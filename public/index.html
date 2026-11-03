@@ -42,6 +42,50 @@
   .card .name { font-size: 20px; font-weight: 700; margin: 8px 0 6px; line-height: 1.2; }
   .card .sub { line-height: 1.6; }
   .card .foot { border-top: 1px solid var(--line); margin-top: 10px; padding-top: 10px; color: var(--muted); font-size: 14px; }
+  .sheet { display: grid; gap: 12px; }
+  .sheet section { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 4px 16px 16px; }
+  .fields { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .field { display: grid; gap: 4px; font-size: 14px; color: var(--muted); }
+  input, select, textarea { font: inherit; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; width: 100%; background: #fff; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: var(--accent); }
+  input[type=checkbox], input[type=radio] { width: auto; }
+  .tablewrap { overflow-x: auto; }
+  .sheet-table { border-collapse: collapse; width: 100%; min-width: 720px; }
+  .sheet-table th, .sheet-table td { border-bottom: 1px solid var(--line); padding: 5px 6px; text-align: left; }
+  .sheet-table thead th { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  .sheet-table tbody th { font-weight: 600; white-space: nowrap; width: 1%; padding-right: 14px; }
+  .sheet-table td:nth-child(2) { min-width: 160px; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .seg input { display: none; }
+  .seg span { display: block; padding: 6px 12px; cursor: pointer; }
+  .seg input:checked + span { background: var(--accent); color: #fff; }
+  button:disabled { opacity: .5; cursor: default; }
+  .sheet section { min-width: 0; }
+  .sheet section > * + * { margin-top: 12px; }
+  .rowcards { display: grid; gap: 8px; }
+  .rowcard { display: flex; gap: 10px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: #fafcfd; }
+  .rowcard .num { color: var(--muted); font-weight: 600; padding-top: 22px; }
+  .cardgrid { flex: 1; min-width: 0; display: grid; gap: 8px 10px; grid-template-columns: repeat(10, minmax(0, 1fr)); }
+  .cardgrid .field span { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cardgrid .seg { display: flex; }
+  .cardgrid .seg label { flex: 1; text-align: center; }
+  .cardgrid .seg span { font-size: 14px; color: var(--ink); padding: 7px 4px; overflow: visible; }
+  .cardgrid .check { padding-top: 7px; }
+  @media (max-width: 900px) { .cardgrid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+  .hint { font-size: 13px; color: var(--muted); margin: 2px 0 6px; }
+  .caption { font-weight: 600; margin-bottom: 4px; }
+  .check { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; color: var(--ink); }
+  .unit { display: flex; align-items: center; gap: 4px; }
+  .unit > span { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .sheet-table td.num { color: var(--muted); width: 1%; }
+  .addrow { margin-top: 8px; color: var(--accent); }
+  .matrix tbody th { white-space: normal; width: auto; font-weight: 400; min-width: 320px; }
+  .matrix td { text-align: center; width: 120px; }
+  .matrix .reading { margin-top: 6px; max-width: 200px; }
+  .tick { width: 56px; height: 40px; font-size: 20px; font-weight: 700; color: var(--accent); padding: 0; }
+  .tick.flag { color: var(--danger); background: #fdecea; border-color: #f2b8b5; }
+  .matrix .initials th { font-weight: 600; }
+  .matrix .initials input { width: 70px; text-align: center; text-transform: uppercase; }
   dialog { border: 1px solid var(--line); border-radius: 12px; padding: 0; width: min(560px, calc(100vw - 32px)); }
   dialog::backdrop { background: rgba(20, 33, 43, .35); }
   dialog .head { padding: 14px 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
@@ -71,11 +115,14 @@ let products = [], plant;
 async function render() {
   [products, plant] = await Promise.all([api('/api/products'), api('/api/plant')]);
   plant.plant = true;
-  if (location.hash === '#plant') return showProduct(plant);
-  const [brand, folder] = location.hash.slice(1).split('/').map(decodeURIComponent);
-  const p = products.find(p => p.brand === brand && p.folder === folder);
-  p ? showProduct(p) : showFolders();
+  const parts = location.hash.slice(1).split('/').map(decodeURIComponent);
+  const [p, file] = parts[0] === 'plant' ? [plant, parts[1]]
+    : [products.find(p => p.brand === parts[0] && p.folder === parts[1]), parts[2]];
+  if (!p) return showFolders();
+  file && p.sheets.some(s => s.file === file) ? showSheet(p, file) : showProduct(p);
 }
+
+const folderHref = p => p.plant ? '#plant' : productHref(p);
 
 // List or cards; remembered on this device only.
 let view = 'list';
@@ -142,7 +189,7 @@ function showProduct(p) {
     ${p.sheets.length ? `<div class="list">${p.sheets.map(s => `
       <div class="row">
         <span class="icon">${sheetIcon}</span>
-        <span class="grow"><div class="title">${esc(s.name)}</div><div class="sub">${esc(s.code)}</div></span>
+        <a class="grow" href="${folderHref(p)}/${encodeURIComponent(s.file)}" style="color:inherit;text-decoration:none"><div class="title">${esc(s.name)}</div><div class="sub">${esc(s.code)}</div></a>
         <button class="link" data-remove="${esc(s.file)}">Remove</button>
       </div>`).join('')}</div>` : '<div class="empty">No log sheets in this folder yet. Tap “Add log sheet” to choose one.</div>'}`;
   document.getElementById('add').onclick = () => openPicker(p);
@@ -151,6 +198,106 @@ function showProduct(p) {
     await api(productUrl(p) + '/' + encodeURIComponent(b.dataset.remove), { method: 'DELETE' });
     render();
   });
+}
+
+// One input for a field or table cell. Filling in works; saving comes later.
+function input(f, name) {
+  const n = `name="${esc(name)}"`;
+  if (f.type === 'select') return `<select ${n}><option></option>${f.options.map(o => `<option>${esc(o)}</option>`).join('')}</select>`;
+  if (f.type === 'passfail') return `<span class="seg">${(f.options || ['Pass', 'Fail']).map(o =>
+    `<label><input type="radio" ${n} value="${esc(o)}"><span>${esc(o)}</span></label>`).join('')}</span>`;
+  if (f.type === 'textarea') return `<textarea ${n} rows="2"></textarea>`;
+  if (f.type === 'checkbox') return `<label class="check"><input type="checkbox" ${n}>${esc(f.checkLabel || '')}</label>`;
+  const type = { date: 'date', time: 'time', number: 'number' }[f.type] || 'text';
+  const value = f.default === 'today' ? new Date().toLocaleDateString('en-CA') : f.default;
+  const box = `<input type="${type}" ${n}${type === 'number' ? ' inputmode="decimal" step="any"' : ''}${value ? ` value="${esc(value)}"` : ''}>`;
+  return f.unit ? `<span class="unit">${box}<span>${esc(f.unit)}</span></span>` : box;
+}
+
+const hint = f => f.hint ? `<div class="hint">${esc(f.hint)}</div>` : '';
+const caption = (f, sec) => f.label && f.label !== sec.title ? `<div class="caption">${esc(f.label)}</div>` : '';
+
+// Tables either list fixed rows (one per item) or start with blank rows that "+ Add row" extends.
+function tableRow(f, i, head) {
+  return `<tr>${head !== undefined ? `<th>${esc(head)}</th>` : `<td class="num">${i + 1}</td>`}${f.columns.map(c =>
+    `<td>${input(c, `${f.id}.${i}.${c.id}`)}</td>`).join('')}</tr>`;
+}
+
+// Too many columns for an iPad-wide table: each row becomes a card, its boxes packed into rows of 10 slots.
+const asCards = f => !f.fixedRows && f.columns.length > 8;
+function cardRow(f, i) {
+  return `<div class="rowcard"><div class="num">${i + 1}</div><div class="cardgrid">${f.columns.map(c =>
+    `<label class="field" style="grid-column: span ${c.span || (c.type === 'passfail' ? 2 : 1)}"><span>${esc(c.label)}</span>${input(c, `${f.id}.${i}.${c.id}`)}</label>`).join('')}</div></div>`;
+}
+const rowHtml = (f, i) => asCards(f) ? cardRow(f, i) : tableRow(f, i);
+
+function tableHtml(f, sec) {
+  const fixed = f.fixedRows, rows = fixed || Array.from({ length: f.rows || 1 });
+  const add = fixed ? '' : `<button type="button" class="addrow" data-addrow="${esc(f.id)}">+ Add row</button>`;
+  if (asCards(f)) return `${caption(f, sec)}${hint(f)}
+    <div class="rowcards" data-table="${esc(f.id)}">${rows.map((r, i) => cardRow(f, i)).join('')}</div>${add}`;
+  return `${caption(f, sec)}${hint(f)}
+    <div class="tablewrap"><table class="sheet-table">
+      <thead><tr><th>${esc(fixed ? f.rowHeader || '' : '#')}</th>${f.columns.map(c => `<th>${esc(c.label)}${c.unit ? ` (${esc(c.unit)})` : ''}</th>`).join('')}</tr></thead>
+      <tbody data-table="${esc(f.id)}">${rows.map((r, i) => tableRow(f, i, fixed ? r : undefined)).join('')}</tbody>
+    </table></div>${add}`;
+}
+
+// Checklist grid: each box cycles blank → ✓ → ✱ (needs attention) → blank.
+function matrixHtml(f, sec) {
+  return `${caption(f, sec)}${hint(f)}
+    <div class="tablewrap"><table class="sheet-table matrix">
+      <thead><tr><th></th>${f.columns.map(c => `<th>${esc(c.label)}</th>`).join('')}</tr></thead>
+      <tbody>${f.items.map(it => `<tr>
+        <th>${/^[a-z]$/.test(it.id) ? `<b>${it.id}.</b> ` : ''}${esc(it.label)}${it.reading ? `<span class="unit reading"><input type="number" inputmode="decimal" step="any" name="${esc(`${f.id}.${it.id}.reading`)}" placeholder="${esc(it.reading.label)}"><span>${esc(it.reading.unit || '')}</span></span>` : ''}</th>
+        ${f.columns.map(c => `<td><button type="button" class="tick" data-name="${esc(`${f.id}.${it.id}.${c.id}`)}"></button></td>`).join('')}</tr>`).join('')}
+      ${f.initials ? `<tr class="initials"><th>${esc(f.initials)}</th>${f.columns.map(c => `<td><input name="${esc(`${f.id}.initials.${c.id}`)}" maxlength="4"></td>`).join('')}</tr>` : ''}
+      </tbody>
+    </table></div>`;
+}
+
+function fieldHtml(f, sec) {
+  if (f.type === 'table') return tableHtml(f, sec);
+  if (f.type === 'matrix') return matrixHtml(f, sec);
+  return `<label class="field"><span>${esc(f.label)}${f.required ? ' *' : ''}</span>${input(f, f.id)}${hint(f)}</label>`;
+}
+
+function wireSheet(s) {
+  app.querySelectorAll('.tick').forEach(b => b.onclick = () => {
+    b.textContent = { '': '✓', '✓': '✱' }[b.textContent] || '';
+    b.className = 'tick' + (b.textContent === '✱' ? ' flag' : '');
+  });
+  app.querySelectorAll('[data-addrow]').forEach(b => b.onclick = () => {
+    const f = s.sections.flatMap(sec => sec.fields).find(f => f.id === b.dataset.addrow);
+    const body = app.querySelector(`[data-table="${CSS.escape(f.id)}"]`);
+    body.insertAdjacentHTML('beforeend', rowHtml(f, body.children.length));
+  });
+}
+
+async function showSheet(p, file) {
+  const s = await api(productUrl(p) + '/' + encodeURIComponent(file));
+  app.innerHTML = `
+    <a class="crumb" href="${folderHref(p)}">← ${esc(p.plant ? p.name : p.brand + ' · ' + p.name)}</a>
+    <div class="bar"><h1>${esc(s.name)}</h1><span class="sub">${esc(s.code)} · ${esc(s.frequency || '')}</span></div>
+    ${s.description ? `<div class="sub" style="margin:-10px 0 12px">${esc(s.description)}</div>` : ''}
+    <form class="sheet" onsubmit="return false">${s.sections.map(sec => `
+      <section>
+        <h2>${esc(sec.title)}</h2>
+        ${sectionBody(sec)}
+      </section>`).join('')}
+      <div class="bar"><span class="sub">Preview: entries aren't saved yet.</span><button class="primary" disabled>Save</button></div>
+    </form>`;
+  wireSheet(s);
+}
+
+// Simple fields sit side by side in a grid; tables and grids take the full width.
+function sectionBody(sec) {
+  const wide = f => f.type === 'table' || f.type === 'matrix' || f.type === 'textarea';
+  let html = '', run = [];
+  const flush = () => { if (run.length) html += `<div class="fields">${run.map(f => fieldHtml(f, sec)).join('')}</div>`; run = []; };
+  for (const f of sec.fields) wide(f) ? (flush(), html += `<div class="wide">${fieldHtml(f, sec)}</div>`) : run.push(f);
+  flush();
+  return html;
 }
 
 async function openPicker(p) {

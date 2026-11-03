@@ -33,8 +33,10 @@ function plantFolder() {
   return { name: 'Plant-wide', ...(fs.existsSync(meta) ? readJson(meta) : {}), sheets: sheetFiles(PLANT).map(f => sheetInfo(PLANT, f)) };
 }
 
-// Add a log sheet from the library to folder d (POST { file }), or remove one (DELETE .../<file>).
+// Read one log sheet (GET .../<file>), add one from the library to folder d (POST { file }),
+// or remove one (DELETE .../<file>).
 async function sheetRoute(req, res, d, file) {
+  if (req.method === 'GET' && sheetFiles(d).includes(file)) return send(res, 200, readJson(path.join(d, file)));
   if (req.method === 'POST') {
     const { file: pick } = await body(req);
     if (!safe(pick) || !fs.existsSync(path.join(LIBRARY, pick))) return send(res, 400, { error: 'No such log sheet' });

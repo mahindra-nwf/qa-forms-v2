@@ -1,0 +1,292 @@
+{
+  "name": "Production Log - Moji - California",
+  "code": "Log 045 A",
+  "category": "Production",
+  "frequency": "Each production run",
+  "description": "Ingredient and packaging lot numbers for item 35823 (Moji - California). Rows come from the item's component list.",
+  "sections": [
+    {
+      "title": "Production",
+      "fields": [
+        {
+          "id": "productionDate",
+          "label": "Production date",
+          "type": "date",
+          "required": true,
+          "default": "today",
+          "prefill": "productionDate"
+        },
+        {
+          "id": "itemNumber",
+          "label": "Item number",
+          "type": "text",
+          "required": true,
+          "default": "35823"
+        },
+        {
+          "id": "variety",
+          "label": "Variety description",
+          "type": "text",
+          "required": true,
+          "default": "Moji - California"
+        }
+      ]
+    },
+    {
+      "title": "Rice",
+      "fields": [
+        {
+          "id": "rice",
+          "label": "Rice mix",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            "Rice (Sweet)",
+            "Broken Rice",
+            "Vinegar",
+            "Salt",
+            "Soybean Oil",
+            "M9"
+          ],
+          "columns": [
+            {
+              "id": "lot",
+              "label": "Lot number",
+              "type": "text"
+            },
+            {
+              "id": "qtyUsed",
+              "label": "Quantity used",
+              "type": "number"
+            },
+            {
+              "id": "unitUsed",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "lb",
+                "kg",
+                "case",
+                "bag",
+                "ea",
+                "gal"
+              ]
+            },
+            {
+              "id": "qtyExtra",
+              "label": "Quantity extra",
+              "type": "number"
+            },
+            {
+              "id": "unitExtra",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "lb",
+                "kg",
+                "case",
+                "bag",
+                "ea",
+                "gal"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Fillings and sauce",
+      "fields": [
+        {
+          "id": "fillings",
+          "label": "Fillings and sauce",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            "Surimi",
+            "Redi Chunk",
+            "Avocado",
+            "Peas",
+            "Mayonnaise",
+            "Starch"
+          ],
+          "columns": [
+            {
+              "id": "lot",
+              "label": "Lot number",
+              "type": "text"
+            },
+            {
+              "id": "qtyUsed",
+              "label": "Quantity used",
+              "type": "number"
+            },
+            {
+              "id": "unitUsed",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "lb",
+                "kg",
+                "case",
+                "bag",
+                "ea",
+                "gal"
+              ]
+            },
+            {
+              "id": "qtyExtra",
+              "label": "Quantity extra",
+              "type": "number"
+            },
+            {
+              "id": "unitExtra",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "lb",
+                "kg",
+                "case",
+                "bag",
+                "ea",
+                "gal"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Coating and wrap",
+      "fields": [
+        {
+          "id": "coating",
+          "label": "Coating and wrap",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            "White Sesame",
+            "Nori"
+          ],
+          "columns": [
+            {
+              "id": "lot",
+              "label": "Lot number",
+              "type": "text"
+            },
+            {
+              "id": "qtyUsed",
+              "label": "Quantity used",
+              "type": "number"
+            },
+            {
+              "id": "unitUsed",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "lb",
+                "kg",
+                "case",
+                "bag",
+                "ea",
+                "gal"
+              ]
+            },
+            {
+              "id": "qtyExtra",
+              "label": "Quantity extra",
+              "type": "number"
+            },
+            {
+              "id": "unitExtra",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "lb",
+                "kg",
+                "case",
+                "bag",
+                "ea",
+                "gal"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Packaging",
+      "fields": [
+        {
+          "id": "packaging",
+          "label": "Packaging",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            "Tray (8 pc Moji)",
+            "Lid",
+            "Soy Sauce Pack",
+            "Wasabi Pack",
+            "Ginger Pack",
+            "Label",
+            "Master Case"
+          ],
+          "columns": [
+            {
+              "id": "lot",
+              "label": "Lot number",
+              "type": "text"
+            },
+            {
+              "id": "qtyUsed",
+              "label": "Quantity used",
+              "type": "number"
+            },
+            {
+              "id": "unitUsed",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "ea",
+                "case",
+                "roll",
+                "box"
+              ]
+            },
+            {
+              "id": "qtyExtra",
+              "label": "Quantity extra",
+              "type": "number"
+            },
+            {
+              "id": "unitExtra",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "ea",
+                "case",
+                "roll",
+                "box"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "QA verification",
+      "fields": [
+        {
+          "id": "qaVerification",
+          "label": "QA verification",
+          "type": "text"
+        },
+        {
+          "id": "qaDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}
