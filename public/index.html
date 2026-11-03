@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plant QA Forms</title>
+<style>
+  :root {
+    --bg: #eef2f5; --card: #fff; --ink: #14212b; --muted: #5d6b76; --line: #d8e0e6;
+    --accent: #0e6b86; --accent-soft: #e3f1f5; --danger: #b3261e;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { background: var(--card); border-bottom: 1px solid var(--line); padding: 12px 20px; display: flex; align-items: baseline; gap: 10px; }
+  header a { color: inherit; text-decoration: none; font-weight: 700; font-size: 18px; }
+  header small { color: var(--muted); letter-spacing: .08em; text-transform: uppercase; font-size: 11px; }
+  main { padding: 16px 20px 40px; }
+  h1 { font-size: 24px; margin: 4px 0 16px; }
+  h2 { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 20px 0 8px; }
+  .crumb { color: var(--accent); text-decoration: none; font-size: 14px; }
+  .list { display: grid; gap: 8px; }
+  .row { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; gap: 14px; color: inherit; text-decoration: none; }
+  a.row:hover { border-color: var(--accent); }
+  .icon { width: 36px; height: 36px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex: none; }
+  .grow { flex: 1; min-width: 0; }
+  .title { font-weight: 600; }
+  .sub { color: var(--muted); font-size: 14px; }
+  .count { font-size: 13px; color: var(--muted); white-space: nowrap; }
+  .count.zero { color: var(--danger); }
+  button { font: inherit; border-radius: 8px; border: 1px solid var(--line); background: var(--card); padding: 8px 14px; cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  button.link { border: 0; background: none; color: var(--danger); padding: 6px 8px; }
+  .empty { background: var(--card); border: 1px dashed var(--line); border-radius: 10px; padding: 20px; color: var(--muted); text-align: center; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--card); }
+  .toggle button { border: 0; border-radius: 0; padding: 6px 12px; color: var(--muted); }
+  .toggle button.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; color: inherit; text-decoration: none; display: flex; flex-direction: column; }
+  a.card:hover { border-color: var(--accent); }
+  .card .brand { font: 11px ui-monospace, Consolas, monospace; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+  .card .name { font-size: 20px; font-weight: 700; margin: 8px 0 6px; line-height: 1.2; }
+  .card .sub { line-height: 1.6; }
+  .card .foot { border-top: 1px solid var(--line); margin-top: 10px; padding-top: 10px; color: var(--muted); font-size: 14px; }
+  dialog { border: 1px solid var(--line); border-radius: 12px; padding: 0; width: min(560px, calc(100vw - 32px)); }
+  dialog::backdrop { background: rgba(20, 33, 43, .35); }
+  dialog .head { padding: 14px 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+  dialog .body { padding: 12px 16px; max-height: 60vh; overflow: auto; display: grid; gap: 6px; }
+  dialog .row { cursor: pointer; width: 100%; text-align: left; }
+  dialog .row:disabled { opacity: .5; cursor: default; }
+</style>
+</head>
+<body>
+<header><a href="#">Plant QA Forms</a><small>Product folders</small></header>
+<main id="app"></main>
+
+<dialog id="picker">
+  <div class="head"><strong>Add a log sheet</strong><button onclick="picker.close()">Close</button></div>
+  <div class="body" id="pickerList"></div>
+</dialog>
+
+<script>
+const app = document.getElementById('app');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const folderIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>';
+const sheetIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>';
+const api = async (url, opts) => { const r = await fetch(url, opts); const j = await r.json(); if (!r.ok) throw new Error(j.error); return j; };
+const productUrl = p => p.plant ? '/api/plant/sheets' : `/api/products/${encodeURIComponent(p.brand)}/${encodeURIComponent(p.folder)}/sheets`;
+let products = [], plant;
+
+async function render() {
+  [products, plant] = await Promise.all([api('/api/products'), api('/api/plant')]);
+  plant.plant = true;
+  if (location.hash === '#plant') return showProduct(plant);
+  const [brand, folder] = location.hash.slice(1).split('/').map(decodeURIComponent);
+  const p = products.find(p => p.brand === brand && p.folder === folder);
+  p ? showProduct(p) : showFolders();
+}
+
+// List or cards; remembered on this device only.
+let view = 'list';
+try { view = localStorage.getItem('productView') || 'list'; } catch {}
+const sheetCount = n => n + ' log sheet' + (n === 1 ? '' : 's');
+
+function showFolders() {
+  const toggle = `<div class="bar"><h1>Products</h1><div class="toggle">${['list', 'cards'].map(v =>
+    `<button data-view="${v}" class="${v === view ? 'on' : ''}">${v === 'list' ? 'List' : 'Cards'}</button>`).join('')}</div></div>`;
+  app.innerHTML = toggle + (view === 'cards' ? productCards() : productList())
+    + (products.length ? '' : '<div class="empty">No product folders yet. Add folders under <code>products/</code>.</div>');
+  app.querySelectorAll('[data-view]').forEach(b => b.onclick = () => {
+    view = b.dataset.view;
+    try { localStorage.setItem('productView', view); } catch {}
+    showFolders();
+  });
+}
+
+const productHref = p => `#${encodeURIComponent(p.brand)}/${encodeURIComponent(p.folder)}`;
+
+function productCards() {
+  return `<div class="cards">
+    <a class="card" href="#plant">
+      <div class="brand">Plant</div>
+      <div class="name">${esc(plant.name)}</div>
+      <div class="sub">SSOP, receiving, shipping<br>${sheetCount(plant.sheets.length)}</div>
+      <div class="foot">No records yet</div>
+    </a>${products.map(p => `
+    <a class="card" href="${productHref(p)}">
+      <div class="brand">${esc(p.brand)}</div>
+      <div class="name">${esc(p.name)}</div>
+      <div class="sub">${esc(p.pack)}<br>${p.item ? 'Item ' + esc(p.item) : 'Item # not set'} · ${sheetCount(p.sheets.length)}</div>
+      <div class="foot">No records yet</div>
+    </a>`).join('')}</div>`;
+}
+
+function productList() {
+  const brands = [...new Set(products.map(p => p.brand))];
+  return `
+    <h2>Plant</h2>
+    <div class="list">
+      <a class="row" href="#plant">
+        <span class="icon">${folderIcon}</span>
+        <span class="grow"><div class="title">${esc(plant.name)}</div><div class="sub">SSOP, receiving, shipping</div></span>
+        <span class="count ${plant.sheets.length ? '' : 'zero'}">${plant.sheets.length ? sheetCount(plant.sheets.length) : 'No log sheets yet'}</span>
+      </a>
+    </div>` + brands.map(b => `
+    <h2>${esc(b)}</h2>
+    <div class="list">${products.filter(p => p.brand === b).map(p => `
+      <a class="row" href="${productHref(p)}">
+        <span class="icon">${folderIcon}</span>
+        <span class="grow"><div class="title">${esc(p.name)}</div><div class="sub">${esc(p.pack)}${p.item ? ' · Item ' + esc(p.item) : ''}</div></span>
+        <span class="count ${p.sheets.length ? '' : 'zero'}">${p.sheets.length ? sheetCount(p.sheets.length) : 'No log sheets yet'}</span>
+      </a>`).join('')}
+    </div>`).join('');
+}
+
+function showProduct(p) {
+  app.innerHTML = `
+    <a class="crumb" href="#">← Products</a>
+    <div class="bar"><h1>${p.plant ? '' : esc(p.brand) + ' · '}${esc(p.name)}</h1><button class="primary" id="add">+ Add log sheet</button></div>
+    <div class="sub" style="margin:-10px 0 8px">${p.plant ? esc(p.note) : esc(p.pack) + (p.item ? ' · Item ' + esc(p.item) : '')}</div>
+    <h2>Log sheets</h2>
+    ${p.sheets.length ? `<div class="list">${p.sheets.map(s => `
+      <div class="row">
+        <span class="icon">${sheetIcon}</span>
+        <span class="grow"><div class="title">${esc(s.name)}</div><div class="sub">${esc(s.code)}</div></span>
+        <button class="link" data-remove="${esc(s.file)}">Remove</button>
+      </div>`).join('')}</div>` : '<div class="empty">No log sheets in this folder yet. Tap “Add log sheet” to choose one.</div>'}`;
+  document.getElementById('add').onclick = () => openPicker(p);
+  app.querySelectorAll('[data-remove]').forEach(b => b.onclick = async () => {
+    if (!confirm(`Remove “${b.closest('.row').querySelector('.title').textContent}” from ${p.name}? The sheet stays in the library.`)) return;
+    await api(productUrl(p) + '/' + encodeURIComponent(b.dataset.remove), { method: 'DELETE' });
+    render();
+  });
+}
+
+async function openPicker(p) {
+  const library = await api('/api/library'), have = new Set(p.sheets.map(s => s.file));
+  pickerList.innerHTML = library.map(s => `
+    <button class="row" data-file="${esc(s.file)}" ${have.has(s.file) ? 'disabled' : ''}>
+      <span class="icon">${sheetIcon}</span>
+      <span class="grow"><div class="title">${esc(s.name)}</div><div class="sub">${esc(s.code)}${have.has(s.file) ? ' · already added' : ''}</div></span>
+    </button>`).join('');
+  pickerList.querySelectorAll('[data-file]').forEach(b => b.onclick = async () => {
+    await api(productUrl(p), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ file: b.dataset.file }) });
+    picker.close();
+    render();
+  });
+  picker.showModal();
+}
+
+addEventListener('hashchange', render);
+render().catch(e => app.innerHTML = `<div class="empty">Couldn't load products: ${esc(e.message)}</div>`);
+</script>
+</body>
+</html>

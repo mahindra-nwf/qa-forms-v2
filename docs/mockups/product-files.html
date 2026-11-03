@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product File Designs</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Mockup of two ways to organise log sheets by product. Same tokens as the app (light mode). */
+:root {
+  --bg: #eef2f5; --surface: #ffffff; --ink: #14212b; --muted: #5b6b78; --line: #d3dde4;
+  --accent: #0d6a87; --accent-ink: #ffffff; --accent-soft: #e1eff4;
+  --good: #1f7a4d; --good-soft: #e3f3ea; --warn: #8a5a00; --warn-soft: #fbf0d9;
+  --display: "Barlow Semi Condensed", "Arial Narrow", sans-serif;
+  --body: "Source Sans 3", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #d9e1e7; color: var(--ink); font: 15px/1.45 var(--body); padding: 20px 16px 60px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; margin: 0; line-height: 1.15; }
+.page { max-width: 1100px; margin: 0 auto; display: grid; gap: 18px; }
+.intro h1 { font-size: 1.8rem; }
+.intro p { margin: 4px 0 0; color: var(--muted); max-width: 70ch; }
+.switch { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px; gap: 4px; }
+.switch button { font: 600 1rem var(--body); border: 0; background: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; color: var(--muted); }
+.switch button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.option { display: grid; gap: 14px; }
+.option[hidden] { display: none; }
+.why { background: var(--surface); border-radius: 8px; padding: 14px 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 28px; }
+.why h3 { font-size: 1.05rem; margin-bottom: 4px; }
+.why ul { margin: 0; padding-left: 18px; }
+.cap { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+/* iPad landscape frame */
+.ipad { background: #1b252d; border-radius: 22px; padding: 14px; }
+.screen { background: var(--bg); border-radius: 10px; overflow: hidden; aspect-ratio: 1180 / 820; display: flex; flex-direction: column; font-size: 14px; }
+.bar { background: var(--surface); border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 14px; padding: 9px 18px; }
+.brand { font-family: var(--display); font-weight: 700; font-size: 1.1rem; margin-right: auto; }
+.nav { display: flex; gap: 4px; }
+.nav span { padding: 4px 10px; border-radius: 6px; color: var(--muted); font-weight: 600; font-size: .9rem; }
+.nav span.on { background: var(--accent-soft); color: var(--accent); }
+.who { font-size: .85rem; color: var(--muted); }
+.body { padding: 16px 18px; display: grid; gap: 12px; align-content: start; overflow: hidden; flex: 1; }
+.head { display: flex; justify-content: space-between; align-items: end; gap: 12px; }
+.head h2 { font-size: 1.5rem; }
+.eyebrow { font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.btn { display: inline-block; border: 1px solid var(--line); background: var(--surface); padding: 6px 14px; border-radius: 6px; font-weight: 600; font-size: .9rem; white-space: nowrap; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.link { color: var(--accent); font-weight: 600; font-size: .9rem; }
+.pill { display: inline-block; font-size: .72rem; font-weight: 600; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.pill.good { background: var(--good-soft); color: var(--good); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.pill.info { background: var(--accent-soft); color: var(--accent); }
+.list { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.row { background: var(--surface); padding: 10px 14px; display: grid; grid-template-columns: 1fr auto; gap: 2px 14px; align-items: center; }
+.row .t { font-weight: 600; }
+.row .m { font-size: .82rem; color: var(--muted); grid-column: 1; }
+.row .r { grid-column: 2; grid-row: 1 / span 2; display: flex; gap: 8px; align-items: center; }
+.code { font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+.progress { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; width: 140px; }
+.progress i { display: block; height: 100%; background: var(--accent); }
+.progress.done i { background: var(--good); }
+.prod { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
+.prod .n { font-family: var(--display); font-weight: 600; font-size: 1.3rem; margin-right: auto; }
+.kv { display: grid; font-size: .82rem; }
+.kv b { font-weight: 600; font-size: .95rem; }
+.kv span { color: var(--muted); }
+.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; gap: 6px; align-content: start; }
+.tile .brandname { font-family: var(--mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.tile h3 { font-size: 1.25rem; }
+.tile .spec { font-size: .85rem; color: var(--muted); }
+.tile .last { font-size: .8rem; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 4px; }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs span { padding: 6px 12px; font-weight: 600; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.tabs span.on { color: var(--accent); border-color: var(--accent); }
+.two { display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px; align-items: start; }
+.foot { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+.ghost { opacity: .45; }
+.example { font-size: .78rem; color: var(--muted); font-style: italic; }
+@media (max-width: 760px) { .tiles { grid-template-columns: repeat(2, 1fr); } .two { grid-template-columns: 1fr; } .screen { aspect-ratio: auto; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="intro">
+    <h1>Product file designs</h1>
+    <p>Two ways to organise log sheets by product, shown on an iPad in landscape. Log sheet names below are examples from the sample folder; your new sheets would go in the same places.</p>
+  </div>
+  <div class="switch" role="group" aria-label="Design">
+    <button type="button" data-opt="a" aria-pressed="true">A · Production run file</button>
+    <button type="button" data-opt="b" aria-pressed="false">B · Product folders</button>
+  </div>
+
+  <!-- ===================== Option A ===================== -->
+  <section class="option" id="opt-a">
+    <div class="why">
+      <div><h3>How it works</h3><ul>
+        <li>QA starts a <b>run</b>: pick the product and production date.</li>
+        <li>Every log sheet for that run is filled inside it, so one run = one batch record.</li>
+        <li>The run shows what's done and what's missing, then QA reviews and closes it.</li></ul></div>
+      <div><h3>Best for</h3><ul>
+        <li>Audits and traceability: one place shows everything about a day's production of a product.</li>
+        <li>Making sure no log is forgotten before product ships.</li></ul></div>
+    </div>
+
+    <div class="cap">Screen 1 · Home: today's runs</div>
+    <div class="ipad"><div class="screen">
+      <div class="bar"><span class="brand">Plant QA Forms</span><div class="nav"><span class="on">Runs</span><span>Products</span><span>History</span><span>Admin</span></div><span class="who">Ana (QA)</span></div>
+      <div class="body">
+        <div class="head"><div><div class="eyebrow">Monday, Nov 2, 2026</div><h2>Production runs</h2></div><span class="btn primary">+ Start a run</span></div>
+        <div class="list">
+          <div class="row"><span class="t">Moji California 6oz <span class="code">· Item 35823</span></span><span class="m">Started 6:40 AM by Ana · 2 of 4 logs done</span>
+            <span class="r"><span class="progress"><i style="width:50%"></i></span><span class="pill info">In progress</span><span class="link">Open →</span></span></div>
+          <div class="row"><span class="t">Moji Spicy Tuna 6oz</span><span class="m">Started 7:15 AM by Bo · 4 of 4 logs done</span>
+            <span class="r"><span class="progress done"><i style="width:100%"></i></span><span class="pill warn">Ready for QA review</span><span class="link">Open →</span></span></div>
+          <div class="row"><span class="t">Moji Spicy Crab 6oz</span><span class="m">Started 9:02 AM by Ana · 0 of 4 logs done</span>
+            <span class="r"><span class="progress"><i style="width:0"></i></span><span class="pill info">In progress</span><span class="link">Open →</span></span></div>
+        </div>
+        <div class="eyebrow" style="margin-top:6px">Earlier runs</div>
+        <div class="list">
+          <div class="row"><span class="t">Moji California Cream Cheese 6oz <span class="code">· Oct 30</span></span><span class="m">4 of 4 logs · Reviewed by Ana, Oct 30 4:10 PM</span><span class="r"><span class="pill good">Closed</span><span class="link">Open →</span></span></div>
+          <div class="row"><span class="t">Moji California 6oz <span class="code">· Oct 30</span></span><span class="m">4 of 4 logs · Reviewed by Ana, Oct 30 3:55 PM</span><span class="r"><span class="pill good">Closed</span><span class="link">Open →</span></span></div>
+        </div>
+      </div>
+    </div></div>
+
+    <div class="cap">Screen 2 · Inside a run</div>
+    <div class="ipad"><div class="screen">
+      <div class="bar"><span class="brand">Plant QA Forms</span><div class="nav"><span class="on">Runs</span><span>Products</span><span>History</span><span>Admin</span></div><span class="who">Ana (QA)</span></div>
+      <div class="body">
+        <span class="link">← All runs</span>
+        <div class="prod"><span class="n">Moji California 6oz</span>
+          <div class="kv"><span>Item #</span><b>35823</b></div><div class="kv"><span>Pack</span><b>8 pc / 4 tray</b></div>
+          <div class="kv"><span>Production date</span><b>Nov 2, 2026</b></div><div class="kv"><span>Started</span><b>6:40 AM · Ana</b></div>
+          <span class="pill info">2 of 4 logs done</span></div>
+        <div class="list">
+          <div class="row"><span class="t"><span class="code">Log 045 A</span> · Production Lot Number</span><span class="m">Done 7:05 AM by Ana · item and variety filled in automatically</span><span class="r"><span class="pill good">✓ Done</span><span class="btn">View</span></span></div>
+          <div class="row"><span class="t"><span class="code">Log 060</span> · Packaging, Temperature &amp; X-Ray</span><span class="m">Done 8:30 AM by Bo</span><span class="r"><span class="pill good">✓ Done</span><span class="btn">View</span></span></div>
+          <div class="row"><span class="t"><span class="code">Log 064</span> · Check Weight</span><span class="m">Not started</span><span class="r"><span class="btn primary">Fill</span></span></div>
+          <div class="row"><span class="t"><span class="code">Log 074</span> · Pallet Count</span><span class="m">Not started</span><span class="r"><span class="btn primary">Fill</span></span></div>
+        </div>
+        <div class="foot"><span>QA review: all 4 logs must be done before the run can be closed.</span><span class="btn primary ghost">Review &amp; close run</span></div>
+        <p class="example">Log sheet names are examples.</p>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ===================== Option B ===================== -->
+  <section class="option" id="opt-b" hidden>
+    <div class="why">
+      <div><h3>How it works</h3><ul>
+        <li>Home shows one folder per product.</li>
+        <li>Open a product to see its log sheets and fill any of them; product details fill in automatically.</li>
+        <li>Each folder has its own history of that product's records.</li></ul></div>
+      <div><h3>Best for</h3><ul>
+        <li>Simple, familiar layout, like a filing cabinet with one drawer per product.</li>
+        <li>Logs filled at different times, not tied to a single production run.</li></ul></div>
+    </div>
+
+    <div class="cap">Screen 1 · Home: product folders</div>
+    <div class="ipad"><div class="screen">
+      <div class="bar"><span class="brand">Plant QA Forms</span><div class="nav"><span class="on">Products</span><span>History</span><span>Admin</span></div><span class="who">Ana (QA)</span></div>
+      <div class="body">
+        <div class="head"><div><div class="eyebrow">Products · 4</div><h2>Choose a product</h2></div></div>
+        <div class="tiles">
+          <div class="tile"><span class="brandname">Moji</span><h3>California</h3><span class="spec">6oz · 8 pc / 4 tray<br>Item 35823</span><span class="last">Last log: Production Lot 045 A<br><span style="color:var(--muted)">Today 7:05 AM · Ana</span></span></div>
+          <div class="tile"><span class="brandname">Moji</span><h3>Spicy Crab</h3><span class="spec">6oz · 8 pc / 4 tray<br>Item # not set</span><span class="last">Last log: Pallet Count 074<br><span style="color:var(--muted)">Oct 30 2:40 PM · Bo</span></span></div>
+          <div class="tile"><span class="brandname">Moji</span><h3>California Cream Cheese</h3><span class="spec">6oz · 8 pc / 4 tray<br>Item # not set</span><span class="last">Last log: Check Weight 064<br><span style="color:var(--muted)">Oct 30 1:15 PM · Ana</span></span></div>
+          <div class="tile"><span class="brandname">Moji</span><h3>Spicy Tuna</h3><span class="spec">6oz · 8 pc / 4 tray<br>Item # not set</span><span class="last">Last log: Packaging &amp; X-Ray 060<br><span style="color:var(--muted)">Today 8:30 AM · Bo</span></span></div>
+        </div>
+      </div>
+    </div></div>
+
+    <div class="cap">Screen 2 · Inside a product folder</div>
+    <div class="ipad"><div class="screen">
+      <div class="bar"><span class="brand">Plant QA Forms</span><div class="nav"><span class="on">Products</span><span>History</span><span>Admin</span></div><span class="who">Ana (QA)</span></div>
+      <div class="body">
+        <span class="link">← All products</span>
+        <div class="prod"><span class="n">Moji California 6oz</span>
+          <div class="kv"><span>Item #</span><b>35823</b></div><div class="kv"><span>Pack</span><b>8 pc / 4 tray</b></div><div class="kv"><span>Records</span><b>38</b></div></div>
+        <div class="tabs"><span class="on">Log sheets</span><span>History</span></div>
+        <div class="two">
+          <div class="list">
+            <div class="row"><span class="t"><span class="code">Log 045 A</span> · Production Lot Number</span><span class="m">Last filled today 7:05 AM by Ana</span><span class="r"><span class="btn primary">Fill</span></span></div>
+            <div class="row"><span class="t"><span class="code">Log 060</span> · Packaging, Temperature &amp; X-Ray</span><span class="m">Last filled Oct 30 by Bo</span><span class="r"><span class="btn primary">Fill</span></span></div>
+            <div class="row"><span class="t"><span class="code">Log 064</span> · Check Weight</span><span class="m">Last filled Oct 30 by Ana</span><span class="r"><span class="btn primary">Fill</span></span></div>
+            <div class="row"><span class="t"><span class="code">Log 074</span> · Pallet Count</span><span class="m">Last filled Oct 29 by Bo</span><span class="r"><span class="btn primary">Fill</span></span></div>
+          </div>
+          <div><div class="eyebrow" style="margin-bottom:6px">Recent records for this product</div>
+            <div class="list">
+              <div class="row"><span class="t">Production Lot 045 A</span><span class="m">Today 7:05 AM · Ana</span></div>
+              <div class="row"><span class="t">Pallet Count 074</span><span class="m">Oct 30 2:40 PM · Bo</span></div>
+              <div class="row"><span class="t">Check Weight 064</span><span class="m">Oct 30 1:15 PM · Ana</span></div>
+            </div></div>
+        </div>
+        <p class="example">Log sheet names are examples.</p>
+      </div>
+    </div></div>
+  </section>
+</div>
+<script>
+document.querySelectorAll('[data-opt]').forEach(b => b.onclick = () => {
+  document.querySelectorAll('[data-opt]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  document.getElementById('opt-a').hidden = b.dataset.opt !== 'a';
+  document.getElementById('opt-b').hidden = b.dataset.opt !== 'b';
+});
+</script>
+</body>
+</html>
