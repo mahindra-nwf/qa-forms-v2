@@ -60,6 +60,10 @@ async function body(req) {
   return s ? JSON.parse(s) : {};
 }
 
+// build-static.js reuses these to write the read-only GitHub Pages demo.
+module.exports = { ROOT, PRODUCTS, PLANT, LIBRARY, readJson, sheetFiles, sheetInfo, listProducts, plantFolder };
+if (require.main !== module) return;
+
 http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://localhost');
   const parts = url.pathname.split('/').filter(Boolean).map(decodeURIComponent);

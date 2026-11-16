@@ -108,7 +108,13 @@ const app = document.getElementById('app');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const folderIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>';
 const sheetIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>';
-const api = async (url, opts) => { const r = await fetch(url, opts); const j = await r.json(); if (!r.ok) throw new Error(j.error); return j; };
+// build-static.js flips this to true for the GitHub Pages demo: data comes from saved .json files
+// next to the page, and adding or removing log sheets is turned off.
+const STATIC = false;
+if (STATIC) document.querySelector('header small').textContent = 'Demo · read-only';
+const api = async (url, opts) => {
+  if (STATIC) url = url.slice(1) + (url.endsWith('.json') ? '' : '.json');
+  const r = await fetch(url, opts); const j = await r.json(); if (!r.ok) throw new Error(j.error); return j; };
 const productUrl = p => p.plant ? '/api/plant/sheets' : `/api/products/${encodeURIComponent(p.brand)}/${encodeURIComponent(p.folder)}/sheets`;
 let products = [], plant;
 
@@ -183,16 +189,16 @@ function productList() {
 function showProduct(p) {
   app.innerHTML = `
     <a class="crumb" href="#">← Products</a>
-    <div class="bar"><h1>${p.plant ? '' : esc(p.brand) + ' · '}${esc(p.name)}</h1><button class="primary" id="add">+ Add log sheet</button></div>
+    <div class="bar"><h1>${p.plant ? '' : esc(p.brand) + ' · '}${esc(p.name)}</h1>${STATIC ? '' : '<button class="primary" id="add">+ Add log sheet</button>'}</div>
     <div class="sub" style="margin:-10px 0 8px">${p.plant ? esc(p.note) : esc(p.pack) + (p.item ? ' · Item ' + esc(p.item) : '')}</div>
     <h2>Log sheets</h2>
     ${p.sheets.length ? `<div class="list">${p.sheets.map(s => `
       <div class="row">
         <span class="icon">${sheetIcon}</span>
         <a class="grow" href="${folderHref(p)}/${encodeURIComponent(s.file)}" style="color:inherit;text-decoration:none"><div class="title">${esc(s.name)}</div><div class="sub">${esc(s.code)}</div></a>
-        <button class="link" data-remove="${esc(s.file)}">Remove</button>
-      </div>`).join('')}</div>` : '<div class="empty">No log sheets in this folder yet. Tap “Add log sheet” to choose one.</div>'}`;
-  document.getElementById('add').onclick = () => openPicker(p);
+        ${STATIC ? '' : `<button class="link" data-remove="${esc(s.file)}">Remove</button>`}
+      </div>`).join('')}</div>` : `<div class="empty">No log sheets in this folder yet.${STATIC ? '' : ' Tap “Add log sheet” to choose one.'}</div>`}`;
+  if (!STATIC) document.getElementById('add').onclick = () => openPicker(p);
   app.querySelectorAll('[data-remove]').forEach(b => b.onclick = async () => {
     if (!confirm(`Remove “${b.closest('.row').querySelector('.title').textContent}” from ${p.name}? The sheet stays in the library.`)) return;
     await api(productUrl(p) + '/' + encodeURIComponent(b.dataset.remove), { method: 'DELETE' });
