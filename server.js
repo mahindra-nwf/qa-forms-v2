@@ -33,6 +33,56 @@ function plantFolder() {
   return { name: 'Plant-wide', ...(fs.existsSync(meta) ? readJson(meta) : {}), sheets: sheetFiles(PLANT).map(f => sheetInfo(PLANT, f)) };
 }
 
+// Regions: regions/<Region>/region.json, logs/ (each log defined once, scope "line" or "product")
+// and products/<Product>/product.json. A product's log sheets are the region's "product" logs,
+// filled in with that product's details.
+const REGIONS = path.join(ROOT, 'regions');
+const byOrder = (a, b) => (a.order ?? 99) - (b.order ?? 99) || a.name.localeCompare(b.name);
+const jsonIn = d => fs.existsSync(d) ? fs.readdirSync(d).filter(f => f.endsWith('.json')).sort() : [];
+
+function regionLogs(r) {
+  const d = path.join(REGIONS, r, 'logs');
+  return jsonIn(d).map(file => { const j = readJson(path.join(d, file)); return { file, name: j.name, code: j.code || '', scope: j.scope || 'line' }; });
+}
+
+function regionProducts(r) {
+  const d = path.join(REGIONS, r, 'products');
+  return dirs(d).map(folder => {
+    const meta = path.join(d, folder, 'product.json');
+    return { folder, ...(fs.existsSync(meta) ? readJson(meta) : { name: folder }) };
+  }).sort(byOrder);
+}
+
+function regionInfo(r) {
+  const meta = path.join(REGIONS, r, 'region.json');
+  return { id: r, ...(fs.existsSync(meta) ? readJson(meta) : { name: r }) };
+}
+
+const listRegions = () => dirs(REGIONS).map(r => ({ ...regionInfo(r), products: regionProducts(r).length, logs: regionLogs(r) })).sort(byOrder);
+const regionDetail = r => ({ ...regionInfo(r), logs: regionLogs(r), products: regionProducts(r) });
+
+// Fill a product log with the product's details:
+//   field.prefill: "item"      → default from product.item ("region" → the region name)
+//   table.rowsFrom: "materials.packaging" → one fixed row per entry in that list; the row shows
+//     its name/material (and spec underneath), and matching column ids are filled in
+//   column.each: "components"  → repeat the column for each component ("{name}" in the label)
+// Without the product details the template's own fixedRows/columns are used.
+function fillLog(form, product, region) {
+  const value = key => key === 'region' ? region.name : product[key];
+  const comps = product.components?.length ? product.components : null;
+  for (const sec of form.sections) for (const f of sec.fields) {
+    if (f.prefill && value(f.prefill)) f.default = value(f.prefill);
+    const rows = f.rowsFrom && f.rowsFrom.split('.').reduce((o, k) => o?.[k], product);
+    if (rows?.length) f.fixedRows = rows.map(r => ({ label: r.name ?? r.material, sub: r.spec, values: r }));
+    if (f.columns) f.columns = f.columns.flatMap(c => {
+      if (!c.each) return [c];
+      const names = (comps || [{ name: 'item 1' }, { name: 'item 2' }]).map(x => x.name);
+      return names.map((n, i) => ({ ...c, each: undefined, id: c.id + (i + 1), label: c.label.replace('{name}', n) }));
+    });
+  }
+  return form;
+}
+
 // Read one log sheet (GET .../<file>), add one from the library to folder d (POST { file }),
 // or remove one (DELETE .../<file>).
 async function sheetRoute(req, res, d, file) {
@@ -61,7 +111,8 @@ async function body(req) {
 }
 
 // build-static.js reuses these to write the read-only GitHub Pages demo.
-module.exports = { ROOT, PRODUCTS, PLANT, LIBRARY, readJson, sheetFiles, sheetInfo, listProducts, plantFolder };
+module.exports = { ROOT, PRODUCTS, PLANT, LIBRARY, REGIONS, readJson, sheetFiles, sheetInfo, listProducts, plantFolder,
+  listRegions, regionDetail, regionInfo, regionProducts, fillLog };
 if (require.main !== module) return;
 
 http.createServer(async (req, res) => {
@@ -77,6 +128,22 @@ http.createServer(async (req, res) => {
       const d = path.join(PRODUCTS, brand, folder);
       if (![brand, folder].every(safe) || !fs.existsSync(d)) return send(res, 404, { error: 'No such product' });
       return sheetRoute(req, res, d, file);
+    }
+    // /api/regions, /api/regions/<r>, /api/regions/<r>/logs/<file>,
+    // /api/regions/<r>/products/<folder>/logs/<file>
+    if (parts[0] === 'api' && parts[1] === 'regions' && req.method === 'GET') {
+      const [, , r, kind, a, b, c] = parts;
+      if (!r) return send(res, 200, listRegions());
+      if (![r, kind, a, b, c].every(x => x === undefined || safe(x)) || !fs.existsSync(path.join(REGIONS, r))) return send(res, 404, { error: 'No such region' });
+      if (!kind) return send(res, 200, regionDetail(r));
+      const logs = regionLogs(r);
+      const logFile = path.join(REGIONS, r, 'logs', kind === 'logs' ? a : c || '');
+      if (kind === 'logs' && logs.some(l => l.file === a && l.scope === 'line')) return send(res, 200, readJson(logFile));
+      if (kind === 'products' && b === 'logs' && logs.some(l => l.file === c && l.scope === 'product')) {
+        const p = regionProducts(r).find(p => p.folder === a);
+        if (p) return send(res, 200, fillLog(readJson(logFile), p, regionInfo(r)));
+      }
+      return send(res, 404, { error: 'Not found' });
     }
     if (url.pathname === '/api/plant' && req.method === 'GET') return send(res, 200, plantFolder());
     if (parts[0] === 'api' && parts[1] === 'plant' && parts[2] === 'sheets') { plantFolder(); return sheetRoute(req, res, PLANT, parts[3]); }

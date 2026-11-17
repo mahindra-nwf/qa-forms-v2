@@ -1,0 +1,34 @@
+{
+  "order": 6,
+  "name": "Pork Soup Dumplings",
+  "item": "19896",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - Soup Dumpling w/",
+  "lotLog": "PL-066",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Protein",
+        "spec": "soup dumpling"
+      },
+      {
+        "material": "Sauce",
+        "spec": "garlic chili rayu glaze packet"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  }
+}

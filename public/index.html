@@ -95,7 +95,7 @@
 </style>
 </head>
 <body>
-<header><a href="#">Plant QA Forms</a><small>Product folders</small></header>
+<header><a href="#">Plant QA Forms</a><small>Regions</small></header>
 <main id="app"></main>
 
 <dialog id="picker">
@@ -119,13 +119,109 @@ const productUrl = p => p.plant ? '/api/plant/sheets' : `/api/products/${encodeU
 let products = [], plant;
 
 async function render() {
+  const parts = location.hash.slice(1).split('/').filter(Boolean).map(decodeURIComponent);
+  if (parts[0] === 'r') return showRegionRoute(parts.slice(1));
+  if (!parts.length) return showHome();
   [products, plant] = await Promise.all([api('/api/products'), api('/api/plant')]);
   plant.plant = true;
-  const parts = location.hash.slice(1).split('/').map(decodeURIComponent);
   const [p, file] = parts[0] === 'plant' ? [plant, parts[1]]
     : [products.find(p => p.brand === parts[0] && p.folder === parts[1]), parts[2]];
   if (!p) return showFolders();
   file && p.sheets.some(s => s.file === file) ? showSheet(p, file) : showProduct(p);
+}
+
+// ---- Regions ----
+// Each iPad can be set to one region (it then opens straight there) or to all regions.
+// Switching between "one iPad per region" and "one iPad per worker" is only this setting.
+let deviceRegion = '';
+try { deviceRegion = localStorage.getItem('region') || ''; } catch {}
+const setDeviceRegion = r => { deviceRegion = r; try { localStorage.setItem('region', r); } catch {} };
+const enc = encodeURIComponent;
+const regionHref = r => `#r/${enc(r.id)}`;
+const regionProductHref = (r, p) => `${regionHref(r)}/p/${enc(p.folder)}`;
+const logCount = n => n + ' log' + (n === 1 ? '' : 's');
+
+async function showHome() {
+  const regions = await api('/api/regions');
+  const mine = regions.find(r => r.id === deviceRegion);
+  if (mine) return showRegion(await api(`/api/regions/${enc(mine.id)}`));
+  app.innerHTML = `
+    <h1>Regions</h1>
+    <div class="list">${regions.map(r => `
+      <a class="row" href="${regionHref(r)}">
+        <span class="icon">${folderIcon}</span>
+        <span class="grow"><div class="title">${esc(r.name)}${r.title ? ' · ' + esc(r.title) : ''}</div>
+          <div class="sub">${r.products} products · ${logCount(r.logs.filter(l => l.scope === 'line').length)} for the whole line</div></span>
+      </a>`).join('')}
+    </div>
+    ${regions.length ? '' : '<div class="empty">No regions yet. Add folders under <code>regions/</code>.</div>'}
+    <h2>Not in a region yet</h2>
+    <div class="list"><a class="row" href="#products">
+      <span class="icon">${folderIcon}</span>
+      <span class="grow"><div class="title">Earlier product folders</div><div class="sub">Moji sushi products and plant-wide sheets (SSOP, receiving, shipping)</div></span>
+    </a></div>`;
+}
+
+async function showRegionRoute([id, kind, a, b]) {
+  const r = await api(`/api/regions/${enc(id)}`);
+  if (kind === 'log' && r.logs.some(l => l.file === a && l.scope === 'line'))
+    return renderSheet(`/api/regions/${enc(r.id)}/logs/${enc(a)}`, regionHref(r), r.name);
+  const p = kind === 'p' && r.products.find(p => p.folder === a);
+  if (p && b && r.logs.some(l => l.file === b && l.scope === 'product'))
+    return renderSheet(`/api/regions/${enc(r.id)}/products/${enc(p.folder)}/logs/${enc(b)}`, regionProductHref(r, p), `${r.name} · ${p.name}`);
+  if (p) return showRegionProduct(r, p);
+  showRegion(r);
+}
+
+function deviceBar(r) {
+  if (STATIC) return '';
+  const here = deviceRegion === r.id;
+  return `<div class="sub" style="margin:0 0 12px">${here
+    ? `This iPad opens to ${esc(r.name)}. <button class="link" style="color:var(--accent)" id="unpin">Show all regions instead</button>`
+    : `<button id="pin">Make ${esc(r.name)} this iPad's region</button>`}</div>`;
+}
+
+function wireDeviceBar(r) {
+  const pin = document.getElementById('pin'), unpin = document.getElementById('unpin');
+  if (pin) pin.onclick = () => { setDeviceRegion(r.id); showRegion(r); };
+  if (unpin) unpin.onclick = () => { setDeviceRegion(''); location.hash = ''; showHome(); };
+}
+
+const productSub = p => [p.item && 'Item ' + p.item, p.customer].filter(Boolean).join(' · ') || 'Details not filled in yet';
+
+function showRegion(r) {
+  const line = r.logs.filter(l => l.scope === 'line'), perProduct = r.logs.filter(l => l.scope === 'product');
+  app.innerHTML = `
+    ${deviceRegion === r.id ? '' : '<a class="crumb" href="#">← All regions</a>'}
+    <div class="bar"><h1>${esc(r.name)}${r.title ? ' · ' + esc(r.title) : ''}</h1></div>
+    ${deviceBar(r)}
+    <h2>Whole line · one sheet per day</h2>
+    <div class="list">${line.map(l => logRow(l, `${regionHref(r)}/log/${enc(l.file)}`)).join('')}</div>
+    <h2>Products · ${logCount(perProduct.length)} each</h2>
+    <div class="list">${r.products.map(p => `
+      <a class="row" href="${regionProductHref(r, p)}">
+        <span class="icon">${folderIcon}</span>
+        <span class="grow"><div class="title">${esc(p.name)}${p.unsure ? ' <span class="count zero">· not sure this runs in ' + esc(r.name) + '</span>' : ''}</div><div class="sub">${esc(productSub(p))}</div></span>
+      </a>`).join('')}
+    </div>`;
+  wireDeviceBar(r);
+}
+
+const logRow = (l, href) => `
+  <a class="row" href="${href}">
+    <span class="icon">${sheetIcon}</span>
+    <span class="grow"><div class="title">${esc(l.name)}</div><div class="sub">${esc(l.code)}</div></span>
+  </a>`;
+
+function showRegionProduct(r, p) {
+  const missing = [!p.item && 'item number', !p.materials && 'recipe rows', !p.components?.length && 'weight targets'].filter(Boolean);
+  app.innerHTML = `
+    <a class="crumb" href="${regionHref(r)}">← ${esc(r.name)}</a>
+    <div class="bar"><h1>${esc(p.name)}</h1></div>
+    <div class="sub" style="margin:-10px 0 8px">${esc(productSub(p))}${p.variety ? ' · ' + esc(p.variety) : ''}</div>
+    ${missing.length ? `<div class="empty" style="text-align:left">Not filled in yet: ${esc(missing.join(', '))}. Those parts of the sheets open with blank or generic rows. Add them in <code>regions/${esc(r.id)}/products/${esc(p.folder)}/product.json</code>.</div>` : ''}
+    <h2>Log sheets</h2>
+    <div class="list">${r.logs.filter(l => l.scope === 'product').map(l => logRow(l, `${regionProductHref(r, p)}/${enc(l.file)}`)).join('')}</div>`;
 }
 
 const folderHref = p => p.plant ? '#plant' : productHref(p);
@@ -136,7 +232,7 @@ try { view = localStorage.getItem('productView') || 'list'; } catch {}
 const sheetCount = n => n + ' log sheet' + (n === 1 ? '' : 's');
 
 function showFolders() {
-  const toggle = `<div class="bar"><h1>Products</h1><div class="toggle">${['list', 'cards'].map(v =>
+  const toggle = `<a class="crumb" href="#">← Regions</a><div class="bar"><h1>Products</h1><div class="toggle">${['list', 'cards'].map(v =>
     `<button data-view="${v}" class="${v === view ? 'on' : ''}">${v === 'list' ? 'List' : 'Cards'}</button>`).join('')}</div></div>`;
   app.innerHTML = toggle + (view === 'cards' ? productCards() : productList())
     + (products.length ? '' : '<div class="empty">No product folders yet. Add folders under <code>products/</code>.</div>');
@@ -188,7 +284,7 @@ function productList() {
 
 function showProduct(p) {
   app.innerHTML = `
-    <a class="crumb" href="#">← Products</a>
+    <a class="crumb" href="#products">← Products</a>
     <div class="bar"><h1>${p.plant ? '' : esc(p.brand) + ' · '}${esc(p.name)}</h1>${STATIC ? '' : '<button class="primary" id="add">+ Add log sheet</button>'}</div>
     <div class="sub" style="margin:-10px 0 8px">${p.plant ? esc(p.note) : esc(p.pack) + (p.item ? ' · Item ' + esc(p.item) : '')}</div>
     <h2>Log sheets</h2>
@@ -207,15 +303,16 @@ function showProduct(p) {
 }
 
 // One input for a field or table cell. Filling in works; saving comes later.
-function input(f, name) {
+// `preset` is a value filled in from the product (table cells); otherwise the field's default.
+function input(f, name, preset) {
   const n = `name="${esc(name)}"`;
-  if (f.type === 'select') return `<select ${n}><option></option>${f.options.map(o => `<option>${esc(o)}</option>`).join('')}</select>`;
+  const value = preset ?? (f.default === 'today' ? new Date().toLocaleDateString('en-CA') : f.default);
+  if (f.type === 'select') return `<select ${n}><option></option>${f.options.map(o => `<option${o === value ? ' selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
   if (f.type === 'passfail') return `<span class="seg">${(f.options || ['Pass', 'Fail']).map(o =>
-    `<label><input type="radio" ${n} value="${esc(o)}"><span>${esc(o)}</span></label>`).join('')}</span>`;
-  if (f.type === 'textarea') return `<textarea ${n} rows="2"></textarea>`;
+    `<label><input type="radio" ${n} value="${esc(o)}"${o === value ? ' checked' : ''}><span>${esc(o)}</span></label>`).join('')}</span>`;
+  if (f.type === 'textarea') return `<textarea ${n} rows="2">${esc(value || '')}</textarea>`;
   if (f.type === 'checkbox') return `<label class="check"><input type="checkbox" ${n}>${esc(f.checkLabel || '')}</label>`;
   const type = { date: 'date', time: 'time', number: 'number' }[f.type] || 'text';
-  const value = f.default === 'today' ? new Date().toLocaleDateString('en-CA') : f.default;
   const box = `<input type="${type}" ${n}${type === 'number' ? ' inputmode="decimal" step="any"' : ''}${value ? ` value="${esc(value)}"` : ''}>`;
   return f.unit ? `<span class="unit">${box}<span>${esc(f.unit)}</span></span>` : box;
 }
@@ -224,9 +321,12 @@ const hint = f => f.hint ? `<div class="hint">${esc(f.hint)}</div>` : '';
 const caption = (f, sec) => f.label && f.label !== sec.title ? `<div class="caption">${esc(f.label)}</div>` : '';
 
 // Tables either list fixed rows (one per item) or start with blank rows that "+ Add row" extends.
+// A fixed row is a label, or { label, values } when the product fills some cells in.
 function tableRow(f, i, head) {
-  return `<tr>${head !== undefined ? `<th>${esc(head)}</th>` : `<td class="num">${i + 1}</td>`}${f.columns.map(c =>
-    `<td>${input(c, `${f.id}.${i}.${c.id}`)}</td>`).join('')}</tr>`;
+  const label = head?.label ?? head, vals = head?.values || {};
+  const th = `<th>${esc(label)}${head?.sub ? `<div class="sub" style="font-weight:400">${esc(head.sub)}</div>` : ''}</th>`;
+  return `<tr>${head !== undefined ? th : `<td class="num">${i + 1}</td>`}${f.columns.map(c =>
+    `<td>${input(c, `${f.id}.${i}.${c.id}`, vals[c.id])}</td>`).join('')}</tr>`;
 }
 
 // Too many columns for an iPad-wide table: each row becomes a card, its boxes packed into rows of 10 slots.
@@ -280,10 +380,12 @@ function wireSheet(s) {
   });
 }
 
-async function showSheet(p, file) {
-  const s = await api(productUrl(p) + '/' + encodeURIComponent(file));
+const showSheet = (p, file) => renderSheet(productUrl(p) + '/' + encodeURIComponent(file), folderHref(p), p.plant ? p.name : p.brand + ' · ' + p.name);
+
+async function renderSheet(url, backHref, backLabel) {
+  const s = await api(url);
   app.innerHTML = `
-    <a class="crumb" href="${folderHref(p)}">← ${esc(p.plant ? p.name : p.brand + ' · ' + p.name)}</a>
+    <a class="crumb" href="${backHref}">← ${esc(backLabel)}</a>
     <div class="bar"><h1>${esc(s.name)}</h1><span class="sub">${esc(s.code)} · ${esc(s.frequency || '')}</span></div>
     ${s.description ? `<div class="sub" style="margin:-10px 0 12px">${esc(s.description)}</div>` : ''}
     <form class="sheet" onsubmit="return false">${s.sections.map(sec => `

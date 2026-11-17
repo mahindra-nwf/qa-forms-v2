@@ -1,0 +1,34 @@
+{
+  "order": 7,
+  "name": "Shrimp Potstickers",
+  "item": "19895",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - Shrimp Dumpling w/",
+  "lotLog": "PL-067",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Protein",
+        "spec": "shrimp dumpling"
+      },
+      {
+        "material": "Sauce",
+        "spec": "chili ponzu lime packet"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  }
+}

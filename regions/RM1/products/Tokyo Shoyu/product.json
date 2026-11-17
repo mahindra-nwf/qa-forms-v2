@@ -1,0 +1,37 @@
+{
+  "order": 9,
+  "name": "Tokyo Shoyu",
+  "item": "19899",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - Tokyo Shoyu Bowl 14 oz",
+  "lotLog": "PL-062",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Base",
+        "spec": "tokyo shoyu soup"
+      },
+      {
+        "material": "Protein",
+        "spec": "pork chashu"
+      },
+      {
+        "material": "ramen noodles"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  }
+}

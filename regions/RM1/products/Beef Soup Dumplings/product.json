@@ -1,0 +1,41 @@
+{
+  "order": 1,
+  "name": "Beef Soup Dumplings",
+  "item": "47404",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - Beef Dumpling w/Garlic Chili Rayu Glaze",
+  "components": [
+    {
+      "name": "Dumplings",
+      "target": "6 pieces (≥ 5.6 oz)"
+    },
+    {
+      "name": "Sauce cup",
+      "target": "0.53"
+    }
+  ],
+  "lotLog": "PL-065",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Protein",
+        "spec": "Beef Soup Dumpling"
+      },
+      {
+        "material": "Sauce",
+        "spec": "garlic chili rayu glaze packet"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  }
+}

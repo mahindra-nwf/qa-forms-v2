@@ -1,0 +1,38 @@
+{
+  "order": 3,
+  "name": "Chicken Teriyaki",
+  "item": "19901",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - Chicken Teriyaki",
+  "lotLog": "PL-068",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Base",
+        "spec": "rice"
+      },
+      {
+        "material": "Protein",
+        "spec": "Chicken"
+      },
+      {
+        "material": "Sauce",
+        "spec": "teriyaki sauce"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  }
+}

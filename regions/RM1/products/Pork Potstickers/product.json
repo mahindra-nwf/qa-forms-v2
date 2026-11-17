@@ -1,0 +1,35 @@
+{
+  "order": 5,
+  "name": "Pork Potstickers",
+  "unsure": true,
+  "item": "19897",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - Pork Potsticker w/",
+  "lotLog": "PL-064",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Protein",
+        "spec": "pork potsticker"
+      },
+      {
+        "material": "Sauce",
+        "spec": "chili oil vinaigrette packet"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  }
+}
