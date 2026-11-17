@@ -218,7 +218,7 @@ function showRegionProduct(r, p) {
   app.innerHTML = `
     <a class="crumb" href="${regionHref(r)}">← ${esc(r.name)}</a>
     <div class="bar"><h1>${esc(p.name)}</h1></div>
-    <div class="sub" style="margin:-10px 0 8px">${esc(productSub(p))}${p.variety ? ' · ' + esc(p.variety) : ''}</div>
+    <div class="sub" style="margin:-10px 0 8px">${esc(productSub(p))}${p.variety && p.variety !== p.name ? ' · ' + esc(p.variety) : ''}</div>
     ${missing.length ? `<div class="empty" style="text-align:left">Not filled in yet: ${esc(missing.join(', '))}. Those parts of the sheets open with blank or generic rows. Add them in <code>regions/${esc(r.id)}/products/${esc(p.folder)}/product.json</code>.</div>` : ''}
     <h2>Log sheets</h2>
     <div class="list">${r.logs.filter(l => l.scope === 'product').map(l => logRow(l, `${regionProductHref(r, p)}/${enc(l.file)}`)).join('')}</div>`;
