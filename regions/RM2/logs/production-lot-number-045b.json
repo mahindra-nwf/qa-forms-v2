@@ -4,14 +4,32 @@
   "scope": "product",
   "category": "Production",
   "frequency": "Each production run",
-  "description": "Ingredient and packaging lot numbers used for this production run. Rows come from the product's recipe (Production Lot Logs workbook).",
+  "description": "Ingredient and packaging lot numbers used for this production run. Same columns as the paper form (Log 045 v13, RM tab). Rows come from the product recipe.",
   "sections": [
     {
       "title": "Production",
       "fields": [
-        { "id": "productionDate", "label": "Production date", "type": "date", "required": true, "default": "today" },
-        { "id": "itemNumber", "label": "Item number", "type": "text", "required": true, "prefill": "item" },
-        { "id": "variety", "label": "Variety description", "type": "text", "required": true, "prefill": "variety" }
+        {
+          "id": "productionDate",
+          "label": "Production date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "itemNumber",
+          "label": "Item number",
+          "type": "text",
+          "required": true,
+          "prefill": "item"
+        },
+        {
+          "id": "variety",
+          "label": "Variety description",
+          "type": "text",
+          "required": true,
+          "prefill": "variety"
+        }
       ]
     },
     {
@@ -23,13 +41,61 @@
           "type": "table",
           "rowHeader": "Material",
           "rowsFrom": "materials.ingredients",
-          "fixedRows": ["Base", "Protein", "Sauce", "Other"],
+          "fixedRows": [
+            "Base",
+            "Protein",
+            "Sauce",
+            "Other"
+          ],
           "columns": [
-            { "id": "lot", "label": "Lot number", "type": "text" },
-            { "id": "qtyUsed", "label": "Quantity used", "type": "number" },
-            { "id": "unitUsed", "label": "Unit", "type": "select", "options": ["lb", "kg", "oz", "case", "bag", "ea", "gal"] },
-            { "id": "qtyExtra", "label": "Quantity extra", "type": "number" },
-            { "id": "unitExtra", "label": "Unit", "type": "select", "options": ["lb", "kg", "oz", "case", "bag", "ea", "gal"] }
+            {
+              "id": "lot",
+              "label": "Lot number",
+              "type": "text"
+            },
+            {
+              "id": "received",
+              "label": "Received date",
+              "type": "date"
+            },
+            {
+              "id": "qty1",
+              "label": "Quantity used",
+              "type": "number"
+            },
+            {
+              "id": "unit1",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "lb",
+                "kg",
+                "oz",
+                "case",
+                "bag",
+                "ea",
+                "gal"
+              ]
+            },
+            {
+              "id": "qty2",
+              "label": "Quantity used",
+              "type": "number"
+            },
+            {
+              "id": "unit2",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "lb",
+                "kg",
+                "oz",
+                "case",
+                "bag",
+                "ea",
+                "gal"
+              ]
+            }
           ]
         }
       ]
@@ -43,13 +109,55 @@
           "type": "table",
           "rowHeader": "Material",
           "rowsFrom": "materials.packaging",
-          "fixedRows": ["Trays", "Film/Lid", "Cartons/Labels", "Master Case"],
+          "fixedRows": [
+            "Trays",
+            "Film/Lid",
+            "Cartons/Labels",
+            "Master Case"
+          ],
           "columns": [
-            { "id": "lot", "label": "Lot number", "type": "text" },
-            { "id": "qtyUsed", "label": "Quantity used", "type": "number" },
-            { "id": "unitUsed", "label": "Unit", "type": "select", "options": ["ea", "case", "roll", "box"] },
-            { "id": "qtyExtra", "label": "Quantity extra", "type": "number" },
-            { "id": "unitExtra", "label": "Unit", "type": "select", "options": ["ea", "case", "roll", "box"] }
+            {
+              "id": "lot",
+              "label": "Lot number",
+              "type": "text"
+            },
+            {
+              "id": "received",
+              "label": "Received date",
+              "type": "date"
+            },
+            {
+              "id": "qty1",
+              "label": "Quantity used",
+              "type": "number"
+            },
+            {
+              "id": "unit1",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "ea",
+                "case",
+                "roll",
+                "box"
+              ]
+            },
+            {
+              "id": "qty2",
+              "label": "Quantity used",
+              "type": "number"
+            },
+            {
+              "id": "unit2",
+              "label": "Unit",
+              "type": "select",
+              "options": [
+                "ea",
+                "case",
+                "roll",
+                "box"
+              ]
+            }
           ]
         }
       ]
@@ -57,9 +165,26 @@
     {
       "title": "QA verification",
       "fields": [
-        { "id": "comments", "label": "Comments", "type": "textarea" },
-        { "id": "qaVerification", "label": "QA verification", "type": "text" },
-        { "id": "qaDate", "label": "Date", "type": "date" }
+        {
+          "id": "caseCount",
+          "label": "Case count",
+          "type": "number"
+        },
+        {
+          "id": "comments",
+          "label": "Comments",
+          "type": "textarea"
+        },
+        {
+          "id": "qaVerification",
+          "label": "QA verification",
+          "type": "text"
+        },
+        {
+          "id": "qaDate",
+          "label": "Date",
+          "type": "date"
+        }
       ]
     }
   ]
