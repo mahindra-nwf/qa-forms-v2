@@ -1,0 +1,37 @@
+{
+  "order": 7,
+  "name": "Spicy Miso",
+  "item": "70562",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - Spicy Miso Ramen",
+  "lotLog": "PL-076",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Base",
+        "spec": "Spicy Miso"
+      },
+      {
+        "material": "Protein",
+        "spec": "pork chashu"
+      },
+      {
+        "material": "ramen noodles"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  }
+}

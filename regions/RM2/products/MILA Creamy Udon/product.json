@@ -1,0 +1,37 @@
+{
+  "order": 3,
+  "name": "MILA Creamy Udon",
+  "item": "11123",
+  "variety": "Mila - Creamy Udon Noodles w/Chicken",
+  "lotLog": "PL-073",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Base",
+        "spec": "Udon Noodles"
+      },
+      {
+        "material": "Protein",
+        "spec": "Chicken Mushroom"
+      },
+      {
+        "material": "Sauce",
+        "spec": "Creamy Soup"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "order": 2,
+  "name": "MILA Chicken Noodle Stir Fry",
+  "item": "11121",
+  "variety": "Mila - Stir Fry Noodles w/Chicken Bok Choy",
+  "lotLog": "PL-074",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Base",
+        "spec": "Udon Noodles"
+      },
+      {
+        "material": "Protein",
+        "spec": "Chicken Stir Fry"
+      },
+      {
+        "material": "Herbs",
+        "spec": "Bok Choi Vegetables"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  }
+}

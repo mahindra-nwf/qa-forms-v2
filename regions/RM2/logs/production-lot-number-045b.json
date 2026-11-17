@@ -1,0 +1,66 @@
+{
+  "name": "Production Lot Number",
+  "code": "Log 045 B",
+  "scope": "product",
+  "category": "Production",
+  "frequency": "Each production run",
+  "description": "Ingredient and packaging lot numbers used for this production run. Rows come from the product's recipe (Production Lot Logs workbook).",
+  "sections": [
+    {
+      "title": "Production",
+      "fields": [
+        { "id": "productionDate", "label": "Production date", "type": "date", "required": true, "default": "today" },
+        { "id": "itemNumber", "label": "Item number", "type": "text", "required": true, "prefill": "item" },
+        { "id": "variety", "label": "Variety description", "type": "text", "required": true, "prefill": "variety" }
+      ]
+    },
+    {
+      "title": "Ingredients",
+      "fields": [
+        {
+          "id": "ingredients",
+          "label": "Ingredients",
+          "type": "table",
+          "rowHeader": "Material",
+          "rowsFrom": "materials.ingredients",
+          "fixedRows": ["Base", "Protein", "Sauce", "Other"],
+          "columns": [
+            { "id": "lot", "label": "Lot number", "type": "text" },
+            { "id": "qtyUsed", "label": "Quantity used", "type": "number" },
+            { "id": "unitUsed", "label": "Unit", "type": "select", "options": ["lb", "kg", "oz", "case", "bag", "ea", "gal"] },
+            { "id": "qtyExtra", "label": "Quantity extra", "type": "number" },
+            { "id": "unitExtra", "label": "Unit", "type": "select", "options": ["lb", "kg", "oz", "case", "bag", "ea", "gal"] }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Packaging",
+      "fields": [
+        {
+          "id": "packaging",
+          "label": "Packaging",
+          "type": "table",
+          "rowHeader": "Material",
+          "rowsFrom": "materials.packaging",
+          "fixedRows": ["Trays", "Film/Lid", "Cartons/Labels", "Master Case"],
+          "columns": [
+            { "id": "lot", "label": "Lot number", "type": "text" },
+            { "id": "qtyUsed", "label": "Quantity used", "type": "number" },
+            { "id": "unitUsed", "label": "Unit", "type": "select", "options": ["ea", "case", "roll", "box"] },
+            { "id": "qtyExtra", "label": "Quantity extra", "type": "number" },
+            { "id": "unitExtra", "label": "Unit", "type": "select", "options": ["ea", "case", "roll", "box"] }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "QA verification",
+      "fields": [
+        { "id": "comments", "label": "Comments", "type": "textarea" },
+        { "id": "qaVerification", "label": "QA verification", "type": "text" },
+        { "id": "qaDate", "label": "Date", "type": "date" }
+      ]
+    }
+  ]
+}

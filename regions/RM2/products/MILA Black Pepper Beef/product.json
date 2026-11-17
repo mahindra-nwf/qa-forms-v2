@@ -1,0 +1,40 @@
+{
+  "order": 1,
+  "name": "MILA Black Pepper Beef",
+  "item": "11125",
+  "variety": "Mila - Black Pepper Beef and Stir Fry Veggies",
+  "lotLog": "PL-072",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Pepper Onion"
+      },
+      {
+        "material": "Base",
+        "spec": "Rice"
+      },
+      {
+        "material": "Protein",
+        "spec": "Black Pepper Beef"
+      },
+      {
+        "material": "Herbs",
+        "spec": "Bell Peppers"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  }
+}

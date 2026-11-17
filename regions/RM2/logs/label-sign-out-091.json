@@ -1,0 +1,52 @@
+{
+  "name": "Label Sign Out",
+  "code": "Log 091",
+  "scope": "line",
+  "category": "Packaging",
+  "frequency": "Daily",
+  "description": "Labels are stored in lockers with access limited to the Head of Operations, Supervisors and QA. Every label used must be documented and verified between the lead of production and QA. Ensure rolls are returned and removed from equipment when production finishes. Verify allergens are correct based on the master allergen label. At the end of the run, confirm the label before returning it to the cabinet.",
+  "sections": [
+    {
+      "title": "Day",
+      "fields": [
+        { "id": "date", "label": "Date", "type": "date", "required": true, "default": "today" }
+      ]
+    },
+    {
+      "title": "Labels signed out",
+      "fields": [
+        {
+          "id": "labels",
+          "label": "Labels signed out",
+          "type": "table",
+          "rows": 3,
+          "columns": [
+            { "id": "label", "label": "Label", "type": "text", "span": 2 },
+            { "id": "lot", "label": "Label lot #", "type": "text" },
+            { "id": "line", "label": "Line", "type": "text" },
+            { "id": "masterLabel", "label": "Confirm with master label", "type": "passfail", "options": ["Y", "N"] },
+            { "id": "product", "label": "Confirm with product", "type": "passfail", "options": ["Y", "N"] },
+            { "id": "qtyOut", "label": "Qty out", "type": "text" },
+            { "id": "timeOut", "label": "Time out", "type": "time" },
+            { "id": "supOut", "label": "Supervisor initial", "type": "text" },
+            { "id": "qaOut", "label": "QA initial", "type": "text" },
+            { "id": "qtyUsed", "label": "Qty used", "type": "text" },
+            { "id": "endConfirm", "label": "End confirm label", "type": "passfail", "options": ["Y", "N"] },
+            { "id": "qtyReturned", "label": "Qty returned", "type": "text" },
+            { "id": "supIn", "label": "Supervisor initial", "type": "text" },
+            { "id": "qaIn", "label": "QA initial", "type": "text" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Returned to cabinet",
+      "fields": [
+        { "id": "returnedInitial", "label": "Labels removed from the line and returned (initial)", "type": "text" },
+        { "id": "returnedDate", "label": "Date", "type": "date" },
+        { "id": "returnedTime", "label": "Time", "type": "time" },
+        { "id": "review", "label": "Document is completed?", "type": "passfail", "options": ["Accept", "Reject"] }
+      ]
+    }
+  ]
+}
