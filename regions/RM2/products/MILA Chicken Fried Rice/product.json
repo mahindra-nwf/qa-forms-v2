@@ -1,0 +1,21 @@
+{
+  "order": 4,
+  "name": "Mila - Chicken Fried Rice w/ Soy Garlic",
+  "item": "11127",
+  "variety": "Mila - Chicken Fried Rice w/ Soy Garlic",
+  "lotLog": "PL-075",
+  "materials": {
+    "ingredients": [
+      { "material": "Base", "spec": "Rice" },
+      { "material": "Protein", "spec": "Chicken Carrot Pouch" },
+      { "material": "Sauce", "spec": "Soy Garlic Sauce" },
+      { "material": "Other 3", "spec": "Eggs" }
+    ],
+    "packaging": [
+      { "material": "Trays" },
+      { "material": "Film/Lid" },
+      { "material": "Cartons/Labels" },
+      { "material": "Master Case" }
+    ]
+  }
+}
