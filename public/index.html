@@ -75,6 +75,10 @@
   .sheet-table td.del { width: 1%; padding: 0; }
   .addrows { display: flex; gap: 8px; flex-wrap: wrap; }
   .photo-btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); padding: 10px 16px; cursor: pointer; min-height: 44px; }
+  .photo-cell { display: flex; align-items: center; gap: 6px; }
+  .photo-cell .photo-btn { padding: 6px 12px; min-height: 36px; color: var(--accent); white-space: nowrap; }
+  .photo-cell img { height: 36px; width: 48px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); }
+  .photo-cell .delrow { min-width: 32px; min-height: 32px; padding: 4px; }
   .photo-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
   .photo-grid:empty { display: none; }
   .photo { position: relative; margin: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fafcfd; }
@@ -333,6 +337,9 @@ function input(f, name, preset) {
     `<label><input type="radio" ${n} value="${esc(o)}"${o === value ? ' checked' : ''}><span>${esc(o)}</span></label>`).join('')}</span>`;
   if (f.type === 'textarea') return `<textarea ${n} rows="2">${esc(value || '')}</textarea>`;
   if (f.type === 'checkbox') return `<label class="check"><input type="checkbox" ${n}>${esc(f.checkLabel || '')}</label>`;
+  // One photo taken with the iPad camera (e.g. the label at each label check); taking another replaces it.
+  if (f.type === 'photo') return `<span class="photo-cell"><label class="photo-btn">📷 <span>Take</span><input type="file" accept="image/*" capture="environment" hidden data-photocell ${n}></label>
+    <img alt="" hidden><button type="button" class="delrow" data-clearphoto hidden title="Remove photo" aria-label="Remove photo">✕</button></span>`;
   const type = { date: 'date', time: 'time', number: 'number' }[f.type] || 'text';
   const box = `<input type="${type}" ${n}${type === 'number' ? ' inputmode="decimal" step="any"' : ''}${value ? ` value="${esc(value)}"` : ''}>`;
   return f.unit ? `<span class="unit">${box}<span>${esc(f.unit)}</span></span>` : box;
@@ -411,6 +418,25 @@ function fieldHtml(f, sec) {
   if (f.type === 'matrix') return matrixHtml(f, sec);
   return `<label class="field"><span>${esc(f.label)}${f.required ? ' *' : ''}</span>${input(f, f.id)}${hint(f)}</label>`;
 }
+
+// Photo boxes inside rows (rows can be added later, so listen on the page once).
+function showCellPhoto(cell, file) {
+  const img = cell.querySelector('img'), clear = cell.querySelector('[data-clearphoto]');
+  if (img.src) URL.revokeObjectURL(img.src);
+  img.hidden = clear.hidden = !file;
+  if (file) img.src = URL.createObjectURL(file); else img.removeAttribute('src');
+  cell.querySelector('.photo-btn span').textContent = file ? 'Retake' : 'Take';
+}
+app.addEventListener('change', e => {
+  if (e.target.matches('[data-photocell]')) showCellPhoto(e.target.closest('.photo-cell'), e.target.files[0]);
+});
+app.addEventListener('click', e => {
+  const b = e.target.closest('[data-clearphoto]');
+  if (!b || !confirm('Remove this photo?')) return;
+  const cell = b.closest('.photo-cell');
+  cell.querySelector('input').value = '';
+  showCellPhoto(cell, null);
+});
 
 function wireSheet(s) {
   app.querySelectorAll('.tick').forEach(b => b.onclick = () => {
