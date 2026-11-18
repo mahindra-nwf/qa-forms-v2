@@ -76,6 +76,13 @@
   .sheet-table td.del { width: 1%; padding: 0; }
   .addrows { display: flex; gap: 8px; flex-wrap: wrap; }
   .photo-btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); padding: 10px 16px; cursor: pointer; min-height: 44px; }
+  .cardbody { flex: 1; min-width: 0; display: grid; gap: 8px; }
+  .cardbody .cardgrid { flex: none; }
+  .cgroup + .cgroup { border-top: 1px dashed var(--line); padding-top: 8px; }
+  .cgtitle { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .clusters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .cluster { border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px 8px; background: #fff; min-width: 0; }
+  .cltitle { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
   .photo-cell { display: flex; align-items: center; gap: 6px; }
   .photo-cell .photo-btn { padding: 6px 12px; min-height: 36px; color: var(--accent); white-space: nowrap; }
   .photo-cell img { height: 36px; width: 48px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); }
@@ -375,12 +382,25 @@ const asCards = f => !f.fixedRows && f.columns.length > 8;
 const slotsOf = c => c.span || (c.type === 'passfail' ? 2 : 1);
 const perLine = (slots, max) => Math.ceil(slots / Math.ceil(slots / max));
 function cardRow(f, i, typeId) {
-  const t = rowType(f, typeId), cols = columnsFor(f, t);
-  const slots = cols.reduce((n, c) => n + slotsOf(c), 0);
+  const t = rowType(f, typeId);
+  const field = (c, short) => `<label class="field" style="grid-column: span ${slotsOf(c)}"><span>${esc(short && c.short || c.label)}</span>${input(c, `${f.id}.${i}.${c.id}`)}</label>`;
+  // One grid line; a line in a grouped layout gets one column per slot so it always fills a single line.
+  const grid = (cols, opts = {}) => {
+    const slots = cols.reduce((n, c) => n + slotsOf(c), 0);
+    const wide = opts.oneLine ? Math.min(slots, 12) : perLine(slots, 10);
+    return `<div class="cardgrid" style="--cols:${wide};--cols-narrow:${perLine(slots, opts.oneLine ? 8 : 5)}">${cols.map(c => field(c, opts.short)).join('')}</div>`;
+  };
+  const col = id => f.columns.find(c => c.id === id);
+  // t.layout: the card split into titled lines, one per step; a line can hold "clusters"
+  // (e.g. Product 1 / 2 / 3, each with its own weight, O2 and CO2).
+  const body = t?.layout
+    ? `<div class="cardbody">${t.layout.map(g => `<div class="cgroup"><div class="cgtitle">${esc(g.title)}</div>${g.clusters
+        ? `<div class="clusters">${g.clusters.map(cl => `<div class="cluster"><div class="cltitle">${esc(cl.title)}</div>${grid(cl.columns.map(col), { oneLine: true, short: true })}</div>`).join('')}</div>`
+        : grid(g.columns.map(col), { oneLine: true })}</div>`).join('')}</div>`
+    : grid(columnsFor(f, t), { oneLine: t?.oneLine });
   return `<div class="rowcard"${t ? ` data-rowtype="${esc(t.id)}"` : ''}>
     <div class="num">${rowNum(i)}${t ? `<div class="rowtag">${esc(t.tag || t.label)}</div><input type="hidden" name="${esc(`${f.id}.${i}.rowType`)}" value="${esc(t.id)}">` : ''}</div>${delBtn}
-    <div class="cardgrid" style="--cols:${perLine(slots, 10)};--cols-narrow:${perLine(slots, 5)}">${cols.map(c =>
-      `<label class="field" style="grid-column: span ${slotsOf(c)}"><span>${esc(c.label)}</span>${input(c, `${f.id}.${i}.${c.id}`)}</label>`).join('')}</div></div>`;
+    ${body}</div>`;
 }
 const rowHtml = (f, i, typeId) => asCards(f) ? cardRow(f, i, typeId) : tableRow(f, i);
 
