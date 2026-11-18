@@ -141,7 +141,7 @@
           "label": "Checks",
           "type": "table",
           "rows": 1,
-          "hint": "Tap + Full check every hour (all boxes: X-ray, label, weights, seal, O2/CO2, pallet temp) and + Label check at the 30-minute marks in between (label inspection only; take 2 photos of the label with 📷). Use ✕ to delete a row added by mistake. Seal check: 3 consecutive trays for single meals, 2 for family meals. Obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
+          "hint": "Tap + Full check every hour (all boxes: X-ray, label, 3 weights, seal, 3 × O2 and 3 × CO2, pallet temp) and + Label check at the 30-minute marks in between (label inspection only; take 2 photos of the label with 📷). Use ✕ to delete a row added by mistake. Seal check: 3 consecutive trays for single meals, 2 for family meals. Obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
           "columns": [
             {
               "id": "time",
@@ -221,12 +221,32 @@
             },
             {
               "id": "o2",
-              "label": "8. % O2",
+              "label": "8. % O2 1",
+              "type": "number"
+            },
+            {
+              "id": "o2b",
+              "label": "8. % O2 2",
+              "type": "number"
+            },
+            {
+              "id": "o2c",
+              "label": "8. % O2 3",
               "type": "number"
             },
             {
               "id": "co2",
-              "label": "9. % CO2",
+              "label": "9. % CO2 1",
+              "type": "number"
+            },
+            {
+              "id": "co2b",
+              "label": "9. % CO2 2",
+              "type": "number"
+            },
+            {
+              "id": "co2c",
+              "label": "9. % CO2 3",
               "type": "number"
             },
             {
@@ -239,7 +259,7 @@
               "id": "productTemp",
               "label": "11. Pallet product temp (<40°F)",
               "type": "number",
-              "span": 2
+              "span": 3
             },
             {
               "id": "rejectContainer",
@@ -264,7 +284,8 @@
             {
               "id": "obsTime",
               "label": "Obs. time",
-              "type": "time"
+              "type": "time",
+              "span": 2
             },
             {
               "id": "preShipInitials",
@@ -308,7 +329,11 @@
                 "noSealBubble",
                 "sealResult",
                 "o2",
+                "o2b",
+                "o2c",
                 "co2",
+                "co2b",
+                "co2c",
                 "unitLabelItem",
                 "productTemp",
                 "rejectContainer",
