@@ -387,7 +387,7 @@ function cardRow(f, i, typeId) {
   // One grid line; a line in a grouped layout gets one column per slot so it always fills a single line.
   const grid = (cols, opts = {}) => {
     const slots = cols.reduce((n, c) => n + slotsOf(c), 0);
-    const wide = opts.oneLine ? Math.min(slots, 12) : perLine(slots, 10);
+    const wide = opts.oneLine ? Math.min(slots, 14) : perLine(slots, 10);
     return `<div class="cardgrid" style="--cols:${wide};--cols-narrow:${perLine(slots, opts.oneLine ? 8 : 5)}">${cols.map(c => field(c, opts.short)).join('')}</div>`;
   };
   const col = id => f.columns.find(c => c.id === id);
@@ -456,7 +456,9 @@ function showCellPhoto(cell, file) {
   if (img.src) URL.revokeObjectURL(img.src);
   img.hidden = clear.hidden = !file;
   if (file) img.src = URL.createObjectURL(file); else img.removeAttribute('src');
-  cell.querySelector('.photo-btn span').textContent = file ? 'Retake' : 'Take';
+  // with a photo in, the button shrinks to just 📷 (tap to retake) so the thumbnail and ✕ fit
+  cell.querySelector('.photo-btn span').textContent = file ? '' : 'Take';
+  cell.querySelector('.photo-btn').title = file ? 'Retake photo' : 'Take photo';
 }
 app.addEventListener('change', e => {
   if (e.target.matches('[data-photocell]')) showCellPhoto(e.target.closest('.photo-cell'), e.target.files[0]);
@@ -536,7 +538,8 @@ function wirePhotos(form) {
         <figcaption>${esc(p.time)}</figcaption>
         <button type="button" class="delrow" data-delphoto="${i}" title="Remove this photo" aria-label="Remove photo ${i + 1}">✕</button></figure>`).join('');
   };
-  form.querySelectorAll('.photo-btn input').forEach(inp => inp.onchange = () => {
+  // only the paper-log buttons here; photo boxes inside rows are handled by showCellPhoto
+  form.querySelectorAll('.photos-section .photo-btn input').forEach(inp => inp.onchange = () => {
     const time = new Date().toLocaleString([], { dateStyle: 'short', timeStyle: 'short' });
     form.photos.push(...[...inp.files].map(file => ({ file, time })));
     inp.value = '';
