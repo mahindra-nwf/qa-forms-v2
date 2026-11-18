@@ -30,5 +30,15 @@
         "material": "Master Case"
       }
     ]
-  }
+  },
+  "components": [
+    {
+      "name": "Dumplings",
+      "target": "6 pieces (>5.6 oz)"
+    },
+    {
+      "name": "Sauce cup",
+      "target": "0.53"
+    }
+  ]
 }
