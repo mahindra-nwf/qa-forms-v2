@@ -35,11 +35,6 @@
           "prefill": "customer"
         },
         {
-          "id": "masterCaseUpc",
-          "label": "Master case UPC",
-          "type": "text"
-        },
-        {
           "id": "datePacked",
           "label": "Date packed",
           "type": "date",
