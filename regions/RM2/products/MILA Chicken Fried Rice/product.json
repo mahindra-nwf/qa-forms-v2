@@ -6,16 +6,54 @@
   "lotLog": "PL-075",
   "materials": {
     "ingredients": [
-      { "material": "Base", "spec": "Rice" },
-      { "material": "Protein", "spec": "Chicken Carrot Pouch" },
-      { "material": "Sauce", "spec": "Soy Garlic Sauce" },
-      { "material": "Other 3", "spec": "Eggs" }
+      {
+        "material": "Base",
+        "spec": "Rice"
+      },
+      {
+        "material": "Protein",
+        "spec": "Chicken Carrot Pouch"
+      },
+      {
+        "material": "Sauce",
+        "spec": "Soy Garlic Sauce"
+      },
+      {
+        "material": "Other 3",
+        "spec": "Eggs"
+      }
     ],
     "packaging": [
-      { "material": "Trays" },
-      { "material": "Film/Lid" },
-      { "material": "Cartons/Labels" },
-      { "material": "Master Case" }
+      {
+        "material": "Trays"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
     ]
-  }
+  },
+  "components": [
+    {
+      "name": "Rice",
+      "target": "2 x 8"
+    },
+    {
+      "name": "Chicken",
+      "target": "14.3"
+    },
+    {
+      "name": "Egg",
+      "target": "4.3"
+    },
+    {
+      "name": "Sauce",
+      "target": "3.24"
+    }
+  ]
 }

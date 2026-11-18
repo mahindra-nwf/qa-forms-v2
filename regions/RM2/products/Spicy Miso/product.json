@@ -33,5 +33,19 @@
         "material": "Master Case"
       }
     ]
-  }
+  },
+  "components": [
+    {
+      "name": "Soup",
+      "target": "7.5"
+    },
+    {
+      "name": "Noodle",
+      "target": "5"
+    },
+    {
+      "name": "Pork",
+      "target": "1.5"
+    }
+  ]
 }

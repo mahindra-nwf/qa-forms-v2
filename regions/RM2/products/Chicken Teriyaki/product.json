@@ -34,5 +34,19 @@
         "material": "Master Case"
       }
     ]
-  }
+  },
+  "components": [
+    {
+      "name": "Rice",
+      "target": "5"
+    },
+    {
+      "name": "Chicken",
+      "target": "2"
+    },
+    {
+      "name": "Sauce",
+      "target": "3"
+    }
+  ]
 }

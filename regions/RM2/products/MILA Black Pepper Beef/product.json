@@ -36,5 +36,19 @@
         "material": "Master Case"
       }
     ]
-  }
+  },
+  "components": [
+    {
+      "name": "Rice",
+      "target": "7.6"
+    },
+    {
+      "name": "Beef and Sauce",
+      "target": "6.84"
+    },
+    {
+      "name": "Peppers",
+      "target": "4.12"
+    }
+  ]
 }

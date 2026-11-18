@@ -33,5 +33,19 @@
         "material": "Master Case"
       }
     ]
-  }
+  },
+  "components": [
+    {
+      "name": "Noodles",
+      "target": "8.0"
+    },
+    {
+      "name": "Chicken",
+      "target": "3.60"
+    },
+    {
+      "name": "Sauce",
+      "target": "7.40"
+    }
+  ]
 }
