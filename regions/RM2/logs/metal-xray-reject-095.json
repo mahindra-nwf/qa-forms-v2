@@ -9,9 +9,27 @@
     {
       "title": "Production",
       "fields": [
-        { "id": "productionDate", "label": "Production date", "type": "date", "required": true, "default": "today" },
-        { "id": "itemNumber", "label": "Item number", "type": "text", "required": true, "prefill": "item" },
-        { "id": "variety", "label": "Variety description", "type": "text", "required": true, "prefill": "variety" }
+        {
+          "id": "productionDate",
+          "label": "Production date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "itemNumber",
+          "label": "Item number",
+          "type": "text",
+          "required": true,
+          "prefill": "item"
+        },
+        {
+          "id": "variety",
+          "label": "Variety description",
+          "type": "text",
+          "required": true,
+          "prefill": "variety"
+        }
       ]
     },
     {
@@ -22,12 +40,25 @@
           "label": "Ingredients",
           "type": "table",
           "rowHeader": "Ingredient",
-          "fixedRows": ["Base (noodle/rice/dumpling)", "Protein", "Vegetables", "Sauce", "Other 1", "Other 2"],
+          "fixedRows": [
+            "Base (noodle/rice/dumpling)",
+            "Protein",
+            "Vegetables",
+            "Sauce",
+            "Other 1",
+            "Other 2"
+          ],
           "columns": [
-            { "id": "lot1", "label": "Lot number", "type": "text" },
-            { "id": "lot2", "label": "Lot number", "type": "text" },
-            { "id": "lot3", "label": "Lot number", "type": "text" },
-            { "id": "received", "label": "Received date", "type": "date" }
+            {
+              "id": "lot1",
+              "label": "Lot number",
+              "type": "text"
+            },
+            {
+              "id": "received",
+              "label": "Received date",
+              "type": "date"
+            }
           ]
         }
       ]
@@ -41,10 +72,26 @@
           "type": "table",
           "rows": 2,
           "columns": [
-            { "id": "time", "label": "Time", "type": "time" },
-            { "id": "notes", "label": "Notes / corrective actions", "type": "text" },
-            { "id": "qty", "label": "Qty rejected", "type": "number" },
-            { "id": "initial", "label": "Initial", "type": "text" }
+            {
+              "id": "time",
+              "label": "Time",
+              "type": "time"
+            },
+            {
+              "id": "notes",
+              "label": "Notes / corrective actions",
+              "type": "text"
+            },
+            {
+              "id": "qty",
+              "label": "Qty rejected",
+              "type": "number"
+            },
+            {
+              "id": "initial",
+              "label": "Initial",
+              "type": "text"
+            }
           ]
         }
       ]
@@ -52,8 +99,16 @@
     {
       "title": "QA verification",
       "fields": [
-        { "id": "qaVerification", "label": "QA verification", "type": "text" },
-        { "id": "qaDate", "label": "Date", "type": "date" }
+        {
+          "id": "qaVerification",
+          "label": "QA verification",
+          "type": "text"
+        },
+        {
+          "id": "qaDate",
+          "label": "Date",
+          "type": "date"
+        }
       ]
     }
   ]

@@ -341,8 +341,10 @@ const delBtn = '<button type="button" class="delrow" data-delrow title="Delete t
 const rowNum = i => `<span class="n">${i + 1}</span>`;
 
 function tableRow(f, i, head) {
-  const label = head?.label ?? head, vals = head?.values || {};
-  const th = `<th>${esc(label)}${head?.sub ? `<div class="sub" style="font-weight:400">${esc(head.sub)}</div>` : ''}</th>`;
+  // a plain string row has no .sub/.values of its own (careful: strings inherit a built-in .sub())
+  const obj = head && typeof head === 'object' ? head : {};
+  const label = obj.label ?? head, vals = obj.values || {};
+  const th = `<th>${esc(label)}${obj.sub ? `<div class="sub" style="font-weight:400">${esc(obj.sub)}</div>` : ''}</th>`;
   return `<tr>${head !== undefined ? th : `<td class="num">${rowNum(i)}</td>`}${f.columns.map(c =>
     `<td>${input(c, `${f.id}.${i}.${c.id}`, vals[c.id])}</td>`).join('')}${head !== undefined ? '' : `<td class="del">${delBtn}</td>`}</tr>`;
 }
