@@ -72,6 +72,7 @@
   .rowcard[data-rowtype="label"] .rowtag { color: #8a5a00; background: #fdf1dc; }
   .delrow { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; padding: 8px 10px; min-width: 40px; min-height: 40px; align-self: flex-start; }
   .delrow:hover, .delrow:active { color: var(--danger); }
+  .delrow.armed { color: #fff; background: var(--danger); border-radius: 6px; font-size: 13px; font-weight: 600; padding: 8px 10px; }
   .sheet-table td.del { width: 1%; padding: 0; }
   .addrows { display: flex; gap: 8px; flex-wrap: wrap; }
   .photo-btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); padding: 10px 16px; cursor: pointer; min-height: 44px; }
@@ -419,6 +420,16 @@ function fieldHtml(f, sec) {
   return `<label class="field"><span>${esc(f.label)}${f.required ? ' *' : ''}</span>${input(f, f.id)}${hint(f)}</label>`;
 }
 
+// Two-tap delete instead of a confirm() pop-up (some browsers block pop-ups, so the ✕ seemed dead):
+// the first tap turns ✕ into a red "Delete?", the second tap does it; it resets after 5 seconds.
+function armed(btn) {
+  if (btn.classList.contains('armed')) return true;
+  btn.classList.add('armed');
+  btn.textContent = 'Delete?';
+  setTimeout(() => { btn.classList.remove('armed'); btn.textContent = '✕'; }, 5000);
+  return false;
+}
+
 // Photo boxes inside rows (rows can be added later, so listen on the page once).
 function showCellPhoto(cell, file) {
   const img = cell.querySelector('img'), clear = cell.querySelector('[data-clearphoto]');
@@ -432,7 +443,7 @@ app.addEventListener('change', e => {
 });
 app.addEventListener('click', e => {
   const b = e.target.closest('[data-clearphoto]');
-  if (!b || !confirm('Remove this photo?')) return;
+  if (!b) return;
   const cell = b.closest('.photo-cell');
   cell.querySelector('input').value = '';
   showCellPhoto(cell, null);
@@ -454,7 +465,7 @@ function wireSheet(s) {
   });
   app.querySelectorAll('[data-table]').forEach(body => body.addEventListener('click', e => {
     const del = e.target.closest('[data-delrow]');
-    if (!del || !confirm('Delete this row?')) return;
+    if (!del || !armed(del)) return;
     del.closest('.rowcard, tr').remove();
     renumber(body);
   }));
@@ -513,7 +524,7 @@ function wirePhotos(form) {
   });
   grid.onclick = e => {
     const b = e.target.closest('[data-delphoto]');
-    if (!b || !confirm('Remove this photo?')) return;
+    if (!b) return;
     form.photos.splice(Number(b.dataset.delphoto), 1);
     draw();
   };
