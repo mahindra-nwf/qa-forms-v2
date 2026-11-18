@@ -44,9 +44,7 @@
             "Base (noodle/rice/dumpling)",
             "Protein",
             "Vegetables",
-            "Sauce",
-            "Other 1",
-            "Other 2"
+            "Sauce"
           ],
           "columns": [
             {
