@@ -358,13 +358,18 @@
               ],
               "layout": [
                 {
-                  "title": "X-ray & label",
+                  "title": "X-ray",
                   "columns": [
                     "time",
                     "xray",
                     "recipe",
+                    "initial"
+                  ]
+                },
+                {
+                  "title": "Label check",
+                  "columns": [
                     "labelInspection",
-                    "initial",
                     "labelPhoto",
                     "labelPhoto2"
                   ]

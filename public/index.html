@@ -387,7 +387,9 @@ function cardRow(f, i, typeId) {
   // One grid line; a line in a grouped layout gets one column per slot so it always fills a single line.
   const grid = (cols, opts = {}) => {
     const slots = cols.reduce((n, c) => n + slotsOf(c), 0);
-    const wide = opts.oneLine ? Math.min(slots, 14) : perLine(slots, 10);
+    // lines in a grouped card use at least 10 columns, so boxes keep the same size from line to line
+    // instead of a short line stretching a few boxes across the whole card
+    const wide = opts.oneLine ? Math.min(Math.max(slots, opts.short ? 0 : 10), 14) : perLine(slots, 10);
     return `<div class="cardgrid" style="--cols:${wide};--cols-narrow:${perLine(slots, opts.oneLine ? 8 : 5)}">${cols.map(c => field(c, opts.short)).join('')}</div>`;
   };
   const col = id => f.columns.find(c => c.id === id);
