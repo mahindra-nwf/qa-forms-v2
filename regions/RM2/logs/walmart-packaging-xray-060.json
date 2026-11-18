@@ -141,7 +141,7 @@
           "label": "Checks",
           "type": "table",
           "rows": 3,
-          "hint": "Add a row every 30 minutes for the X-ray and label check (1–3 and Label inspection). Product checks (4–11) are done every hour: fill them in on the hourly rows and leave them blank on the rows in between. Seal check: 3 consecutive trays for single meals, 2 for family meals. Monthly obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
+          "hint": "Add a row every 30 minutes for the X-ray and label check (1–3 and Label inspection). Product checks (4–11) are done every hour: fill them in on the hourly rows and leave them blank on the rows in between. Seal check: 3 consecutive trays for single meals, 2 for family meals. Obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
           "columns": [
             {
               "id": "time",
@@ -205,9 +205,10 @@
             },
             {
               "id": "noSealBubble",
-              "label": "6. No seal bubble / pox",
+              "label": "6. No seal bubble",
               "type": "checkbox",
-              "checkLabel": "Yes"
+              "checkLabel": "Yes",
+              "span": 2
             },
             {
               "id": "sealResult",
@@ -231,12 +232,14 @@
             {
               "id": "unitLabelItem",
               "label": "10. Verify unit label item #",
-              "type": "text"
+              "type": "text",
+              "span": 2
             },
             {
               "id": "productTemp",
               "label": "11. Pallet product temp (<40°F)",
-              "type": "number"
+              "type": "number",
+              "span": 2
             },
             {
               "id": "rejectContainer",
@@ -251,16 +254,16 @@
               "id": "comments",
               "label": "Comments / CA",
               "type": "text",
-              "span": 2
+              "span": 1
             },
             {
               "id": "obsInitials",
-              "label": "Monthly obs. initials",
+              "label": "Obs. initials",
               "type": "text"
             },
             {
               "id": "obsTime",
-              "label": "Monthly obs. time",
+              "label": "Obs. time",
               "type": "time"
             },
             {
@@ -271,7 +274,8 @@
             {
               "id": "preShipDateTime",
               "label": "Pre-ship date/time",
-              "type": "text"
+              "type": "text",
+              "span": 2
             }
           ]
         }

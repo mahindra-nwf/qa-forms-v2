@@ -65,13 +65,13 @@
   .rowcards { display: grid; gap: 8px; }
   .rowcard { display: flex; gap: 10px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: #fafcfd; }
   .rowcard .num { color: var(--muted); font-weight: 600; padding-top: 22px; }
-  .cardgrid { flex: 1; min-width: 0; display: grid; gap: 8px 10px; grid-template-columns: repeat(10, minmax(0, 1fr)); }
+  .cardgrid { flex: 1; min-width: 0; display: grid; gap: 8px 10px; grid-template-columns: repeat(var(--cols, 10), minmax(0, 1fr)); }
   .cardgrid .field span { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .cardgrid .seg { display: flex; }
   .cardgrid .seg label { flex: 1; text-align: center; }
   .cardgrid .seg span { font-size: 14px; color: var(--ink); padding: 7px 4px; overflow: visible; }
   .cardgrid .check { padding-top: 7px; }
-  @media (max-width: 900px) { .cardgrid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+  @media (max-width: 900px) { .cardgrid { grid-template-columns: repeat(var(--cols-narrow, 5), minmax(0, 1fr)); } }
   .hint { font-size: 13px; color: var(--muted); margin: 2px 0 6px; }
   .caption { font-weight: 600; margin-bottom: 4px; }
   .check { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; color: var(--ink); }
@@ -334,11 +334,15 @@ function tableRow(f, i, head) {
     `<td>${input(c, `${f.id}.${i}.${c.id}`, vals[c.id])}</td>`).join('')}</tr>`;
 }
 
-// Too many columns for an iPad-wide table: each row becomes a card, its boxes packed into rows of 10 slots.
+// Too many columns for an iPad-wide table: each row becomes a card. Its boxes are split evenly over
+// as few lines as fit (at most 10 slots a line in landscape, 5 in portrait), so no line is left half empty.
 const asCards = f => !f.fixedRows && f.columns.length > 8;
+const slotsOf = c => c.span || (c.type === 'passfail' ? 2 : 1);
+const perLine = (slots, max) => Math.ceil(slots / Math.ceil(slots / max));
 function cardRow(f, i) {
-  return `<div class="rowcard"><div class="num">${i + 1}</div><div class="cardgrid">${f.columns.map(c =>
-    `<label class="field" style="grid-column: span ${c.span || (c.type === 'passfail' ? 2 : 1)}"><span>${esc(c.label)}</span>${input(c, `${f.id}.${i}.${c.id}`)}</label>`).join('')}</div></div>`;
+  const slots = f.columns.reduce((n, c) => n + slotsOf(c), 0);
+  return `<div class="rowcard"><div class="num">${i + 1}</div><div class="cardgrid" style="--cols:${perLine(slots, 10)};--cols-narrow:${perLine(slots, 5)}">${f.columns.map(c =>
+    `<label class="field" style="grid-column: span ${slotsOf(c)}"><span>${esc(c.label)}</span>${input(c, `${f.id}.${i}.${c.id}`)}</label>`).join('')}</div></div>`;
 }
 const rowHtml = (f, i) => asCards(f) ? cardRow(f, i) : tableRow(f, i);
 
