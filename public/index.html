@@ -64,7 +64,16 @@
   .sheet section > * + * { margin-top: 12px; }
   .rowcards { display: grid; gap: 8px; }
   .rowcard { display: flex; gap: 10px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: #fafcfd; }
-  .rowcard .num { color: var(--muted); font-weight: 600; padding-top: 22px; }
+  .rowcard .num { color: var(--muted); font-weight: 600; padding-top: 22px; min-width: 34px; display: flex; flex-direction: column; align-items: center; }
+  .rowcard { position: relative; padding-right: 34px; }
+  .rowcard > .delrow { position: absolute; top: 2px; right: 0; }
+  .rowtag { margin-top: 4px; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border-radius: 4px; padding: 2px 4px; }
+  .rowcard[data-rowtype="label"] { background: #fff; border-style: dashed; }
+  .rowcard[data-rowtype="label"] .rowtag { color: #8a5a00; background: #fdf1dc; }
+  .delrow { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; padding: 8px 10px; min-width: 40px; min-height: 40px; align-self: flex-start; }
+  .delrow:hover, .delrow:active { color: var(--danger); }
+  .sheet-table td.del { width: 1%; padding: 0; }
+  .addrows { display: flex; gap: 8px; flex-wrap: wrap; }
   .cardgrid { flex: 1; min-width: 0; display: grid; gap: 8px 10px; grid-template-columns: repeat(var(--cols, 10), minmax(0, 1fr)); }
   .cardgrid .field span { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .cardgrid .seg { display: flex; }
@@ -327,36 +336,53 @@ const caption = (f, sec) => f.label && f.label !== sec.title ? `<div class="capt
 
 // Tables either list fixed rows (one per item) or start with blank rows that "+ Add row" extends.
 // A fixed row is a label, or { label, values } when the product fills some cells in.
+// Rows the operator adds can be deleted again; fixed rows (one per item) can't.
+const delBtn = '<button type="button" class="delrow" data-delrow title="Delete this row" aria-label="Delete this row">✕</button>';
+const rowNum = i => `<span class="n">${i + 1}</span>`;
+
 function tableRow(f, i, head) {
   const label = head?.label ?? head, vals = head?.values || {};
   const th = `<th>${esc(label)}${head?.sub ? `<div class="sub" style="font-weight:400">${esc(head.sub)}</div>` : ''}</th>`;
-  return `<tr>${head !== undefined ? th : `<td class="num">${i + 1}</td>`}${f.columns.map(c =>
-    `<td>${input(c, `${f.id}.${i}.${c.id}`, vals[c.id])}</td>`).join('')}</tr>`;
+  return `<tr>${head !== undefined ? th : `<td class="num">${rowNum(i)}</td>`}${f.columns.map(c =>
+    `<td>${input(c, `${f.id}.${i}.${c.id}`, vals[c.id])}</td>`).join('')}${head !== undefined ? '' : `<td class="del">${delBtn}</td>`}</tr>`;
 }
+
+// A table can offer several kinds of row (log 060: a full hourly check and a short label check).
+// Each entry in f.rowTypes lists the column ids it shows; a type without "columns" shows them all.
+const rowType = (f, id) => f.rowTypes?.find(t => t.id === id) || f.rowTypes?.[0];
+const columnsFor = (f, t) => t?.columns ? f.columns.filter(c => t.columns.includes(c.id)) : f.columns;
 
 // Too many columns for an iPad-wide table: each row becomes a card. Its boxes are split evenly over
 // as few lines as fit (at most 10 slots a line in landscape, 5 in portrait), so no line is left half empty.
 const asCards = f => !f.fixedRows && f.columns.length > 8;
 const slotsOf = c => c.span || (c.type === 'passfail' ? 2 : 1);
 const perLine = (slots, max) => Math.ceil(slots / Math.ceil(slots / max));
-function cardRow(f, i) {
-  const slots = f.columns.reduce((n, c) => n + slotsOf(c), 0);
-  return `<div class="rowcard"><div class="num">${i + 1}</div><div class="cardgrid" style="--cols:${perLine(slots, 10)};--cols-narrow:${perLine(slots, 5)}">${f.columns.map(c =>
-    `<label class="field" style="grid-column: span ${slotsOf(c)}"><span>${esc(c.label)}</span>${input(c, `${f.id}.${i}.${c.id}`)}</label>`).join('')}</div></div>`;
+function cardRow(f, i, typeId) {
+  const t = rowType(f, typeId), cols = columnsFor(f, t);
+  const slots = cols.reduce((n, c) => n + slotsOf(c), 0);
+  return `<div class="rowcard"${t ? ` data-rowtype="${esc(t.id)}"` : ''}>
+    <div class="num">${rowNum(i)}${t ? `<div class="rowtag">${esc(t.tag || t.label)}</div><input type="hidden" name="${esc(`${f.id}.${i}.rowType`)}" value="${esc(t.id)}">` : ''}</div>${delBtn}
+    <div class="cardgrid" style="--cols:${perLine(slots, 10)};--cols-narrow:${perLine(slots, 5)}">${cols.map(c =>
+      `<label class="field" style="grid-column: span ${slotsOf(c)}"><span>${esc(c.label)}</span>${input(c, `${f.id}.${i}.${c.id}`)}</label>`).join('')}</div></div>`;
 }
-const rowHtml = (f, i) => asCards(f) ? cardRow(f, i) : tableRow(f, i);
+const rowHtml = (f, i, typeId) => asCards(f) ? cardRow(f, i, typeId) : tableRow(f, i);
 
 function tableHtml(f, sec) {
   const fixed = f.fixedRows, rows = fixed || Array.from({ length: f.rows || 1 });
-  const add = fixed ? '' : `<button type="button" class="addrow" data-addrow="${esc(f.id)}">+ Add row</button>`;
+  const add = fixed ? '' : `<div class="addrows">${(f.rowTypes || [{ label: 'Add row' }]).map(t =>
+    `<button type="button" class="addrow" data-addrow="${esc(f.id)}"${t.id ? ` data-rowtype="${esc(t.id)}"` : ''}>+ ${esc(t.label)}</button>`).join('')}</div>`;
+  // data-next: index for the next added row, so names stay unique after rows are deleted
   if (asCards(f)) return `${caption(f, sec)}${hint(f)}
-    <div class="rowcards" data-table="${esc(f.id)}">${rows.map((r, i) => cardRow(f, i)).join('')}</div>${add}`;
+    <div class="rowcards" data-table="${esc(f.id)}" data-next="${rows.length}">${rows.map((r, i) => cardRow(f, i)).join('')}</div>${add}`;
   return `${caption(f, sec)}${hint(f)}
     <div class="tablewrap"><table class="sheet-table">
-      <thead><tr><th>${esc(fixed ? f.rowHeader || '' : '#')}</th>${f.columns.map(c => `<th>${esc(c.label)}${c.unit ? ` (${esc(c.unit)})` : ''}</th>`).join('')}</tr></thead>
-      <tbody data-table="${esc(f.id)}">${rows.map((r, i) => tableRow(f, i, fixed ? r : undefined)).join('')}</tbody>
+      <thead><tr><th>${esc(fixed ? f.rowHeader || '' : '#')}</th>${f.columns.map(c => `<th>${esc(c.label)}${c.unit ? ` (${esc(c.unit)})` : ''}</th>`).join('')}${fixed ? '' : '<th></th>'}</tr></thead>
+      <tbody data-table="${esc(f.id)}" data-next="${rows.length}">${rows.map((r, i) => tableRow(f, i, fixed ? r : undefined)).join('')}</tbody>
     </table></div>${add}`;
 }
+
+// Row numbers always count 1, 2, 3… in the order shown, even after a delete.
+const renumber = body => body.querySelectorAll(':scope > * .n').forEach((n, i) => n.textContent = i + 1);
 
 // Checklist grid: each box cycles blank → ✓ → ✱ (needs attention) → blank.
 function matrixHtml(f, sec) {
@@ -385,8 +411,18 @@ function wireSheet(s) {
   app.querySelectorAll('[data-addrow]').forEach(b => b.onclick = () => {
     const f = s.sections.flatMap(sec => sec.fields).find(f => f.id === b.dataset.addrow);
     const body = app.querySelector(`[data-table="${CSS.escape(f.id)}"]`);
-    body.insertAdjacentHTML('beforeend', rowHtml(f, body.children.length));
+    const i = Number(body.dataset.next);
+    body.dataset.next = i + 1;
+    body.insertAdjacentHTML('beforeend', rowHtml(f, i, b.dataset.rowtype));
+    renumber(body);
+    body.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
+  app.querySelectorAll('[data-table]').forEach(body => body.addEventListener('click', e => {
+    const del = e.target.closest('[data-delrow]');
+    if (!del || !confirm('Delete this row?')) return;
+    del.closest('.rowcard, tr').remove();
+    renumber(body);
+  }));
 }
 
 const showSheet = (p, file) => renderSheet(productUrl(p) + '/' + encodeURIComponent(file), folderHref(p), p.plant ? p.name : p.brand + ' · ' + p.name);

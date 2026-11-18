@@ -140,8 +140,8 @@
           "id": "checks",
           "label": "Checks",
           "type": "table",
-          "rows": 3,
-          "hint": "Add a row every 30 minutes for the X-ray and label check (1–3 and Label inspection). Product checks (4–11) are done every hour: fill them in on the hourly rows and leave them blank on the rows in between. Seal check: 3 consecutive trays for single meals, 2 for family meals. Obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
+          "rows": 1,
+          "hint": "Tap + Full check every hour (all boxes: X-ray, label, weights, seal, O2/CO2, pallet temp) and + Label check at the 30-minute marks in between (X-ray and label only). Use ✕ to delete a row added by mistake. Seal check: 3 consecutive trays for single meals, 2 for family meals. Obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
           "columns": [
             {
               "id": "time",
@@ -182,19 +182,19 @@
             },
             {
               "id": "weight1",
-              "label": "4. Weight check 1",
+              "label": "4. Weight 1",
               "type": "number",
               "unit": "oz"
             },
             {
               "id": "weight2",
-              "label": "4. Weight check 2",
+              "label": "4. Weight 2",
               "type": "number",
               "unit": "oz"
             },
             {
               "id": "weight3",
-              "label": "4. Weight check 3",
+              "label": "4. Weight 3",
               "type": "number",
               "unit": "oz"
             },
@@ -276,6 +276,26 @@
               "label": "Pre-ship date/time",
               "type": "text",
               "span": 2
+            }
+          ],
+          "rowTypes": [
+            {
+              "id": "full",
+              "label": "Full check",
+              "tag": "Full"
+            },
+            {
+              "id": "label",
+              "label": "Label check",
+              "tag": "Label",
+              "columns": [
+                "time",
+                "xray",
+                "recipe",
+                "labelInspection",
+                "initial",
+                "comments"
+              ]
             }
           ]
         }
