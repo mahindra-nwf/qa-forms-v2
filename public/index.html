@@ -45,7 +45,7 @@
   .sheet { display: grid; gap: 12px; }
   .sheet section { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 4px 16px 16px; }
   .fields { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-  .field { display: grid; gap: 4px; font-size: 14px; color: var(--muted); }
+  .field { display: grid; gap: 4px; font-size: 14px; color: var(--muted); align-content: start; }
   input, select, textarea { font: inherit; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; width: 100%; background: #fff; }
   input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: var(--accent); }
   input[type=checkbox], input[type=radio] { width: auto; }
@@ -77,6 +77,10 @@
   .check { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; color: var(--ink); }
   .unit { display: flex; align-items: center; gap: 4px; }
   .unit > span { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .unit input { flex: 1; min-width: 0; }
+  /* In a side-by-side field grid, long checkbox sentences wrap instead of running into the next field. */
+  .fields .check { white-space: normal; align-items: flex-start; }
+  .fields .check input { margin-top: 3px; }
   .sheet-table td.num { color: var(--muted); width: 1%; }
   .addrow { margin-top: 8px; color: var(--accent); }
   .matrix tbody th { white-space: normal; width: auto; font-weight: 400; min-width: 320px; }
