@@ -72,7 +72,7 @@
         },
         {
           "id": "productionType",
-          "label": "Circle one",
+          "label": "Select one",
           "type": "passfail",
           "options": [
             "Regular production",

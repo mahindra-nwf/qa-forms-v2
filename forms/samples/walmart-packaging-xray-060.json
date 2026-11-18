@@ -17,7 +17,7 @@
         { "id": "dateProduced", "label": "Date produced", "type": "date", "required": true },
         { "id": "fullCases", "label": "# Full cases", "type": "number" },
         { "id": "masterCaseExpiry", "label": "Master case expiration date", "type": "date" },
-        { "id": "productionType", "label": "Circle one", "type": "passfail", "options": ["Regular production", "Rework"], "required": true },
+        { "id": "productionType", "label": "Select one", "type": "passfail", "options": ["Regular production", "Rework"], "required": true },
         { "id": "reworkReason", "label": "Rework reason", "type": "text" }
       ]
     },
