@@ -141,7 +141,7 @@
           "label": "Checks",
           "type": "table",
           "rows": 1,
-          "hint": "Tap + Full check every hour (all boxes: X-ray, label, weights, seal, O2/CO2, pallet temp) and + Label check at the 30-minute marks in between (label inspection only; take a photo of the label with 📷). Use ✕ to delete a row added by mistake. Seal check: 3 consecutive trays for single meals, 2 for family meals. Obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
+          "hint": "Tap + Full check every hour (all boxes: X-ray, label, weights, seal, O2/CO2, pallet temp) and + Label check at the 30-minute marks in between (label inspection only; take 2 photos of the label with 📷). Use ✕ to delete a row added by mistake. Seal check: 3 consecutive trays for single meals, 2 for family meals. Obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
           "columns": [
             {
               "id": "time",
@@ -279,7 +279,13 @@
             },
             {
               "id": "labelPhoto",
-              "label": "Label photo",
+              "label": "Label photo 1",
+              "type": "photo",
+              "span": 2
+            },
+            {
+              "id": "labelPhoto2",
+              "label": "Label photo 2",
               "type": "photo",
               "span": 2
             }
@@ -322,7 +328,8 @@
                 "labelInspection",
                 "initial",
                 "comments",
-                "labelPhoto"
+                "labelPhoto",
+                "labelPhoto2"
               ]
             }
           ]
