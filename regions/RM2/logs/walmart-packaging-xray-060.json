@@ -141,7 +141,7 @@
           "label": "Checks",
           "type": "table",
           "rows": 3,
-          "hint": "Add a row every 30 minutes for the X-ray and label check (1–3 and Label inspection). Product checks (4–11) are done every hour: fill them in on the hourly rows and leave them blank on the rows in between. Seal check: 3 consecutive trays for single meals, 2 for family meals.",
+          "hint": "Add a row every 30 minutes for the X-ray and label check (1–3 and Label inspection). Product checks (4–11) are done every hour: fill them in on the hourly rows and leave them blank on the rows in between. Seal check: 3 consecutive trays for single meals, 2 for family meals. Monthly obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
           "columns": [
             {
               "id": "time",
@@ -255,22 +255,22 @@
             },
             {
               "id": "obsInitials",
-              "label": "Monthly direct observation: initials",
+              "label": "Monthly obs. initials",
               "type": "text"
             },
             {
               "id": "obsTime",
-              "label": "Monthly direct observation: time",
+              "label": "Monthly obs. time",
               "type": "time"
             },
             {
               "id": "preShipInitials",
-              "label": "Pre-shipment check: initials",
+              "label": "Pre-ship initials",
               "type": "text"
             },
             {
               "id": "preShipDateTime",
-              "label": "Pre-shipment check: date/time",
+              "label": "Pre-ship date/time",
               "type": "text"
             }
           ]
