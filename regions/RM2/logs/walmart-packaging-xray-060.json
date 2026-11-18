@@ -3,7 +3,7 @@
   "code": "Log 060",
   "scope": "product",
   "category": "Packaging",
-  "frequency": "Each production run",
+  "frequency": "Each production run · checks every 30 min",
   "description": "X-Ray check must be completed at the start of production, every hour (±15 minutes) of production, and at the end of production. If any monitoring fails, packaging must stop and all product from last passing inspection must be checked. Rejected packages will be rerun 3 times through the X-Ray. If all 3 reruns pass, product is released. If any of the 3 reruns are rejected again, number of packages are to be indicated in the comment and packages are to be given to QA for analysis.",
   "sections": [
     {
@@ -125,18 +125,23 @@
           "id": "scaleSerial",
           "label": "Scale serial #",
           "type": "text"
+        },
+        {
+          "id": "pressurePopSeal",
+          "label": "Pressure to pop seal",
+          "type": "text"
         }
       ]
     },
     {
-      "title": "Hourly checks",
+      "title": "Checks",
       "fields": [
         {
           "id": "checks",
           "label": "Checks",
           "type": "table",
           "rows": 3,
-          "hint": "One entry at the start, every hour (±15 min), and at the end of production. Seal check: check 3 consecutive trays for single meals and 2 consecutive trays for family meals.",
+          "hint": "Add a row every 30 minutes for the X-ray and label check (1–3 and Label inspection). Product checks (4–11) are done every hour: fill them in on the hourly rows and leave them blank on the rows in between. Seal check: 3 consecutive trays for single meals, 2 for family meals.",
           "columns": [
             {
               "id": "time",
@@ -155,6 +160,15 @@
             {
               "id": "recipe",
               "label": "3. X-Ray recipe",
+              "type": "passfail",
+              "options": [
+                "Pass",
+                "Fail"
+              ]
+            },
+            {
+              "id": "labelInspection",
+              "label": "Label inspection",
               "type": "passfail",
               "options": [
                 "Pass",
@@ -191,7 +205,7 @@
             },
             {
               "id": "noSealBubble",
-              "label": "6. No seal bubble",
+              "label": "6. No seal bubble / pox",
               "type": "checkbox",
               "checkLabel": "Yes"
             },
@@ -216,12 +230,12 @@
             },
             {
               "id": "unitLabelItem",
-              "label": "10. Label item #",
+              "label": "10. Verify unit label item #",
               "type": "text"
             },
             {
               "id": "productTemp",
-              "label": "11. Pallet temp °F",
+              "label": "11. Pallet product temp (<40°F)",
               "type": "number"
             },
             {
@@ -238,44 +252,57 @@
               "label": "Comments / CA",
               "type": "text",
               "span": 2
+            },
+            {
+              "id": "obsInitials",
+              "label": "Monthly direct observation: initials",
+              "type": "text"
+            },
+            {
+              "id": "obsTime",
+              "label": "Monthly direct observation: time",
+              "type": "time"
+            },
+            {
+              "id": "preShipInitials",
+              "label": "Pre-shipment check: initials",
+              "type": "text"
+            },
+            {
+              "id": "preShipDateTime",
+              "label": "Pre-shipment check: date/time",
+              "type": "text"
             }
           ]
         }
       ]
     },
     {
-      "title": "Weekly direct observation",
+      "title": "End of production",
       "fields": [
         {
-          "id": "observationInitials",
-          "label": "Initials",
+          "id": "labelReturnedInitial",
+          "label": "Label removed from the line and returned to the cabinet (initial)",
           "type": "text"
         },
         {
-          "id": "observationTime",
-          "label": "Time",
-          "type": "time"
-        }
-      ]
-    },
-    {
-      "title": "Pre-shipment check",
-      "fields": [
-        {
-          "id": "preShipInitials",
-          "label": "Initials",
-          "type": "text",
-          "hint": "Verify production documents and released product before shipping."
-        },
-        {
-          "id": "preShipDate",
+          "id": "labelReturnedDate",
           "label": "Date",
           "type": "date"
         },
         {
-          "id": "preShipTime",
+          "id": "labelReturnedTime",
           "label": "Time",
           "type": "time"
+        },
+        {
+          "id": "review",
+          "label": "Document is completed?",
+          "type": "passfail",
+          "options": [
+            "Accept",
+            "Reject"
+          ]
         }
       ]
     }
