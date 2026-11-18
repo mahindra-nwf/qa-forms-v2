@@ -74,6 +74,13 @@
   .delrow:hover, .delrow:active { color: var(--danger); }
   .sheet-table td.del { width: 1%; padding: 0; }
   .addrows { display: flex; gap: 8px; flex-wrap: wrap; }
+  .photo-btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); padding: 10px 16px; cursor: pointer; min-height: 44px; }
+  .photo-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .photo-grid:empty { display: none; }
+  .photo { position: relative; margin: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fafcfd; }
+  .photo img { display: block; width: 100%; height: 150px; object-fit: cover; }
+  .photo figcaption { font-size: 12px; color: var(--muted); padding: 4px 8px; }
+  .photo .delrow { position: absolute; top: 4px; right: 4px; background: rgba(255,255,255,.9); border-radius: 50%; }
   .cardgrid { flex: 1; min-width: 0; display: grid; gap: 8px 10px; grid-template-columns: repeat(var(--cols, 10), minmax(0, 1fr)); }
   .cardgrid .field span { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .cardgrid .seg { display: flex; }
@@ -440,9 +447,50 @@ async function renderSheet(url, backHref, backLabel) {
         <h2>${esc(sec.title)}</h2>
         ${sectionBody(sec)}
       </section>`).join('')}
+      ${photoSection()}
       <div class="bar"><span class="sub">Preview: entries aren't saved yet.</span><button class="primary" disabled>Save</button></div>
     </form>`;
   wireSheet(s);
+  wirePhotos(app.querySelector('form.sheet'));
+}
+
+// Every log has a photo section: while the plant is not fully digital, QA photographs the paper
+// log as a backup paper trail. "Take photo" opens the iPad camera; "Choose photo" opens the library.
+// The pictures are kept on the form (form.photos) for the save step to upload once it exists.
+function photoSection() {
+  return `<section class="photos-section">
+    <h2>Photo of paper log</h2>
+    <div class="hint">Take a photo of the filled-in paper log as a backup. You can add more than one.</div>
+    <div class="photo-grid" data-photos></div>
+    <div class="addrows">
+      <label class="addrow photo-btn">📷 Take photo<input type="file" accept="image/*" capture="environment" hidden></label>
+      <label class="addrow photo-btn">🖼 Choose photo<input type="file" accept="image/*" multiple hidden></label>
+    </div>
+  </section>`;
+}
+
+function wirePhotos(form) {
+  const grid = form.querySelector('[data-photos]');
+  form.photos = [];
+  const draw = () => {
+    grid.querySelectorAll('img').forEach(img => URL.revokeObjectURL(img.src));
+    grid.innerHTML = form.photos.map((p, i) => `
+      <figure class="photo"><img src="${URL.createObjectURL(p.file)}" alt="Photo ${i + 1} of the paper log">
+        <figcaption>${esc(p.time)}</figcaption>
+        <button type="button" class="delrow" data-delphoto="${i}" title="Remove this photo" aria-label="Remove photo ${i + 1}">✕</button></figure>`).join('');
+  };
+  form.querySelectorAll('.photo-btn input').forEach(inp => inp.onchange = () => {
+    const time = new Date().toLocaleString([], { dateStyle: 'short', timeStyle: 'short' });
+    form.photos.push(...[...inp.files].map(file => ({ file, time })));
+    inp.value = '';
+    draw();
+  });
+  grid.onclick = e => {
+    const b = e.target.closest('[data-delphoto]');
+    if (!b || !confirm('Remove this photo?')) return;
+    form.photos.splice(Number(b.dataset.delphoto), 1);
+    draw();
+  };
 }
 
 // Simple fields sit side by side in a grid; tables and grids take the full width.
