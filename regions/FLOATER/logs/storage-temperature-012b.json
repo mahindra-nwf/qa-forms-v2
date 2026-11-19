@@ -1,0 +1,146 @@
+{
+  "name": "Storage Temperature (High Room Temperature)",
+  "code": "Log 012B",
+  "scope": "line",
+  "category": "Storage",
+  "frequency": "Hourly when room temperature is high",
+  "description": "Monitoring: when room temperature is high, monitor room temperature, ingredient temperature and the continuous logger hourly. Acceptable temperatures: Storage Cooler +32°F < T < +38°F · Prep Cooler +32°F < T < +40°F · New Storage Cooler +32°F < T < +40°F · Storage Freezer < +5°F. Surimi +32°F < T < +38°F · Refrigerated ingredients +32°F < T < +40°F · Frozen < +5°F.",
+  "sections": [
+    {
+      "title": "Day",
+      "fields": [
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "coldStorage",
+          "label": "Cold storage",
+          "type": "text"
+        },
+        {
+          "id": "condenser",
+          "label": "Condenser",
+          "type": "text"
+        },
+        {
+          "id": "ingredient",
+          "label": "Ingredient / FP",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "readings",
+          "label": "",
+          "type": "table",
+          "display": "table",
+          "rows": 4,
+          "columns": [
+            {
+              "id": "time",
+              "label": "Time",
+              "type": "time"
+            },
+            {
+              "id": "coldTemp",
+              "label": "°F",
+              "type": "number",
+              "group": "Cold storage"
+            },
+            {
+              "id": "coldIce",
+              "label": "Coils icing?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ],
+              "group": "Cold storage"
+            },
+            {
+              "id": "condTemp",
+              "label": "°F",
+              "type": "number",
+              "group": "Condenser"
+            },
+            {
+              "id": "condIce",
+              "label": "Coils icing?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ],
+              "group": "Condenser"
+            },
+            {
+              "id": "superheat",
+              "label": "Superheat on?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ],
+              "group": "Condenser"
+            },
+            {
+              "id": "logger",
+              "label": "°F",
+              "type": "number",
+              "group": "Contin. logger"
+            },
+            {
+              "id": "ingTemp",
+              "label": "°F",
+              "type": "number",
+              "group": "Ingredient / FP"
+            },
+            {
+              "id": "corrective",
+              "label": "Corrective action",
+              "type": "text"
+            },
+            {
+              "id": "initial",
+              "label": "Daily initial",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comments / corrective actions",
+      "fields": [
+        {
+          "id": "comments",
+          "label": "Comments / corrective actions",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "title": "QA verification",
+      "fields": [
+        {
+          "id": "qaVerification",
+          "label": "QA verification",
+          "type": "text"
+        },
+        {
+          "id": "qaDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ],
+  "order": 5
+}
