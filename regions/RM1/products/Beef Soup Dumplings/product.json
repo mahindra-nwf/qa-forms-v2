@@ -37,5 +37,6 @@
         "material": "Master Case"
       }
     ]
-  }
+  },
+  "gasCheck": true
 }

@@ -111,6 +111,7 @@
   .clusters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
   .cluster { border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px 8px; background: #fff; min-width: 0; }
   .cltitle { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+  input.na { background: #f1f4f6; color: var(--muted); text-align: center; pointer-events: none; }
   .photo-cell { display: flex; align-items: center; gap: 6px; }
   .photo-cell .photo-btn { padding: 6px 12px; min-height: 36px; color: var(--accent); white-space: nowrap; }
   .photo-cell img { height: 36px; width: 48px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); }
@@ -426,6 +427,7 @@ function showProduct(p) {
 // `preset` is a value filled in from the product (table cells); otherwise the field's default.
 function input(f, name, preset) {
   const n = `name="${esc(name)}"`;
+  if (f.na) return `<input type="text" ${n} value="N/A" readonly tabindex="-1" class="na">`;  // not checked for this product
   const value = preset ?? (f.default === 'today' ? new Date().toLocaleDateString('en-CA') : f.default);
   if (f.type === 'select') return `<select ${n}><option></option>${f.options.map(o => `<option${o === value ? ' selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
   if (f.type === 'passfail') return `<span class="seg">${(f.options || ['Pass', 'Fail']).map(o =>

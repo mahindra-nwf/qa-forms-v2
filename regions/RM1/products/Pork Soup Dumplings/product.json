@@ -40,5 +40,6 @@
       "name": "Sauce cup",
       "target": "0.53"
     }
-  ]
+  ],
+  "gasCheck": true
 }

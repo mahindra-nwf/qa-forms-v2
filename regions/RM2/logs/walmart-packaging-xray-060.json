@@ -233,37 +233,43 @@
               "id": "o2",
               "label": "8. % O2 1",
               "type": "number",
-              "short": "8. % O2"
+              "short": "8. % O2",
+              "naUnless": "gasCheck"
             },
             {
               "id": "o2b",
               "label": "8. % O2 2",
               "type": "number",
-              "short": "8. % O2"
+              "short": "8. % O2",
+              "naUnless": "gasCheck"
             },
             {
               "id": "o2c",
               "label": "8. % O2 3",
               "type": "number",
-              "short": "8. % O2"
+              "short": "8. % O2",
+              "naUnless": "gasCheck"
             },
             {
               "id": "co2",
               "label": "9. % CO2 1",
               "type": "number",
-              "short": "9. % CO2"
+              "short": "9. % CO2",
+              "naUnless": "gasCheck"
             },
             {
               "id": "co2b",
               "label": "9. % CO2 2",
               "type": "number",
-              "short": "9. % CO2"
+              "short": "9. % CO2",
+              "naUnless": "gasCheck"
             },
             {
               "id": "co2c",
               "label": "9. % CO2 3",
               "type": "number",
-              "short": "9. % CO2"
+              "short": "9. % CO2",
+              "naUnless": "gasCheck"
             },
             {
               "id": "unitLabelItem",
