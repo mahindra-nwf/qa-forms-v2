@@ -233,12 +233,7 @@ async function showHome() {
           <div class="sub">${r.products ? r.products + ' products · ' : ''}${logCount(r.logs.filter(l => l.scope === 'line').length)}${r.products ? ' for the whole line' : ''}</div></span>
       </a>`).join('')}
     </div>
-    ${regions.length ? '' : '<div class="empty">No regions yet. Add folders under <code>regions/</code>.</div>'}
-    <h2>Not in a region yet</h2>
-    <div class="list"><a class="row" href="#products">
-      <span class="icon">${folderIcon}</span>
-      <span class="grow"><div class="title">Earlier product folders</div><div class="sub">Plant-wide sheets (SSOP, receiving, shipping)</div></span>
-    </a></div>`;
+    ${regions.length ? '' : '<div class="empty">No regions yet. Add folders under <code>regions/</code>.</div>'}`;
 }
 
 async function showRegionRoute([id, kind, a, b]) {
