@@ -42,11 +42,6 @@
       ]
     },
     {
-      "name": "Raw Area",
-      "later": true,
-      "logs": []
-    },
-    {
       "name": "Cook Area",
       "later": true,
       "logs": [
@@ -59,13 +54,6 @@
         "heat-treatment-pork-084.json",
         "cooking-cooling-vegetable-084.json",
         "cooking-cooling-mila-rice-084.json"
-      ]
-    },
-    {
-      "name": "QA Floater",
-      "later": true,
-      "logs": [
-        "glass-brittle-055.json"
       ]
     }
   ]
