@@ -213,7 +213,7 @@ async function showHome() {
       <a class="row" href="${regionHref(r)}">
         <span class="icon">${folderIcon}</span>
         <span class="grow"><div class="title">${esc(r.name)}${r.title ? ' · ' + esc(r.title) : ''}</div>
-          <div class="sub">${r.products} products · ${logCount(r.logs.filter(l => l.scope === 'line').length)} for the whole line</div></span>
+          <div class="sub">${r.products ? r.products + ' products · ' : ''}${logCount(r.logs.filter(l => l.scope === 'line').length)}${r.products ? ' for the whole line' : ''}</div></span>
       </a>`).join('')}
     </div>
     ${regions.length ? '' : '<div class="empty">No regions yet. Add folders under <code>regions/</code>.</div>'}
@@ -319,10 +319,10 @@ function showRegion(r) {
     ${deviceRegion === r.id ? '' : '<a class="crumb" href="#">← All regions</a>'}
     <div class="bar"><h1>${esc(r.name)}${r.title ? ' · ' + esc(r.title) : ''}</h1></div>
     ${deviceBar(r)}
-    ${r.areas ? areasHtml(r) : `<h2>Whole line · one sheet per day</h2>
+    ${r.areas ? areasHtml(r) : `<h2>${r.products.length ? 'Whole line · one sheet per day' : 'Logs'}</h2>
     <div class="list">${lineRows(r, line)}</div>`}
-    <h2>Products · ${r.products.length} · ${logCount(perProduct.length)} each</h2>
-    ${regionProductList(r)}`;
+    ${r.products.length ? `<h2>Products · ${r.products.length} · ${logCount(perProduct.length)} each</h2>
+    ${regionProductList(r)}` : ''}`;
   wireDeviceBar(r);
 }
 
