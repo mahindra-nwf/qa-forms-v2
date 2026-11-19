@@ -225,12 +225,15 @@ async function showHome() {
 
 async function showRegionRoute([id, kind, a, b]) {
   const r = await api(`/api/regions/${enc(id)}`);
-  if (kind === 'log' && r.logs.some(l => l.file === a && l.scope === 'line'))
-    return renderSheet(`/api/regions/${enc(r.id)}/logs/${enc(a)}`, regionHref(r), r.name);
+  const lineLog = kind === 'log' && r.logs.find(l => l.file === a && l.scope === 'line');
+  if (lineLog) return lineLog.group
+    ? renderSheet(`/api/regions/${enc(r.id)}/logs/${enc(a)}`, `${regionHref(r)}/group/${enc(lineLog.group)}`, `${r.name} · ${lineLog.group}`)
+    : renderSheet(`/api/regions/${enc(r.id)}/logs/${enc(a)}`, regionHref(r), r.name);
   const p = kind === 'p' && r.products.find(p => p.folder === a);
   if (p && b && r.logs.some(l => l.file === b && l.scope === 'product'))
     return renderSheet(`/api/regions/${enc(r.id)}/products/${enc(p.folder)}/logs/${enc(b)}`, regionProductHref(r, p), `${r.name} · ${p.name}`);
   if (p) return showRegionProduct(r, p);
+  if (kind === 'group' && r.logs.some(l => l.group === a)) return showLogGroup(r, a);
   const picked = kind === 'pick' && r.logs.find(l => l.file === a && l.scope === 'product');
   if (picked) return showProductPicker(r, picked);
   showRegion(r);
@@ -288,6 +291,27 @@ function regionProductList(r) {
   return brands.map(b => `${b && brands.length > 1 ? `<h3 class="brand">${esc(b)}</h3>` : ''}<div class="list">${r.products.filter(p => (p.brand || '') === b).map(row).join('')}</div>`).join('');
 }
 
+// Whole-line logs; sheets sharing a "group" (e.g. the five Log 049 mixing sheets) show as one row.
+function lineRows(r, line) {
+  const seen = new Set(), rows = [];
+  for (const l of [...line].sort((a, b) => !!a.placeholder - !!b.placeholder)) {
+    if (!l.group) { rows.push(logRow(l, regionLogHref(r, l))); continue; }
+    if (seen.has(l.group)) continue;
+    seen.add(l.group);
+    const members = line.filter(x => x.group === l.group);
+    rows.push(logRow({ name: l.group, code: `${l.code} · ${members.length} sheets` }, `${regionHref(r)}/group/${enc(l.group)}`));
+  }
+  return rows.join('');
+}
+
+function showLogGroup(r, group) {
+  const members = r.logs.filter(l => l.group === group).sort((a, b) => a.groupOrder - b.groupOrder);
+  app.innerHTML = `
+    <a class="crumb" href="${regionHref(r)}">← ${esc(r.name)}</a>
+    <div class="sheethead"><h1>${esc(group)}</h1><div class="meta"><span class="logcode">${esc(members[0]?.code || '')}</span>Choose the sheet</div></div>
+    <div class="list">${members.map(l => logRow(l, regionLogHref(r, l))).join('')}</div>`;
+}
+
 function showRegion(r) {
   const line = r.logs.filter(l => l.scope === 'line'), perProduct = r.logs.filter(l => l.scope === 'product');
   app.innerHTML = `
@@ -295,7 +319,7 @@ function showRegion(r) {
     <div class="bar"><h1>${esc(r.name)}${r.title ? ' · ' + esc(r.title) : ''}</h1></div>
     ${deviceBar(r)}
     ${r.areas ? areasHtml(r) : `<h2>Whole line · one sheet per day</h2>
-    <div class="list">${[...line].sort((a, b) => !!a.placeholder - !!b.placeholder).map(l => logRow(l, regionLogHref(r, l))).join('')}</div>`}
+    <div class="list">${lineRows(r, line)}</div>`}
     <h2>Products · ${r.products.length} · ${logCount(perProduct.length)} each</h2>
     ${regionProductList(r)}`;
   wireDeviceBar(r);

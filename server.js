@@ -42,7 +42,7 @@ const jsonIn = d => fs.existsSync(d) ? fs.readdirSync(d).filter(f => f.endsWith(
 
 function regionLogs(r) {
   const d = path.join(REGIONS, r, 'logs');
-  return jsonIn(d).map(file => { const j = readJson(path.join(d, file)); return { file, name: j.name, code: j.code || '', scope: j.scope || 'line', ...(j.placeholder ? { placeholder: true } : {}), ...(j.nameIf ? { nameIf: j.nameIf } : {}) }; });
+  return jsonIn(d).map(file => { const j = readJson(path.join(d, file)); return { file, name: j.name, code: j.code || '', scope: j.scope || 'line', ...(j.placeholder ? { placeholder: true } : {}), ...(j.nameIf ? { nameIf: j.nameIf } : {}), ...(j.group ? { group: j.group, groupOrder: j.groupOrder ?? 99 } : {}) }; });
 }
 
 function regionProducts(r) {
