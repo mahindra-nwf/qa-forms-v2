@@ -112,6 +112,15 @@
   .cluster { border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px 8px; background: #fff; min-width: 0; }
   .cltitle { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
   input.na { background: #f1f4f6; color: var(--muted); text-align: center; pointer-events: none; }
+  .docs { display: grid; gap: 6px; }
+  .doc-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .doc-list:empty { display: none; }
+  .doc { display: grid; gap: 4px; width: 120px; }
+  .doc img { width: 120px; height: 80px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); }
+  .doc select { padding: 4px 6px; font-size: 13px; }
+  .doc .delrow { justify-self: start; }
+  .doc-add { display: flex; gap: 8px; flex-wrap: wrap; }
+  .doc-add .photo-btn { padding: 6px 12px; min-height: 36px; color: var(--accent); }
   .photo-cell { display: flex; align-items: center; gap: 6px; }
   .photo-cell .photo-btn { padding: 6px 12px; min-height: 36px; color: var(--accent); white-space: nowrap; }
   .photo-cell img { height: 36px; width: 48px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); }
@@ -434,6 +443,11 @@ function input(f, name, preset) {
     `<label><input type="radio" ${n} value="${esc(o)}"${o === value ? ' checked' : ''}><span>${esc(o)}</span></label>`).join('')}</span>`;
   if (f.type === 'textarea') return `<textarea ${n} rows="2">${esc(value || '')}</textarea>`;
   if (f.type === 'checkbox') return `<label class="check"><input type="checkbox" ${n}>${esc(f.checkLabel || '')}</label>`;
+  // Several document photos for one row (BOL, invoice…); each photo gets a type. Files live on the element (el.docs).
+  if (f.type === 'photos') return `<div class="docs" data-docs data-name="${esc(name)}" data-types="${esc((f.docTypes || ['BOL', 'Invoice', 'Packing slip', 'COA', 'Other']).join('|'))}">
+    <div class="doc-list"></div>
+    <div class="doc-add"><label class="photo-btn">Take photo<input type="file" accept="image/*" capture="environment" hidden data-docadd></label>
+    <label class="photo-btn">Choose photo<input type="file" accept="image/*" multiple hidden data-docadd></label></div></div>`;
   // One photo taken with the iPad camera (e.g. the label at each label check); taking another replaces it.
   if (f.type === 'photo') return `<span class="photo-cell"><label class="photo-btn"><span>Take photo</span><input type="file" accept="image/*" capture="environment" hidden data-photocell ${n}></label>
     <img alt="" hidden><button type="button" class="delrow" data-clearphoto hidden title="Remove photo">Remove</button></span>`;
@@ -473,7 +487,9 @@ const slotsOf = c => c.span || (c.type === 'passfail' ? 2 : 1);
 const perLine = (slots, max) => Math.ceil(slots / Math.ceil(slots / max));
 function cardRow(f, i, typeId) {
   const t = rowType(f, typeId);
-  const field = (c, short) => `<label class="field" style="grid-column: span ${slotsOf(c)}"><span>${esc(short && c.short || c.label)}</span>${input(c, `${f.id}.${i}.${c.id}`)}</label>`;
+  // a plain div for the documents box, so tapping a thumbnail doesn't trigger the label's camera input
+  const field = (c, short) => { const tag = c.type === 'photos' ? 'div' : 'label';
+    return `<${tag} class="field" style="grid-column: span ${slotsOf(c)}"><span>${esc(short && c.short || c.label)}</span>${input(c, `${f.id}.${i}.${c.id}`)}</${tag}>`; };
   // One grid line; a line in a grouped layout gets one column per slot so it always fills a single line.
   const grid = (cols, opts = {}) => {
     const slots = cols.reduce((n, c) => n + slotsOf(c), 0);
@@ -575,6 +591,33 @@ function armed(btn) {
 }
 
 // Photo boxes inside rows (rows can be added later, so listen on the page once).
+function drawDocs(box) {
+  const types = box.dataset.types.split('|');
+  box.querySelectorAll('.doc-list img').forEach(img => URL.revokeObjectURL(img.src));
+  box.querySelector('.doc-list').innerHTML = box.docs.map((d, i) => `
+    <div class="doc"><img src="${URL.createObjectURL(d.file)}" alt="Document photo ${i + 1}">
+      <select data-doctype="${i}" aria-label="Document type">${types.map(t => `<option${t === d.type ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select>
+      <button type="button" class="delrow" data-docremove="${i}">Remove</button></div>`).join('');
+}
+app.addEventListener('change', e => {
+  const box = e.target.closest('[data-docs]');
+  if (!box) return;
+  box.docs = box.docs || [];
+  if (e.target.matches('[data-docadd]')) {
+    const first = box.dataset.types.split('|')[0];
+    box.docs.push(...[...e.target.files].map(file => ({ file, type: first })));
+    e.target.value = '';
+    drawDocs(box);
+  } else if (e.target.matches('[data-doctype]')) box.docs[+e.target.dataset.doctype].type = e.target.value;
+});
+app.addEventListener('click', e => {
+  const b = e.target.closest('[data-docremove]');
+  if (!b) return;
+  const box = b.closest('[data-docs]');
+  box.docs.splice(+b.dataset.docremove, 1);
+  drawDocs(box);
+});
+
 function showCellPhoto(cell, file) {
   const img = cell.querySelector('img'), clear = cell.querySelector('[data-clearphoto]');
   if (img.src) URL.revokeObjectURL(img.src);

@@ -118,6 +118,12 @@
               "id": "init",
               "label": "Init",
               "type": "text"
+            },
+            {
+              "id": "documents",
+              "label": "Document photos (BOL, invoice…)",
+              "type": "photos",
+              "span": 10
             }
           ]
         }

@@ -160,6 +160,11 @@
               "id": "tempMonitor",
               "label": "Temp. monitoring #",
               "type": "text"
+            },
+            {
+              "id": "documents",
+              "label": "Document photos (BOL, invoice…)",
+              "type": "photos"
             }
           ]
         },
