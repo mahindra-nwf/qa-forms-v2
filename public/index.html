@@ -236,7 +236,7 @@ async function showHome() {
     <h2>Not in a region yet</h2>
     <div class="list"><a class="row" href="#products">
       <span class="icon">${folderIcon}</span>
-      <span class="grow"><div class="title">Earlier product folders</div><div class="sub">Moji sushi products and plant-wide sheets (SSOP, receiving, shipping)</div></span>
+      <span class="grow"><div class="title">Earlier product folders</div><div class="sub">Plant-wide sheets (SSOP, receiving, shipping)</div></span>
     </a></div>`;
 }
 
@@ -371,8 +371,7 @@ const sheetCount = n => n + ' log sheet' + (n === 1 ? '' : 's');
 function showFolders() {
   const toggle = `<a class="crumb" href="#">← Regions</a><div class="bar"><h1>Products</h1><div class="toggle">${['list', 'cards'].map(v =>
     `<button data-view="${v}" class="${v === view ? 'on' : ''}">${v === 'list' ? 'List' : 'Cards'}</button>`).join('')}</div></div>`;
-  app.innerHTML = toggle + (view === 'cards' ? productCards() : productList())
-    + (products.length ? '' : '<div class="empty">No product folders yet. Add folders under <code>products/</code>.</div>');
+  app.innerHTML = toggle + (view === 'cards' ? productCards() : productList());
   app.querySelectorAll('[data-view]').forEach(b => b.onclick = () => {
     view = b.dataset.view;
     try { localStorage.setItem('productView', view); } catch {}
