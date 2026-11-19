@@ -125,6 +125,9 @@
   .doc .delrow { justify-self: start; }
   .doc-add { display: flex; gap: 8px; flex-wrap: wrap; }
   .doc-add .photo-btn { padding: 6px 12px; min-height: 36px; color: var(--accent); }
+  /* big upload boxes (Receiving Documents): two dashed tiles side by side */
+  .doc-add.big { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; order: -1; }
+  .doc-add.big .photo-btn { justify-content: center; min-height: 140px; border: 2px dashed var(--accent); background: transparent; font-weight: 600; font-size: 18px; }
   .photo-cell { display: flex; align-items: center; gap: 6px; }
   .photo-cell .photo-btn { padding: 6px 12px; min-height: 36px; color: var(--accent); white-space: nowrap; }
   .photo-cell img { height: 36px; width: 48px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); }
@@ -450,13 +453,14 @@ function input(f, name, preset) {
   // Several document photos for one row (BOL, invoice…); each photo gets a type. Files live on the element (el.docs).
   if (f.type === 'photos') return `<div class="docs" data-docs data-name="${esc(name)}" data-types="${esc((f.docTypes || ['BOL', 'Invoice', 'Packing slip', 'COA', 'Other']).join('|'))}">
     <div class="doc-list"></div>
-    <div class="doc-add"><label class="photo-btn">Take photo<input type="file" accept="image/*" capture="environment" hidden data-docadd></label>
-    <label class="photo-btn">Choose photo<input type="file" accept="image/*" multiple hidden data-docadd></label></div></div>`;
+    ${f.big ? `<div class="doc-add big"><label class="photo-btn">Upload from device<input type="file" accept="image/*" multiple hidden data-docadd></label>
+    <label class="photo-btn">Open camera<input type="file" accept="image/*" capture="environment" hidden data-docadd></label></div></div>` : `<div class="doc-add"><label class="photo-btn">Take photo<input type="file" accept="image/*" capture="environment" hidden data-docadd></label>
+    <label class="photo-btn">Choose photo<input type="file" accept="image/*" multiple hidden data-docadd></label></div></div>`}`;
   // One photo taken with the iPad camera (e.g. the label at each label check); taking another replaces it.
   if (f.type === 'photo') return `<span class="photo-cell"><label class="photo-btn"><span>Take photo</span><input type="file" accept="image/*" capture="environment" hidden data-photocell ${n}></label>
     <img alt="" hidden><button type="button" class="delrow" data-clearphoto hidden title="Remove photo">Remove</button></span>`;
   const type = { date: 'date', time: 'time', number: 'number' }[f.type] || 'text';
-  const box = `<input type="${type}" ${n}${type === 'number' ? ' inputmode="decimal" step="any"' : ''}${value ? ` value="${esc(value)}"` : ''}>`;
+  const box = `<input type="${type}" ${n}${type === 'number' ? ' inputmode="decimal" step="any"' : ''}${value ? ` value="${esc(value)}"` : ''}${f.placeholder ? ` placeholder="${esc(f.placeholder)}"` : ''}>`;
   return f.unit ? `<span class="unit">${box}<span>${esc(f.unit)}</span></span>` : box;
 }
 
@@ -582,7 +586,9 @@ function fieldHtml(f, sec) {
   if (f.type === 'info') return infoHtml(f, sec);
   if (f.type === 'table') return tableHtml(f, sec);
   if (f.type === 'matrix') return matrixHtml(f, sec);
-  return `<label class="field"><span>${esc(f.label)}${f.required ? ' *' : ''}</span>${input(f, f.id)}${hint(f)}</label>`;
+  // a div for photo boxes, so tapping a thumbnail doesn't open the camera; no heading when the label is empty
+  const tag = f.type === 'photos' ? 'div' : 'label';
+  return `<${tag} class="field">${f.label ? `<span>${esc(f.label)}${f.required ? ' *' : ''}</span>` : ''}${input(f, f.id)}${hint(f)}</${tag}>`;
 }
 
 // Two-tap delete instead of a confirm() pop-up (some browsers block pop-ups, so the button seemed dead):
@@ -752,7 +758,7 @@ function sectionBody(sec) {
     const right = f => f.type === 'info' || f.type === 'table';
     return `<div class="side"><div class="sidecol">${sec.fields.filter(f => !right(f)).map(f => fieldHtml(f, sec)).join('')}</div><div class="wide">${sec.fields.filter(right).map(f => fieldHtml(f, sec)).join('')}</div></div>`;
   }
-  const wide = f => f.type === 'table' || f.type === 'matrix' || f.type === 'textarea' || f.type === 'info' || f.type === 'note';
+  const wide = f => f.type === 'table' || f.type === 'matrix' || f.type === 'textarea' || f.type === 'info' || f.type === 'note' || f.type === 'photos' || f.wide;
   let html = '', run = [];
   const flush = () => { if (run.length) html += `<div class="fields">${run.map(f => fieldHtml(f, sec)).join('')}</div>`; run = []; };
   for (const f of sec.fields) wide(f) ? (flush(), html += `<div class="wide">${fieldHtml(f, sec)}</div>`) : run.push(f);
