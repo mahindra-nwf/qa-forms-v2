@@ -1,0 +1,190 @@
+{
+  "name": "Pork",
+  "code": "Log 084",
+  "group": "Cooking Log",
+  "groupOrder": 4,
+  "scope": "line",
+  "frequency": "Each batch",
+  "sections": [
+    {
+      "title": "",
+      "side": false,
+      "fields": [
+        {
+          "id": "cookingNote",
+          "type": "note",
+          "lines": [
+            {
+              "b": "Cooking — instructions:",
+              "t": ""
+            },
+            "1. Heat-Treatment: QA personnel will test the internal temperature of the thickest (coldest spot) piece of meat using a thermapen and note the temperature once it comes out of the oven.",
+            "2. Cooking: Take the time and temperature of the meat before and after it goes into the oven. QA personnel must ensure that the internal temperature of meat ≥ 165 °F.",
+            "3. QA personnel will test the internal temperature of the thickest (warmest spot) piece of meat using a thermapen and note the temperature."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Product",
+      "fields": [
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "Batches",
+      "fields": [
+        {
+          "id": "batches",
+          "label": "",
+          "type": "table",
+          "rows": 1,
+          "columns": [
+            {
+              "id": "batch",
+              "label": "Batch #",
+              "type": "text",
+              "span": 1
+            },
+            {
+              "id": "aTimeIn",
+              "label": "Time in",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "aTempIn",
+              "label": "Temp",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "aTimeOut",
+              "label": "Time out",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "aTempOut",
+              "label": "Temp",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "aComments",
+              "label": "Comments",
+              "type": "text",
+              "span": 3
+            },
+            {
+              "id": "preCook",
+              "label": "Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "bTimeIn",
+              "label": "Time in",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "bTempIn",
+              "label": "Temp",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "bTimeOut",
+              "label": "Time out",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "bTempOut",
+              "label": "Temp",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "bComments",
+              "label": "Comments",
+              "type": "text",
+              "span": 3
+            },
+            {
+              "id": "cookInitial",
+              "label": "Initial",
+              "type": "text",
+              "span": 2
+            }
+          ],
+          "rowTypes": [
+            {
+              "id": "batch",
+              "label": "Add batch",
+              "tag": "Batch",
+              "layout": [
+                {
+                  "title": "Heat treatment",
+                  "columns": [
+                    "batch",
+                    "aTimeIn",
+                    "aTempIn",
+                    "aTimeOut",
+                    "aTempOut",
+                    "aComments"
+                  ]
+                },
+                {
+                  "title": "Pre-cook > 130 °F",
+                  "columns": [
+                    "preCook"
+                  ]
+                },
+                {
+                  "title": "Cooking > 165 °F",
+                  "columns": [
+                    "bTimeIn",
+                    "bTempIn",
+                    "bTimeOut",
+                    "bTempOut",
+                    "bComments",
+                    "cookInitial"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "cookVerifiedBy",
+          "label": "Cooking verified by",
+          "type": "text"
+        },
+        {
+          "id": "cookVerifiedDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}

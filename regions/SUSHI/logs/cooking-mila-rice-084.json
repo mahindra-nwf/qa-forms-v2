@@ -1,0 +1,122 @@
+{
+  "name": "Mila Rice",
+  "code": "Log 084",
+  "group": "Cooking Log",
+  "groupOrder": 9,
+  "scope": "line",
+  "frequency": "Each batch",
+  "sections": [
+    {
+      "title": "",
+      "side": false,
+      "fields": [
+        {
+          "id": "cookingNote",
+          "type": "note",
+          "lines": [
+            {
+              "b": "Cooking — instructions:",
+              "t": ""
+            },
+            "Cooking: QA personnel will test the temperature of the rice pouch using an infrared gun and note the temperature once it comes out of the oven.",
+            "Temperature of rice pouch ≥ 165 °F."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Product",
+      "fields": [
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "Batches",
+      "fields": [
+        {
+          "id": "batches",
+          "label": "",
+          "type": "table",
+          "rows": 1,
+          "columns": [
+            {
+              "id": "batch",
+              "label": "Batch #",
+              "type": "text",
+              "span": 1
+            },
+            {
+              "id": "aTimeIn",
+              "label": "Time in",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "aTempIn",
+              "label": "Temp",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "aTimeOut",
+              "label": "Time out",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "aTempOut",
+              "label": "Temp",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "aComments",
+              "label": "Comments",
+              "type": "text",
+              "span": 3
+            },
+            {
+              "id": "cookInitial",
+              "label": "Initial",
+              "type": "text",
+              "span": 2
+            }
+          ],
+          "rowTypes": [
+            {
+              "id": "batch",
+              "label": "Add batch",
+              "tag": "Batch",
+              "layout": [
+                {
+                  "title": "Cooking > 160 °F",
+                  "columns": [
+                    "batch",
+                    "aTimeIn",
+                    "aTempIn",
+                    "aTimeOut",
+                    "aTempOut",
+                    "aComments",
+                    "cookInitial"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

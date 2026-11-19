@@ -1,0 +1,166 @@
+{
+  "name": "Mila Rice",
+  "code": "Log 084",
+  "group": "Cooling Log",
+  "groupOrder": 9,
+  "scope": "line",
+  "frequency": "Each batch",
+  "sections": [
+    {
+      "title": "",
+      "side": false,
+      "fields": [
+        {
+          "id": "coolingNote",
+          "type": "note",
+          "lines": [
+            {
+              "b": "Cooling — instructions:",
+              "t": ""
+            },
+            "Stabilization: Rice pouches are transferred to the blast chiller to cool down temperature.",
+            "1st Stage Cooling: Record time and temperature every 30 min × 3. Temperature needs to be below 80°F by 3rd check.",
+            "2nd Stage Cooling: Check time and temperature after 3 hrs from last check.",
+            "Rice pouches are removed from the blast chiller once temperature has reached below 40 °F.",
+            "Stabilization: Temperature from 130°F - 80°F in 1.5 hrs. 80°F - 40°F in 5 hrs. Total cooling time is ≤ 6.5 hrs."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Product",
+      "fields": [
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "Batches",
+      "fields": [
+        {
+          "id": "batches",
+          "label": "",
+          "type": "table",
+          "rows": 1,
+          "columns": [
+            {
+              "id": "batch",
+              "label": "Batch #",
+              "type": "text",
+              "span": 1
+            },
+            {
+              "id": "preCool",
+              "label": "Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "cool30a",
+              "label": "30 min Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "cool30b",
+              "label": "30 min Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "cool30c",
+              "label": "30 min Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "coolComments",
+              "label": "Comments",
+              "type": "text",
+              "span": 3
+            },
+            {
+              "id": "cool3h",
+              "label": "Time & Temp at 3 hrs",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "coolNext1",
+              "label": "Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "coolNext2",
+              "label": "Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "coolInitial",
+              "label": "Initial",
+              "type": "text",
+              "span": 2
+            }
+          ],
+          "rowTypes": [
+            {
+              "id": "batch",
+              "label": "Add batch",
+              "tag": "Batch",
+              "layout": [
+                {
+                  "title": "Pre-cool > 130 °F",
+                  "columns": [
+                    "batch",
+                    "preCool"
+                  ]
+                },
+                {
+                  "title": "130 °F → 80 °F cooling",
+                  "columns": [
+                    "cool30a",
+                    "cool30b",
+                    "cool30c",
+                    "coolComments"
+                  ]
+                },
+                {
+                  "title": "80 °F → 40 °F cooling",
+                  "columns": [
+                    "cool3h",
+                    "coolNext1",
+                    "coolNext2",
+                    "coolInitial"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "coolVerifiedBy",
+          "label": "Verified by",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

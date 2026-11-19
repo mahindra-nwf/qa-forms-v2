@@ -1,0 +1,173 @@
+{
+  "name": "Meat",
+  "code": "Log 084",
+  "group": "Cooling Log",
+  "groupOrder": 1,
+  "scope": "line",
+  "frequency": "Each batch",
+  "sections": [
+    {
+      "title": "",
+      "side": false,
+      "fields": [
+        {
+          "id": "coolingNote",
+          "type": "note",
+          "lines": [
+            {
+              "b": "Cooling — instructions:",
+              "t": ""
+            },
+            "Stabilization: QA personnel will test the internal temperature of the thickest (warmest spot) piece using a thermapen and note the temperature once it comes out of the oven.",
+            "1. Precooling: 10-15 min after cooking/heat treatment, record time and temperature. Temperature should be above 130°F.",
+            "2. 1st Stage Cooling: Record time and temperature every 30 min × 3. Temperature needs to be below 80°F by 3rd check.",
+            "3. 2nd Stage Cooling: Check time and temperature after 3 hrs from last check.",
+            "Stabilization: Temperature from 130°F - 80°F in 1.5 hrs. 80°F - 40°F in 5 hrs."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Product",
+      "fields": [
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "Batches",
+      "fields": [
+        {
+          "id": "batches",
+          "label": "",
+          "type": "table",
+          "rows": 1,
+          "columns": [
+            {
+              "id": "batch",
+              "label": "Batch #",
+              "type": "text",
+              "span": 1
+            },
+            {
+              "id": "rack",
+              "label": "Cooling rack #",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "preCool",
+              "label": "Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "cool30a",
+              "label": "30 min Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "cool30b",
+              "label": "30 min Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "cool30c",
+              "label": "30 min Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "coolComments",
+              "label": "Comments",
+              "type": "text",
+              "span": 3
+            },
+            {
+              "id": "cool3h",
+              "label": "Time & Temp at 3 hrs",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "coolNext1",
+              "label": "Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "coolNext2",
+              "label": "Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "coolInitial",
+              "label": "Initial",
+              "type": "text",
+              "span": 2
+            }
+          ],
+          "rowTypes": [
+            {
+              "id": "batch",
+              "label": "Add batch",
+              "tag": "Batch",
+              "layout": [
+                {
+                  "title": "Pre-cool > 130 °F",
+                  "columns": [
+                    "batch",
+                    "rack",
+                    "preCool"
+                  ]
+                },
+                {
+                  "title": "130 °F → 80 °F cooling",
+                  "columns": [
+                    "cool30a",
+                    "cool30b",
+                    "cool30c",
+                    "coolComments"
+                  ]
+                },
+                {
+                  "title": "80 °F → 40 °F cooling",
+                  "columns": [
+                    "cool3h",
+                    "coolNext1",
+                    "coolNext2",
+                    "coolInitial"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "coolVerifiedBy",
+          "label": "Cooling verified by",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

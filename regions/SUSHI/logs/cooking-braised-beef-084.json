@@ -1,0 +1,190 @@
+{
+  "name": "Braised Beef",
+  "code": "Log 084",
+  "group": "Cooking Log",
+  "groupOrder": 6,
+  "scope": "line",
+  "frequency": "Each batch",
+  "sections": [
+    {
+      "title": "",
+      "side": true,
+      "fields": [
+        {
+          "id": "cookingNote",
+          "type": "note",
+          "lines": [
+            {
+              "b": "Cooking — instructions:",
+              "t": ""
+            },
+            "Heat-Treatment: QA personnel will insert probe into thickest portion (coldest spot) of the meat.",
+            "1. Take the time and temperature of the meat before and after it goes into the oven. Temperature is greater than 165°F. Operational target temperature is 190°F. Total cooking time is 4 hours.",
+            "2. Record the time and temperature once 4 hrs is over."
+          ]
+        },
+        {
+          "id": "usda",
+          "type": "info",
+          "head": [
+            "Item",
+            "Time & Temp (USDA)"
+          ],
+          "body": [
+            [
+              "Pouched raw beef",
+              "165°F for 0 sec"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Product",
+      "fields": [
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "Batches",
+      "fields": [
+        {
+          "id": "batches",
+          "label": "",
+          "type": "table",
+          "rows": 1,
+          "columns": [
+            {
+              "id": "batch",
+              "label": "Batch #",
+              "type": "text",
+              "span": 1
+            },
+            {
+              "id": "aTimeIn",
+              "label": "Time in",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "aTempIn",
+              "label": "Temp",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "initialStart",
+              "label": "Initial",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "aCorrective",
+              "label": "Corrective action",
+              "type": "text",
+              "span": 3
+            },
+            {
+              "id": "preCook",
+              "label": "Time & Temp",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "bEndTime",
+              "label": "End time (+4 hrs)",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "bEndTemp",
+              "label": "End temp (> 165 °F)",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "bCorrective",
+              "label": "Corrective action",
+              "type": "text",
+              "span": 3
+            },
+            {
+              "id": "cookComments",
+              "label": "Comments",
+              "type": "text",
+              "span": 3
+            },
+            {
+              "id": "cookInitial",
+              "label": "Initial",
+              "type": "text",
+              "span": 2
+            }
+          ],
+          "rowTypes": [
+            {
+              "id": "batch",
+              "label": "Add batch",
+              "tag": "Batch",
+              "layout": [
+                {
+                  "title": "Start",
+                  "columns": [
+                    "batch",
+                    "aTimeIn",
+                    "aTempIn",
+                    "initialStart",
+                    "aCorrective"
+                  ]
+                },
+                {
+                  "title": "Pre-cook > 130 °F",
+                  "columns": [
+                    "preCook"
+                  ]
+                },
+                {
+                  "title": "End",
+                  "columns": [
+                    "bEndTime",
+                    "bEndTemp",
+                    "bCorrective",
+                    "cookComments",
+                    "cookInitial"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "cookVerifiedBy",
+          "label": "Cooking verified by",
+          "type": "text"
+        },
+        {
+          "id": "cookVerifiedDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}

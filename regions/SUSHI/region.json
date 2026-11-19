@@ -45,15 +45,24 @@
       "name": "Cook Area",
       "later": true,
       "logs": [
-        "cooking-cooling-meat-084.json",
-        "cooking-cooling-chicken-084.json",
-        "cooking-cooling-beef-084.json",
-        "cooking-cooling-pork-084.json",
-        "cooking-cooling-spicy-pork-084.json",
-        "cooking-cooling-braised-beef-084.json",
-        "heat-treatment-pork-084.json",
-        "cooking-cooling-vegetable-084.json",
-        "cooking-cooling-mila-rice-084.json"
+        "cooking-meat-084.json",
+        "cooling-meat-084.json",
+        "cooking-chicken-084.json",
+        "cooling-chicken-084.json",
+        "cooking-beef-084.json",
+        "cooling-beef-084.json",
+        "cooking-pork-084.json",
+        "cooling-pork-084.json",
+        "cooking-spicy-pork-084.json",
+        "cooling-spicy-pork-084.json",
+        "cooking-braised-beef-084.json",
+        "cooling-braised-beef-084.json",
+        "cooking-heat-treatment-pork-084.json",
+        "cooling-heat-treatment-pork-084.json",
+        "cooking-vegetable-084.json",
+        "cooling-vegetable-084.json",
+        "cooking-mila-rice-084.json",
+        "cooling-mila-rice-084.json"
       ]
     }
   ]

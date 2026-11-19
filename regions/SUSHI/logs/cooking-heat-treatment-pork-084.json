@@ -1,8 +1,8 @@
 {
-  "name": "Mila Rice",
+  "name": "Heat Treatment Pork",
   "code": "Log 084",
-  "group": "Cooking and Cooling Log",
-  "groupOrder": 9,
+  "group": "Cooking Log",
+  "groupOrder": 7,
   "scope": "line",
   "frequency": "Each batch",
   "sections": [
@@ -18,23 +18,8 @@
               "b": "Cooking — instructions:",
               "t": ""
             },
-            "Cooking: QA personnel will test the temperature of the rice pouch using an infrared gun and note the temperature once it comes out of the oven.",
-            "Temperature of rice pouch ≥ 165 °F."
-          ]
-        },
-        {
-          "id": "coolingNote",
-          "type": "note",
-          "lines": [
-            {
-              "b": "Cooling — instructions:",
-              "t": ""
-            },
-            "Stabilization: Rice pouches are transferred to the blast chiller to cool down temperature.",
-            "1st Stage Cooling: Record time and temperature every 30 min × 3. Temperature needs to be below 80°F by 3rd check.",
-            "2nd Stage Cooling: Check time and temperature after 3 hrs from last check.",
-            "Rice pouches are removed from the blast chiller once temperature has reached below 40 °F.",
-            "Stabilization: Temperature from 130°F - 80°F in 1.5 hrs. 80°F - 40°F in 5 hrs. Total cooling time is ≤ 6.5 hrs."
+            "Heat-Treatment: QA personnel will take the time and temperature of the meat before and after it goes into the oven.",
+            "Cooking: QA personnel will test the internal temperature of the thickest (coldest spot) piece of meat using a thermapen and note the temperature once it comes out of the oven. Internal temperature of meat ≥ 160 °F."
           ]
         }
       ]
@@ -103,61 +88,49 @@
               "span": 3
             },
             {
-              "id": "cookInitial",
+              "id": "heatInitial",
               "label": "Initial",
               "type": "text",
               "span": 2
             },
             {
-              "id": "preCool",
-              "label": "Time & Temp",
+              "id": "cookBatch",
+              "label": "Batch #",
               "type": "text",
+              "span": 1
+            },
+            {
+              "id": "bTimeIn",
+              "label": "Time in",
+              "type": "time",
               "span": 2
             },
             {
-              "id": "cool30a",
-              "label": "30 min Time & Temp",
-              "type": "text",
+              "id": "bTempIn",
+              "label": "Temp",
+              "type": "number",
               "span": 2
             },
             {
-              "id": "cool30b",
-              "label": "30 min Time & Temp",
-              "type": "text",
+              "id": "bTimeOut",
+              "label": "Time out",
+              "type": "time",
               "span": 2
             },
             {
-              "id": "cool30c",
-              "label": "30 min Time & Temp",
-              "type": "text",
+              "id": "bTempOut",
+              "label": "Temp",
+              "type": "number",
               "span": 2
             },
             {
-              "id": "coolComments",
+              "id": "bComments",
               "label": "Comments",
               "type": "text",
               "span": 3
             },
             {
-              "id": "cool3h",
-              "label": "Time & Temp at 3 hrs",
-              "type": "text",
-              "span": 2
-            },
-            {
-              "id": "coolNext1",
-              "label": "Time & Temp",
-              "type": "text",
-              "span": 2
-            },
-            {
-              "id": "coolNext2",
-              "label": "Time & Temp",
-              "type": "text",
-              "span": 2
-            },
-            {
-              "id": "coolInitial",
+              "id": "cookInitial",
               "label": "Initial",
               "type": "text",
               "span": 2
@@ -170,7 +143,7 @@
               "tag": "Batch",
               "layout": [
                 {
-                  "title": "Cooking > 160 °F",
+                  "title": "Heat treatment",
                   "columns": [
                     "batch",
                     "aTimeIn",
@@ -178,31 +151,19 @@
                     "aTimeOut",
                     "aTempOut",
                     "aComments",
+                    "heatInitial"
+                  ]
+                },
+                {
+                  "title": "Cooking > 160 °F",
+                  "columns": [
+                    "cookBatch",
+                    "bTimeIn",
+                    "bTempIn",
+                    "bTimeOut",
+                    "bTempOut",
+                    "bComments",
                     "cookInitial"
-                  ]
-                },
-                {
-                  "title": "Pre-cool > 130 °F",
-                  "columns": [
-                    "preCool"
-                  ]
-                },
-                {
-                  "title": "130 °F → 80 °F cooling",
-                  "columns": [
-                    "cool30a",
-                    "cool30b",
-                    "cool30c",
-                    "coolComments"
-                  ]
-                },
-                {
-                  "title": "80 °F → 40 °F cooling",
-                  "columns": [
-                    "cool3h",
-                    "coolNext1",
-                    "coolNext2",
-                    "coolInitial"
                   ]
                 }
               ]
@@ -215,9 +176,14 @@
       "title": "",
       "fields": [
         {
-          "id": "coolVerifiedBy",
-          "label": "Verified by",
+          "id": "cookVerifiedBy",
+          "label": "Cooking verified by",
           "type": "text"
+        },
+        {
+          "id": "cookVerifiedDate",
+          "label": "Date",
+          "type": "date"
         }
       ]
     }
