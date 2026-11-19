@@ -42,7 +42,8 @@ const jsonIn = d => fs.existsSync(d) ? fs.readdirSync(d).filter(f => f.endsWith(
 
 function regionLogs(r) {
   const d = path.join(REGIONS, r, 'logs');
-  return jsonIn(d).map(file => { const j = readJson(path.join(d, file)); return { file, name: j.name, code: j.code || '', scope: j.scope || 'line', ...(j.placeholder ? { placeholder: true } : {}), ...(j.nameIf ? { nameIf: j.nameIf } : {}), ...(j.group ? { group: j.group, groupOrder: j.groupOrder ?? 99 } : {}) }; });
+  return jsonIn(d).map(file => { const j = readJson(path.join(d, file)); return { file, name: j.name, code: j.code || '', scope: j.scope || 'line', ...(j.placeholder ? { placeholder: true } : {}), ...(j.nameIf ? { nameIf: j.nameIf } : {}), ...(j.group ? { group: j.group, groupOrder: j.groupOrder ?? 99 } : {}), order: j.order ?? 99 }; })
+    .sort((a, b) => a.order - b.order || a.file.localeCompare(b.file));  // "order" in a log file sets its place in the list
 }
 
 function regionProducts(r) {
