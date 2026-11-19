@@ -9,16 +9,37 @@
     {
       "title": "Product",
       "fields": [
-        { "id": "date", "label": "Date", "type": "date", "required": true, "default": "today" },
-        { "id": "product", "label": "Product", "type": "text", "required": true, "prefill": "name" },
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true,
+          "prefill": "name"
+        },
         {
           "id": "targets",
           "label": "Ingredient targets",
           "type": "table",
           "rowHeader": "Ingredient",
           "rowsFrom": "components",
-          "fixedRows": ["Ingredient 1", "Ingredient 2"],
-          "columns": [{ "id": "target", "label": "Target (oz)", "type": "text" }]
+          "fixedRows": [
+            "Ingredient 1",
+            "Ingredient 2"
+          ],
+          "columns": [
+            {
+              "id": "target",
+              "label": "Target (oz)",
+              "type": "text"
+            }
+          ]
         },
         {
           "id": "scales",
@@ -26,8 +47,16 @@
           "type": "table",
           "rows": 2,
           "columns": [
-            { "id": "scale", "label": "Scale #", "type": "text" },
-            { "id": "weight", "label": "Weight (g)", "type": "number" }
+            {
+              "id": "scale",
+              "label": "Scale #",
+              "type": "text"
+            },
+            {
+              "id": "weight",
+              "label": "Weight (g)",
+              "type": "number"
+            }
           ]
         }
       ]
@@ -42,14 +71,52 @@
           "rows": 2,
           "hint": "Two weight samples per check. %O2 check seal: target ≤ 0.5%, limit ≤ 1.0%.",
           "columns": [
-            { "id": "time", "label": "Time", "type": "time" },
-            { "id": "temp", "label": "Temp {name} (°F)", "type": "number", "each": "components" },
-            { "id": "w1", "label": "Wt {name} 1 (oz)", "type": "number", "each": "components" },
-            { "id": "w2", "label": "Wt {name} 2 (oz)", "type": "number", "each": "components" },
-            { "id": "o2a", "label": "% O2 tray 1", "type": "number" },
-            { "id": "o2b", "label": "% O2 tray 2", "type": "number" },
-            { "id": "o2c", "label": "% O2 tray 3", "type": "number" },
-            { "id": "initial", "label": "Initial", "type": "text" }
+            {
+              "id": "time",
+              "label": "Time",
+              "type": "time"
+            },
+            {
+              "id": "temp",
+              "label": "Temp {name} (°F)",
+              "type": "number",
+              "each": "components"
+            },
+            {
+              "id": "w1",
+              "label": "Wt {name} 1 (oz)",
+              "type": "number",
+              "each": "components"
+            },
+            {
+              "id": "w2",
+              "label": "Wt {name} 2 (oz)",
+              "type": "number",
+              "each": "components"
+            },
+            {
+              "id": "o2a",
+              "label": "% O2 tray 1",
+              "type": "number",
+              "naUnless": "gasCheck"
+            },
+            {
+              "id": "o2b",
+              "label": "% O2 tray 2",
+              "type": "number",
+              "naUnless": "gasCheck"
+            },
+            {
+              "id": "o2c",
+              "label": "% O2 tray 3",
+              "type": "number",
+              "naUnless": "gasCheck"
+            },
+            {
+              "id": "initial",
+              "label": "Initial",
+              "type": "text"
+            }
           ]
         }
       ]
@@ -57,9 +124,25 @@
     {
       "title": "Record review",
       "fields": [
-        { "id": "review", "label": "Document is completed?", "type": "passfail", "options": ["Accept", "Reject"] },
-        { "id": "reviewInitials", "label": "Initials", "type": "text" },
-        { "id": "reviewDate", "label": "Date", "type": "date" }
+        {
+          "id": "review",
+          "label": "Document is completed?",
+          "type": "passfail",
+          "options": [
+            "Accept",
+            "Reject"
+          ]
+        },
+        {
+          "id": "reviewInitials",
+          "label": "Initials",
+          "type": "text"
+        },
+        {
+          "id": "reviewDate",
+          "label": "Date",
+          "type": "date"
+        }
       ]
     }
   ]
