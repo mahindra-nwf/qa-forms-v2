@@ -1,0 +1,43 @@
+{
+  "name": "Receiving Documents",
+  "code": "Photos",
+  "scope": "line",
+  "category": "Receiving",
+  "frequency": "Each delivery",
+  "description": "Photos of the paperwork that comes with each delivery (BOL, invoice, packing slip, COA). Add one delivery per truck and take a photo of each document.",
+  "sections": [
+    {
+      "title": "Deliveries",
+      "fields": [
+        {
+          "id": "deliveries",
+          "label": "Deliveries",
+          "type": "table",
+          "rows": 1,
+          "display": "cards",
+          "columns": [
+            { "id": "date", "label": "Date", "type": "date", "span": 2 },
+            { "id": "time", "label": "Time", "type": "time", "span": 2 },
+            { "id": "vendor", "label": "Vendor", "type": "text", "span": 3 },
+            { "id": "po", "label": "PO #", "type": "text", "span": 2 },
+            { "id": "init", "label": "Init", "type": "text", "span": 1 },
+            { "id": "documents", "label": "Document photos (BOL, invoice, packing slip, COA…)", "type": "photos" }
+          ],
+          "rowTypes": [
+            {
+              "id": "delivery",
+              "label": "Add delivery",
+              "tag": "Delivery",
+              "layout": [
+                { "title": "Delivery", "columns": ["date", "time", "vendor", "po", "init"] },
+                { "title": "Documents", "columns": ["documents"] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "noPaper": true,
+  "order": 1.5
+}

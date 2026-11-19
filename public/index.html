@@ -485,8 +485,8 @@ const columnsFor = (f, t) => t?.columns ? f.columns.filter(c => t.columns.includ
 
 // Too many columns for an iPad-wide table: each row becomes a card. Its boxes are split evenly over
 // as few lines as fit (at most 10 slots a line in landscape, 5 in portrait), so no line is left half empty.
-// display: "table" keeps a wide table as one line per row, like the paper (e.g. log 051)
-const asCards = f => f.display !== 'table' && !f.fixedRows && f.columns.length > 8;
+// display: "table" keeps a wide table as one line per row, like the paper (e.g. log 051); display: "cards" forces cards
+const asCards = f => f.display === 'cards' || (f.display !== 'table' && !f.fixedRows && f.columns.length > 8);
 const slotsOf = c => c.span || (c.type === 'passfail' ? 2 : 1);
 const perLine = (slots, max) => Math.ceil(slots / Math.ceil(slots / max));
 function cardRow(f, i, typeId) {
@@ -696,7 +696,7 @@ async function renderSheet(url, backHref, backLabel) {
         ${sec.title ? `<h2>${esc(sec.title)}</h2>` : ''}
         ${sectionBody(sec)}
       </section>`).join('')}
-      ${photoSection()}
+      ${s.noPaper ? "" : photoSection()}
       <div class="bar"><span class="sub">Preview: entries aren't saved yet.</span><button class="primary" disabled>Save</button></div>
       ${s.footer ? `<footer class="docfoot">${s.footer.map(l => `<div>${esc(l)}</div>`).join('')}</footer>` : ''}
     </form>`;
@@ -720,7 +720,8 @@ function photoSection() {
 }
 
 function wirePhotos(form) {
-  const grid = form.querySelector('[data-photos]');
+  const grid = form.querySelector("[data-photos]");
+  if (!grid) return; // a log with no paper version (noPaper) has no paper-log photo box
   form.photos = [];
   const draw = () => {
     grid.querySelectorAll('img').forEach(img => URL.revokeObjectURL(img.src));
