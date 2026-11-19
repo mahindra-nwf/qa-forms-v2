@@ -472,15 +472,6 @@
           "id": "labelReturnedTime",
           "label": "Time",
           "type": "time"
-        },
-        {
-          "id": "review",
-          "label": "Document is completed?",
-          "type": "passfail",
-          "options": [
-            "Accept",
-            "Reject"
-          ]
         }
       ]
     }

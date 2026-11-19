@@ -125,15 +125,6 @@
       "title": "Record review",
       "fields": [
         {
-          "id": "review",
-          "label": "Document is completed?",
-          "type": "passfail",
-          "options": [
-            "Accept",
-            "Reject"
-          ]
-        },
-        {
           "id": "reviewInitials",
           "label": "Initials",
           "type": "text"
