@@ -81,8 +81,18 @@ function fillLog(form, product, region) {
       f.head = f.head.filter((h, i) => keep[i]); f.body = f.body.map(r => r.filter((v, i) => keep[i])); }
     const rows = f.rowsFrom && f.rowsFrom.split('.').reduce((o, k) => o?.[k], product);
     if (rows?.length) f.fixedRows = rows.map(r => ({ label: r.name ?? r.material, sub: r.spec, values: r }));
-    // column.naUnless: "gasCheck" → the box shows N/A for products without that flag (e.g. O2/CO2 only for potstickers and dumplings)
-    if (f.columns) for (const c of f.columns) if (c.naUnless && !product[c.naUnless]) c.na = true;
+    // column.naUnless: "gasCheck" → the box is left off for products without that flag (e.g. O2/CO2 only for potstickers and dumplings)
+    if (f.columns && f.columns.some(c => c.naUnless && !product[c.naUnless])) {
+      const drop = new Set(f.columns.filter(c => c.naUnless && !product[c.naUnless]).map(c => c.id));
+      const keep = ids => ids.filter(id => !drop.has(id));
+      f.columns = f.columns.filter(c => !drop.has(c.id));
+      for (const t of f.rowTypes || []) {
+        if (t.columns) t.columns = keep(t.columns);
+        if (t.layout) t.layout = t.layout.map(g => g.clusters
+          ? { ...g, clusters: g.clusters.map(cl => ({ ...cl, columns: keep(cl.columns) })).filter(cl => cl.columns.length) }
+          : { ...g, columns: keep(g.columns) }).filter(g => g.clusters ? g.clusters.length : g.columns.length);
+      }
+    }
     if (f.columns) f.columns = f.columns.flatMap(c => {
       if (!c.each) return [c];
       const names = (comps || [{ name: 'item 1' }, { name: 'item 2' }]).map(x => x.name);
