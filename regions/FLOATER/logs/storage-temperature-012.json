@@ -1,0 +1,147 @@
+{
+  "name": "Storage Temperature",
+  "code": "Log 012",
+  "scope": "line",
+  "category": "Storage",
+  "frequency": "2x daily (once per shift)",
+  "description": "Monitoring: document the information below 2x daily (once per shift). QA verification: download the wireless data once per month and check it against this log. Acceptable temperatures: Storage Cooler +32°F < T < +38°F · Prep Cooler +32°F < T < +40°F · Shipping and Receiving Cooler +32°F < T < +40°F · Storage Freezer < +5°F.",
+  "sections": [
+    {
+      "title": "Day",
+      "fields": [
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "readings",
+          "label": "",
+          "type": "table",
+          "display": "table",
+          "rows": 2,
+          "columns": [
+            {
+              "id": "time",
+              "label": "Time",
+              "type": "time"
+            },
+            {
+              "id": "storageTemp",
+              "label": "°F",
+              "type": "number",
+              "group": "Storage Cooler"
+            },
+            {
+              "id": "storageIce",
+              "label": "Coils icing?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ],
+              "group": "Storage Cooler"
+            },
+            {
+              "id": "prepTemp",
+              "label": "°F",
+              "type": "number",
+              "group": "Prep Cooler"
+            },
+            {
+              "id": "prepIce",
+              "label": "Coils icing?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ],
+              "group": "Prep Cooler"
+            },
+            {
+              "id": "shipRecvTemp",
+              "label": "°F",
+              "type": "number",
+              "group": "Shipping and Receiving Cooler"
+            },
+            {
+              "id": "shipRecvIce",
+              "label": "Coils icing?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ],
+              "group": "Shipping and Receiving Cooler"
+            },
+            {
+              "id": "freezerTemp",
+              "label": "°F",
+              "type": "number",
+              "group": "Freezer"
+            },
+            {
+              "id": "freezerIce",
+              "label": "Coils icing?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ],
+              "group": "Freezer"
+            },
+            {
+              "id": "corrective",
+              "label": "Corrective action",
+              "type": "text"
+            },
+            {
+              "id": "initial",
+              "label": "Daily initial",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Comments / corrective actions",
+      "fields": [
+        {
+          "id": "comments",
+          "label": "Comments / corrective actions",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "title": "QA verification",
+      "fields": [
+        {
+          "id": "loggerNote",
+          "label": "QA verifies that the continuous logger has been downloaded and reviewed.",
+          "type": "checkbox",
+          "checkLabel": "Done"
+        },
+        {
+          "id": "qaVerification",
+          "label": "QA verification",
+          "type": "text"
+        },
+        {
+          "id": "qaDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ],
+  "order": 4
+}

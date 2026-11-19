@@ -1,0 +1,257 @@
+{
+  "name": "ATP Tests",
+  "code": "Log 026",
+  "scope": "line",
+  "category": "Sanitation",
+  "frequency": "Daily",
+  "description": "Swab 3 sushi and 3 RM locations daily after cleaning and sanitation. Results (RLU): Pass under 60 · Caution 61–180 · Fail over 180. CA: if the result is in the Caution or Fail range, reclean, sanitize, reinspect and retest.",
+  "sections": [
+    {
+      "title": "Day",
+      "fields": [
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        }
+      ]
+    },
+    {
+      "title": "Swabs",
+      "fields": [
+        {
+          "id": "swabs",
+          "label": "",
+          "type": "table",
+          "display": "cards",
+          "rows": 6,
+          "columns": [
+            {
+              "id": "time",
+              "label": "Time",
+              "type": "time"
+            },
+            {
+              "id": "employee",
+              "label": "Employee",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "location",
+              "label": "Loc. # · Area · Location (Zone)",
+              "type": "select",
+              "options": [
+                "1 · Avo · Avocado Cutter Blade (not in use) (Zone 1)",
+                "2 · Avo · Avocado Cutter Infeed Hopper (not in use) (Zone 1)",
+                "3 · Avo · Avocado Cutter Outfeed (not in use) (Zone 1)",
+                "4 · Avo · Avocado Table (Zone 1)",
+                "5 · Avo · Kettle Inside (Zone 1)",
+                "6 · Avo · Avocado Mixing Tool (write which in notes) (Zone 1)",
+                "9 · Pack · Plastic Sauce Packet Bins (interior) (Zone 2)",
+                "10 · Pack · Spiral Infeed White Belt (Zone 2)",
+                "11 · Pack · Spiral Outfeed Metal Belt (Zone 2)",
+                "12 · Pack · L Belt Surface (before spiral) (Zone 2)",
+                "13 · Pack · L Belt Surface (after spiral) (Zone 2)",
+                "14 · Prep · Buggy (Zone 1)",
+                "15 · Prep · Ingredient Containers (outside) (Zone 2)",
+                "16 · Prep · Mixing Machine: Hopper (Zone 1)",
+                "17 · Prep · Mixing Machine: Mixer (Zone 1)",
+                "18 · Prep · Cutting Boards (Zone 1)",
+                "19 · Prep · Trays (Zone 1)",
+                "20 · Prep · Tubs (Zone 1)",
+                "21 · Prep · Prep Table (Zone 1)",
+                "22 · Prep · Scissors/Knife (Zone 1)",
+                "23 · Prod · Hi-Roll Upper Conveyor Rice Roller (Zone 1)",
+                "24 · Prod · Hi-Roll Lower Conveyor Rice Roller (Zone 1)",
+                "25 · Prod · Hi-Roll Rice Hopper (inside) (Zone 1)",
+                "26 · Prod · Hi-Roll Rice Belt (Zone 1)",
+                "27 · Prod · Sesame Hopper (Zone 1)",
+                "28 · Prod · Hi-Roll Table (Zone 1)",
+                "29 · Prod · Hi-Roll Log-Forming Belt (Zone 1)",
+                "30 · Prod · Hi-Roll Belt to IQ2 (Zone 1)",
+                "31 · Prod · IQ2 Belt Surface (Zone 1)",
+                "32 · Prod · Vemag Extruder Tube (inside) (Zone 1)",
+                "33 · Prod · Vemag Hopper (Zone 1)",
+                "35 · Prod · Sushi Cutter Belt (Zone 1)",
+                "36 · Prod · Sushi Cutter Blade (Zone 1)",
+                "37 · Prod · Transfer Belt (sushi cutter to harvest) (Zone 1)",
+                "38 · Prod · Harvesting Sushi Belt (A side) (Zone 1)",
+                "39 · Prod · Harvesting Tray Belt (A side) (Zone 2)",
+                "40 · Prod · Harvesting Sushi Belt (B side) (Zone 1)",
+                "41 · Prod · Harvesting Tray Belt (B side) (Zone 2)",
+                "42 · Rice · Stainless Steel Bowls (Zone 1)",
+                "43 · Rice · Rice Carrier (Zone 1)",
+                "44 · Rice · Rice Scoop (Zone 1)",
+                "45 · Prep · Buggy Lid (Zone 1)",
+                "46 · Rice · Pitcher (Zone 1)",
+                "47 · Rice · Beaker (Zone 1)",
+                "48 · Rice · Container (write which in notes) (Zone 1)",
+                "49 · Rice · Rice Mixer (inside) (Zone 1)",
+                "50 · Rice · Buggy Handle (Zone 2)",
+                "120 · Sushi · Spiral exit exhaust buffer (Zone 2)",
+                "121 · Sushi · White guards under sushi harvest belts (Zone 2)",
+                "122 · Sushi · White guards under sushi harvest tray belts (Zone 2)",
+                "123 · Sushi · Rice lift (Zone 2)",
+                "124 · Sushi · Hi-roll parts rollers (Zone 1)",
+                "125 · Sushi · Hi-Roll Belt (Zone 1)",
+                "126 · Sushi · Hi-Roll control panel (Zone 2)",
+                "127 · Sushi · Vemag control panel (Zone 2)",
+                "128 · Sushi · Sesame vibrator platform (Zone 1)",
+                "129 · Sushi · White pail (Zone 1)",
+                "130 · Sushi · Blue barrel (Zone 1)",
+                "131 · Sushi · Rice pot (Zone 1)",
+                "132 · Sushi · Shrimp cutter (Zone 1)",
+                "51 · Meal · IQ1 Infeed Belt Surface (Zone 2)",
+                "52 · Meal · IQ1 Outfeed Belt Surface (Zone 2)",
+                "53 · Meal · Scale Top (Zone 2)",
+                "54 · Meal · Scale Buttons (Zone 2)",
+                "55 · Meal · Stainless Steel Prep Tables (Zone 1)",
+                "56 · Meal · Cutting Boards (Zone 1)",
+                "57 · Meal · Trays (Zone 1)",
+                "58 · Meal · White Tubs Inside (Zone 1)",
+                "59 · Meal · Blue Tubs Inside (Zone 1)",
+                "60 · Meal · Green Tubs Inside (Zone 1)",
+                "61 · Meal · Sauce Dispenser - Hopper (Zone 1)",
+                "63 · Meal · Sauce Dispenser - Frame (Zone 1)",
+                "64 · Meal · Assembly Belt Top (Zone 2)",
+                "65 · Meal · Preservative Belt Top (Zone 2)",
+                "66 · Meal · Ulma Belt Top (Zone 2)",
+                "67 · Meal · Assembly Belt Underside (Zone 2)",
+                "68 · Meal · Preservative Belt Underside (Zone 2)",
+                "69 · Meal · Ulma inside (Zone 2)",
+                "70 · Meal · White Guard Under Assembly Belt (Zone 2)",
+                "71 · Meal · Short Buggy (Inside) (Zone 1)",
+                "72 · Meal · Buggy Lid (Zone 1)",
+                "73 · Meal · Tray Racks (Zone 2)",
+                "75 · Meal · Table Underside (Zone 2)",
+                "76 · Meal · Bowl (Zone 1)",
+                "77 · Meal · Knife Blade (Zone 1)",
+                "78 · Meal · Scoop (Zone 1)",
+                "79 · Meal · Conveyor Belt Gear (Zone 2)",
+                "80 · Meal · Scissors Blade (Zone 1)",
+                "81 · Meal · Measuring Cup / Spoon (Zone 1)",
+                "82 · Meal · Carts (Zone 2)",
+                "83 · Meal · Tub Lid (Zone 1)",
+                "84 · Meal · Tub Racks (Zone 2)",
+                "85 · Meal · Sauce Mixer (Mixer/Auger) (Zone 1)",
+                "86 · Meal · Sauce Mixer (Handle) (Zone 2)",
+                "87 · Meal · Knife Handle (Zone 2)",
+                "88 · Meal · Scissors Handle (Zone 2)",
+                "89 · Meal · Robocoupe (hopper inside) (Zone 1)",
+                "90 · Meal · Robocoupe (mixer) (Zone 1)",
+                "91 · Meal · Tall Buggy Inside (Zone 1)",
+                "92 · Meal · Short Buggy Handle (Zone 2)",
+                "93 · Meal · Tall Buggy Handle (Zone 2)",
+                "94 · Meal · Short Buggy Outside (Zone 2)",
+                "95 · Meal · Tall Buggy Outside (Zone 2)",
+                "96 · Meal · White Tubs Outside/Underside (Zone 2)",
+                "97 · Meal · Blue Tubs Outside/Underside (Zone 2)",
+                "98 · Meal · Green Tubs Outside/Underside (Zone 2)",
+                "99 · Meal · White Guard Under Garnish Belt (Zone 2)",
+                "100 · Meal · White Guard Under Lidding Belt (Zone 2)",
+                "101 · Meal · Strainer (Large Square) (Zone 1)",
+                "114 · Meal · Parsley Cutter Blade (Zone 1)",
+                "115 · Meal · Parsley Cutter Belt (Zone 1)",
+                "117 · Meal · Sauce machine \"T\" pipe (Zone 1)",
+                "118 · Meal · Sauce machine \"J\" pipe (Zone 1)",
+                "119 · Meal · Sauce machine frame (Zone 2)",
+                "120 · Meal · Ulma Frame (Zone 2)",
+                "121 · Meal · Ulma Belt (Zone 2)",
+                "122 · Meal · Ulma Monitor (Zone 3)",
+                "123 · Meal · Film (Zone 1)",
+                "124 · Meal · Heat Tunnel Frame (Zone 2)",
+                "125 · Meal · Heat Tunnel Rollers (Zone 2)",
+                "126 · Meal · Multivac Frame (Zone 2)",
+                "127 · Meal · Multivac Tooling (Zone 2)",
+                "128 · Raw · Multivac Frame (Zone 2)",
+                "129 · Raw · Multivac Tooling (Zone 2)"
+              ],
+              "span": 5
+            },
+            {
+              "id": "rlu",
+              "label": "RLU",
+              "type": "number"
+            },
+            {
+              "id": "result",
+              "label": "Pass/Fail",
+              "type": "passfail",
+              "options": [
+                "Pass",
+                "Caution",
+                "Fail"
+              ]
+            },
+            {
+              "id": "retest",
+              "label": "Retest RLU",
+              "type": "number"
+            },
+            {
+              "id": "qaVerified",
+              "label": "QA Verified",
+              "type": "text",
+              "span": 2
+            }
+          ],
+          "rowTypes": [
+            {
+              "id": "swab",
+              "label": "Add swab",
+              "tag": "Swab",
+              "layout": [
+                {
+                  "title": "Swab",
+                  "columns": [
+                    "time",
+                    "employee",
+                    "location"
+                  ]
+                },
+                {
+                  "title": "Result",
+                  "columns": [
+                    "rlu",
+                    "result",
+                    "retest",
+                    "qaVerified"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Notes",
+      "fields": [
+        {
+          "id": "notes",
+          "label": "Notes / corrective actions",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "title": "QA verification",
+      "fields": [
+        {
+          "id": "qaVerification",
+          "label": "QA verification",
+          "type": "text"
+        },
+        {
+          "id": "qaDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ],
+  "order": 3
+}
