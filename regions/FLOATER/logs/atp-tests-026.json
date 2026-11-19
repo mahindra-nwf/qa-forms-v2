@@ -31,13 +31,14 @@
             {
               "id": "time",
               "label": "Time",
-              "type": "time"
+              "type": "time",
+              "span": 2
             },
             {
               "id": "employee",
               "label": "Employee",
               "type": "text",
-              "span": 2
+              "span": 3
             },
             {
               "id": "location",
@@ -174,7 +175,8 @@
             {
               "id": "rlu",
               "label": "RLU",
-              "type": "number"
+              "type": "number",
+              "span": 2
             },
             {
               "id": "result",
@@ -184,18 +186,20 @@
                 "Pass",
                 "Caution",
                 "Fail"
-              ]
+              ],
+              "span": 3
             },
             {
               "id": "retest",
               "label": "Retest RLU",
-              "type": "number"
+              "type": "number",
+              "span": 2
             },
             {
               "id": "qaVerified",
               "label": "QA Verified",
               "type": "text",
-              "span": 2
+              "span": 3
             }
           ],
           "rowTypes": [
