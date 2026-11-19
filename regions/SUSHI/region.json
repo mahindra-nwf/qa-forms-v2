@@ -65,8 +65,7 @@
       "name": "QA Floater",
       "later": true,
       "logs": [
-        "glass-brittle-055.json",
-        "chemical-strength-051.json"
+        "glass-brittle-055.json"
       ]
     }
   ]
