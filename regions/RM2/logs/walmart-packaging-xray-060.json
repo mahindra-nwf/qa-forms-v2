@@ -1,5 +1,10 @@
 {
-  "name": "Walmart Packaging, Temperature, and X-Ray",
+  "name": "Packaging, Temperature, and X-Ray",
+  "nameIf": {
+    "field": "customer",
+    "value": "Walmart",
+    "name": "Walmart Packaging, Temperature, and X-Ray"
+  },
   "code": "Log 060",
   "scope": "product",
   "category": "Packaging",
@@ -141,7 +146,7 @@
           "label": "Checks",
           "type": "table",
           "rows": 1,
-          "hint": "Tap + Full check every hour (all boxes: X-ray, label, 3 weights, seal, 3 × O2 and 3 × CO2, pallet temp, 2 label photos) and + Label check at the 30-minute marks in between (label inspection only; take 2 photos of the label with 📷). Use ✕ to delete a row added by mistake. Seal check: 3 consecutive trays for single meals, 2 for family meals. Obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
+          "hint": "Tap + Full check every hour (all boxes: X-ray, label, 3 weights, seal, 3 × O2 and 3 × CO2, pallet temp, 2 label photos) and + Label check at the 30-minute marks in between (label inspection only; take 2 photos of the label with Take photo). Use Delete to remove a row added by mistake. Seal check: 3 consecutive trays for single meals, 2 for family meals. Obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
           "columns": [
             {
               "id": "time",
@@ -313,13 +318,13 @@
               "id": "labelPhoto",
               "label": "Label photo 1",
               "type": "photo",
-              "span": 2
+              "span": 3
             },
             {
               "id": "labelPhoto2",
               "label": "Label photo 2",
               "type": "photo",
-              "span": 2
+              "span": 3
             }
           ],
           "rowTypes": [

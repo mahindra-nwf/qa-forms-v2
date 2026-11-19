@@ -54,6 +54,28 @@
   .sheet-table th, .sheet-table td { border-bottom: 1px solid var(--line); padding: 5px 6px; text-align: left; }
   .sheet-table thead th { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
   .sheet-table tbody th { font-weight: 600; white-space: nowrap; width: 1%; padding-right: 14px; }
+  /* long descriptions under a row name wrap instead of pushing the table wider than the iPad */
+  .sheet-table tr.grouphead th { text-align: center; color: var(--ink); border-bottom: 2px solid var(--line); }
+  .sheet-table tr.grouphead th:not(:empty) { background: var(--accent-soft); border-left: 2px solid var(--card); }
+  .sheet-table.info { min-width: 0; font-size: 14px; }
+  .side { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr); gap: 20px; align-items: start; }
+  @media (max-width: 900px) { .side { grid-template-columns: 1fr; } }
+  .note { font-size: 14px; line-height: 1.6; }
+  .sidecol { display: grid; gap: 10px; align-content: start; }
+  .sheet-table.info.strong { font-size: 17px; font-weight: 700; border: 2px solid var(--ink); }
+  .sheet-table.info.strong thead th { font-size: 16px; font-weight: 700; }
+  .note > div:first-child { margin-bottom: 8px; }
+  .docfoot { margin-top: 18px; font-size: 11px; line-height: 1.5; color: var(--muted); text-align: center; }
+  .docfoot div:first-child { font-style: italic; font-weight: 600; }
+  .sheet-table.paper td { padding: 5px 3px; }
+  .sheet-table.paper input { padding: 7px 4px; font-size: 15px; }
+  .sheet-table.paper input[type=number] { min-width: 58px; text-align: center; }
+  .sheet-table.paper input[type=date] { width: 136px; }
+  .sheet-table.paper .delrow { padding: 6px 6px; }
+  .sheet-table.info th, .sheet-table.info td { border: 1px solid var(--line); padding: 5px 8px; text-align: center; white-space: nowrap; }
+  .sheet-table.info td:first-child { white-space: normal; }
+  .sheet-table.info thead th { color: var(--ink); background: var(--accent-soft); text-transform: none; letter-spacing: 0; font-size: 13px; white-space: normal; }
+  .sheet-table tbody th .sub { white-space: normal; min-width: 200px; max-width: 340px; }
   .sheet-table td:nth-child(2) { min-width: 160px; }
   .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
   .seg input { display: none; }
@@ -64,18 +86,24 @@
   .sheet section > * + * { margin-top: 12px; }
   .rowcards { display: grid; gap: 8px; }
   .rowcard { display: flex; gap: 10px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: #fafcfd; }
-  .rowcard .num { color: var(--muted); font-weight: 600; padding-top: 22px; min-width: 34px; display: flex; flex-direction: column; align-items: center; }
-  .rowcard { position: relative; padding-right: 34px; }
-  .rowcard > .delrow { position: absolute; top: 2px; right: 0; }
+  .rowcard .num { color: var(--muted); font-weight: 600; padding-top: 22px; min-width: 60px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .rowcard .num .delrow { margin-top: 6px; }
   .rowtag { margin-top: 4px; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border-radius: 4px; padding: 2px 4px; }
   .rowcard[data-rowtype="label"] { background: #fff; border-style: dashed; }
   .rowcard[data-rowtype="label"] .rowtag { color: #8a5a00; background: #fdf1dc; }
-  .delrow { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; padding: 8px 10px; min-width: 40px; min-height: 40px; align-self: flex-start; }
-  .delrow:hover, .delrow:active { color: var(--danger); }
-  .delrow.armed { color: #fff; background: var(--danger); border-radius: 6px; font-size: 13px; font-weight: 600; padding: 8px 10px; }
+  .delrow { border: 1px solid var(--line); background: var(--card); color: var(--muted); font-size: 13px; line-height: 1; padding: 8px 10px; min-height: 34px; border-radius: 6px; white-space: nowrap; align-self: center; }
+  .delrow:hover, .delrow:active { color: var(--danger); border-color: var(--danger); }
+  .delrow.armed { color: #fff; background: var(--danger); border-color: var(--danger); font-weight: 600; }
   .sheet-table td.del { width: 1%; padding: 0; }
   .addrows { display: flex; gap: 8px; flex-wrap: wrap; }
   .photo-btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); padding: 10px 16px; cursor: pointer; min-height: 44px; }
+  h2.later { margin-top: 32px; padding-top: 12px; border-top: 1px solid var(--line); }
+  h3.brand { font-size: 14px; margin: 14px 0 6px; color: var(--ink); }
+  .sheethead { margin-bottom: 14px; }
+  .sheethead h1 { margin: 6px 0 4px; line-height: 1.25; }
+  .sheethead .meta { color: var(--muted); font-size: 14px; }
+  .logcode { display: inline-block; background: var(--accent-soft); color: var(--accent); font-weight: 600; border-radius: 4px; padding: 1px 7px; margin-right: 8px; }
+  .sheethead .desc { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 6px; padding: 8px 12px; }
   .cardbody { flex: 1; min-width: 0; display: grid; gap: 8px; }
   .cardbody .cardgrid { flex: none; }
   .cgroup + .cgroup { border-top: 1px dashed var(--line); padding-top: 8px; }
@@ -86,13 +114,13 @@
   .photo-cell { display: flex; align-items: center; gap: 6px; }
   .photo-cell .photo-btn { padding: 6px 12px; min-height: 36px; color: var(--accent); white-space: nowrap; }
   .photo-cell img { height: 36px; width: 48px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); }
-  .photo-cell .delrow { min-width: 32px; min-height: 32px; padding: 4px; }
+  .photo-cell .delrow { padding: 6px 8px; min-height: 32px; }
   .photo-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
   .photo-grid:empty { display: none; }
   .photo { position: relative; margin: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fafcfd; }
   .photo img { display: block; width: 100%; height: 150px; object-fit: cover; }
   .photo figcaption { font-size: 12px; color: var(--muted); padding: 4px 8px; }
-  .photo .delrow { position: absolute; top: 4px; right: 4px; background: rgba(255,255,255,.9); border-radius: 50%; }
+  .photo .delrow { position: absolute; top: 6px; right: 6px; background: rgba(255,255,255,.95); }
   .cardgrid { flex: 1; min-width: 0; display: grid; gap: 8px 10px; grid-template-columns: repeat(var(--cols, 10), minmax(0, 1fr)); }
   .cardgrid .field span { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .cardgrid .seg { display: flex; }
@@ -203,7 +231,22 @@ async function showRegionRoute([id, kind, a, b]) {
   if (p && b && r.logs.some(l => l.file === b && l.scope === 'product'))
     return renderSheet(`/api/regions/${enc(r.id)}/products/${enc(p.folder)}/logs/${enc(b)}`, regionProductHref(r, p), `${r.name} · ${p.name}`);
   if (p) return showRegionProduct(r, p);
+  const picked = kind === 'pick' && r.logs.find(l => l.file === a && l.scope === 'product');
+  if (picked) return showProductPicker(r, picked);
   showRegion(r);
+}
+
+// A per-product log opened from an area (e.g. Prep Room → Log 045): choose the product first.
+function showProductPicker(r, l) {
+  const brands = [...new Set(r.products.map(p => p.brand || ''))];
+  app.innerHTML = `
+    <a class="crumb" href="${regionHref(r)}">← ${esc(r.name)}</a>
+    <div class="sheethead"><h1>${esc(l.name)}</h1><div class="meta"><span class="logcode">${esc(l.code)}</span>Choose the product</div></div>
+    ${brands.map(b => `${b ? `<h2>${esc(b)}</h2>` : ''}<div class="list">${r.products.filter(p => (p.brand || '') === b).map(p => `
+      <a class="row" href="${regionProductHref(r, p)}/${enc(l.file)}">
+        <span class="icon">${folderIcon}</span>
+        <span class="grow"><div class="title">${esc(p.name)}</div><div class="sub">${esc(productSub(p))}</div></span>
+      </a>`).join('')}</div>`).join('')}`;
 }
 
 function deviceBar(r) {
@@ -222,39 +265,59 @@ function wireDeviceBar(r) {
 
 const productSub = p => [p.item && 'Item ' + p.item, p.customer].filter(Boolean).join(' · ') || 'Details not filled in yet';
 
+// Opening a log from the region page: whole-line logs open straight away, per-product logs ask for the product.
+const regionLogHref = (r, l) => l.scope === 'product' ? `${regionHref(r)}/pick/${enc(l.file)}` : `${regionHref(r)}/log/${enc(l.file)}`;
+
+// Regions with r.areas (the sushi line) list their logs by work area; the others by whole line / product.
+function areasHtml(r) {
+  const byFile = Object.fromEntries(r.logs.map(l => [l.file, l]));
+  const area = a => `<h2>${esc(a.name)}</h2>${a.logs.length
+    ? `<div class="list">${a.logs.map(f => byFile[f]).filter(Boolean).map(l => logRow(l, regionLogHref(r, l))).join('')}</div>`
+    : '<div class="empty">No logs for this area yet.</div>'}`;
+  const now = r.areas.filter(a => !a.later), later = r.areas.filter(a => a.later);
+  return now.map(area).join('') + (later.length ? `<h2 class="later">Not production zones · lower priority</h2>${later.map(area).join('')}` : '');
+}
+
+function regionProductList(r) {
+  const brands = [...new Set(r.products.map(p => p.brand || ''))];
+  const row = p => `
+      <a class="row" href="${regionProductHref(r, p)}">
+        <span class="icon">${folderIcon}</span>
+        <span class="grow"><div class="title">${esc(p.name)}${p.unsure ? ' <span class="count zero">· not sure this runs in ' + esc(r.name) + '</span>' : ''}</div><div class="sub">${esc(productSub(p))}</div></span>
+      </a>`;
+  return brands.map(b => `${b && brands.length > 1 ? `<h3 class="brand">${esc(b)}</h3>` : ''}<div class="list">${r.products.filter(p => (p.brand || '') === b).map(row).join('')}</div>`).join('');
+}
+
 function showRegion(r) {
   const line = r.logs.filter(l => l.scope === 'line'), perProduct = r.logs.filter(l => l.scope === 'product');
   app.innerHTML = `
     ${deviceRegion === r.id ? '' : '<a class="crumb" href="#">← All regions</a>'}
     <div class="bar"><h1>${esc(r.name)}${r.title ? ' · ' + esc(r.title) : ''}</h1></div>
     ${deviceBar(r)}
-    <h2>Whole line · one sheet per day</h2>
-    <div class="list">${line.map(l => logRow(l, `${regionHref(r)}/log/${enc(l.file)}`)).join('')}</div>
-    <h2>Products · ${logCount(perProduct.length)} each</h2>
-    <div class="list">${r.products.map(p => `
-      <a class="row" href="${regionProductHref(r, p)}">
-        <span class="icon">${folderIcon}</span>
-        <span class="grow"><div class="title">${esc(p.name)}${p.unsure ? ' <span class="count zero">· not sure this runs in ' + esc(r.name) + '</span>' : ''}</div><div class="sub">${esc(productSub(p))}</div></span>
-      </a>`).join('')}
-    </div>`;
+    ${r.areas ? areasHtml(r) : `<h2>Whole line · one sheet per day</h2>
+    <div class="list">${[...line].sort((a, b) => !!a.placeholder - !!b.placeholder).map(l => logRow(l, regionLogHref(r, l))).join('')}</div>`}
+    <h2>Products · ${r.products.length} · ${logCount(perProduct.length)} each</h2>
+    ${regionProductList(r)}`;
   wireDeviceBar(r);
 }
 
-const logRow = (l, href) => `
+const logRow = (l, href, onProduct) => `
   <a class="row" href="${href}">
     <span class="icon">${sheetIcon}</span>
-    <span class="grow"><div class="title">${esc(l.name)}</div><div class="sub">${esc(l.code)}</div></span>
+    <span class="grow"><div class="title">${esc(l.name)}</div><div class="sub">${esc(l.code)}${l.scope === 'product' && !onProduct ? ' · for each product' : ''}</div></span>
+    ${l.placeholder ? '<span class="count zero">Not built yet</span>' : ''}
   </a>`;
 
 function showRegionProduct(r, p) {
-  const missing = [!p.item && 'item number', !p.materials && 'recipe rows', !p.components?.length && 'weight targets'].filter(Boolean);
+  const needsTargets = r.logs.some(l => l.scope === 'product' && l.file.includes('064'));
+  const missing = [!p.item && 'item number', !p.materials && 'recipe rows', needsTargets && !p.components?.length && 'weight targets'].filter(Boolean);
   app.innerHTML = `
     <a class="crumb" href="${regionHref(r)}">← ${esc(r.name)}</a>
     <div class="bar"><h1>${esc(p.name)}</h1></div>
     <div class="sub" style="margin:-10px 0 8px">${esc(productSub(p))}${p.variety && p.variety !== p.name ? ' · ' + esc(p.variety) : ''}</div>
     ${missing.length ? `<div class="empty" style="text-align:left">Not filled in yet: ${esc(missing.join(', '))}. Those parts of the sheets open with blank or generic rows. Add them in <code>regions/${esc(r.id)}/products/${esc(p.folder)}/product.json</code>.</div>` : ''}
     <h2>Log sheets</h2>
-    <div class="list">${r.logs.filter(l => l.scope === 'product').map(l => logRow(l, `${regionProductHref(r, p)}/${enc(l.file)}`)).join('')}</div>`;
+    <div class="list">${r.logs.filter(l => l.scope === 'product').map(l => logRow({ ...l, name: l.nameIf && p[l.nameIf.field] === l.nameIf.value ? l.nameIf.name : l.name }, `${regionProductHref(r, p)}/${enc(l.file)}`, true)).join('')}</div>`;
 }
 
 const folderHref = p => p.plant ? '#plant' : productHref(p);
@@ -346,8 +409,8 @@ function input(f, name, preset) {
   if (f.type === 'textarea') return `<textarea ${n} rows="2">${esc(value || '')}</textarea>`;
   if (f.type === 'checkbox') return `<label class="check"><input type="checkbox" ${n}>${esc(f.checkLabel || '')}</label>`;
   // One photo taken with the iPad camera (e.g. the label at each label check); taking another replaces it.
-  if (f.type === 'photo') return `<span class="photo-cell"><label class="photo-btn">📷 <span>Take</span><input type="file" accept="image/*" capture="environment" hidden data-photocell ${n}></label>
-    <img alt="" hidden><button type="button" class="delrow" data-clearphoto hidden title="Remove photo" aria-label="Remove photo">✕</button></span>`;
+  if (f.type === 'photo') return `<span class="photo-cell"><label class="photo-btn"><span>Take photo</span><input type="file" accept="image/*" capture="environment" hidden data-photocell ${n}></label>
+    <img alt="" hidden><button type="button" class="delrow" data-clearphoto hidden title="Remove photo">Remove</button></span>`;
   const type = { date: 'date', time: 'time', number: 'number' }[f.type] || 'text';
   const box = `<input type="${type}" ${n}${type === 'number' ? ' inputmode="decimal" step="any"' : ''}${value ? ` value="${esc(value)}"` : ''}>`;
   return f.unit ? `<span class="unit">${box}<span>${esc(f.unit)}</span></span>` : box;
@@ -359,7 +422,7 @@ const caption = (f, sec) => f.label && f.label !== sec.title ? `<div class="capt
 // Tables either list fixed rows (one per item) or start with blank rows that "+ Add row" extends.
 // A fixed row is a label, or { label, values } when the product fills some cells in.
 // Rows the operator adds can be deleted again; fixed rows (one per item) can't.
-const delBtn = '<button type="button" class="delrow" data-delrow title="Delete this row" aria-label="Delete this row">✕</button>';
+const delBtn = '<button type="button" class="delrow" data-delrow title="Delete this row">Delete</button>';
 const rowNum = i => `<span class="n">${i + 1}</span>`;
 
 function tableRow(f, i, head) {
@@ -378,7 +441,8 @@ const columnsFor = (f, t) => t?.columns ? f.columns.filter(c => t.columns.includ
 
 // Too many columns for an iPad-wide table: each row becomes a card. Its boxes are split evenly over
 // as few lines as fit (at most 10 slots a line in landscape, 5 in portrait), so no line is left half empty.
-const asCards = f => !f.fixedRows && f.columns.length > 8;
+// display: "table" keeps a wide table as one line per row, like the paper (e.g. log 051)
+const asCards = f => f.display !== 'table' && !f.fixedRows && f.columns.length > 8;
 const slotsOf = c => c.span || (c.type === 'passfail' ? 2 : 1);
 const perLine = (slots, max) => Math.ceil(slots / Math.ceil(slots / max));
 function cardRow(f, i, typeId) {
@@ -401,7 +465,7 @@ function cardRow(f, i, typeId) {
         : grid(g.columns.map(col), { oneLine: true })}</div>`).join('')}</div>`
     : grid(columnsFor(f, t), { oneLine: t?.oneLine });
   return `<div class="rowcard"${t ? ` data-rowtype="${esc(t.id)}"` : ''}>
-    <div class="num">${rowNum(i)}${t ? `<div class="rowtag">${esc(t.tag || t.label)}</div><input type="hidden" name="${esc(`${f.id}.${i}.rowType`)}" value="${esc(t.id)}">` : ''}</div>${delBtn}
+    <div class="num">${rowNum(i)}${t ? `<div class="rowtag">${esc(t.tag || t.label)}</div><input type="hidden" name="${esc(`${f.id}.${i}.rowType`)}" value="${esc(t.id)}">` : ''}${delBtn}</div>
     ${body}</div>`;
 }
 const rowHtml = (f, i, typeId) => asCards(f) ? cardRow(f, i, typeId) : tableRow(f, i);
@@ -414,8 +478,8 @@ function tableHtml(f, sec) {
   if (asCards(f)) return `${caption(f, sec)}${hint(f)}
     <div class="rowcards" data-table="${esc(f.id)}" data-next="${rows.length}">${rows.map((r, i) => cardRow(f, i)).join('')}</div>${add}`;
   return `${caption(f, sec)}${hint(f)}
-    <div class="tablewrap"><table class="sheet-table">
-      <thead><tr><th>${esc(fixed ? f.rowHeader || '' : '#')}</th>${f.columns.map(c => `<th>${esc(c.label)}${c.unit ? ` (${esc(c.unit)})` : ''}</th>`).join('')}${fixed ? '' : '<th></th>'}</tr></thead>
+    <div class="tablewrap"><table class="sheet-table${f.display === 'table' ? ' paper' : ''}">
+      <thead>${groupHead(f)}<tr><th>${esc(fixed ? f.rowHeader || '' : '#')}</th>${labelCells(f)}${fixed ? '' : '<th></th>'}</tr></thead>
       <tbody data-table="${esc(f.id)}" data-next="${rows.length}">${rows.map((r, i) => tableRow(f, i, fixed ? r : undefined)).join('')}</tbody>
     </table></div>${add}`;
 }
@@ -436,19 +500,51 @@ function matrixHtml(f, sec) {
     </table></div>`;
 }
 
+// Column names; neighbours marked mergeLabel with the same name share one cell (paper: "F29 Foot Foamer" over 4 and 5).
+function labelCells(f) {
+  const cells = [];
+  for (const c of f.columns) {
+    const last = cells[cells.length - 1], text = c.label + (c.unit ? ` (${c.unit})` : '');
+    if (last && c.mergeLabel && last.merge && last.text === text) last.span++;
+    else cells.push({ text, span: 1, merge: c.mergeLabel });
+  }
+  return cells.map(c => `<th${c.span > 1 ? ` colspan="${c.span}" style="text-align:center"` : ''}>${esc(c.text)}</th>`).join('');
+}
+
+// Column groups: a heading row above the column names (paper: "2. Washroom Hose" over F-364 | F-29).
+function groupHead(f) {
+  if (!f.columns.some(c => c.group)) return '';
+  const cells = [];
+  for (const c of f.columns) {
+    const last = cells[cells.length - 1];
+    if (last && c.group && last.group === c.group) last.span++; else cells.push({ group: c.group || '', span: 1 });
+  }
+  return `<tr class="grouphead"><th></th>${cells.map(g => `<th colspan="${g.span}">${esc(g.group)}</th>`).join('')}${f.fixedRows ? '' : '<th></th>'}</tr>`;
+}
+
+// Read-only reference table printed on the paper (e.g. chemical, units, acceptable range).
+// f.title: a heading across the whole box; f.strong: bold, larger text (a boxed limit like the paper's)
+const infoHtml = (f, sec) => `${caption(f, sec)}<div class="tablewrap"><table class="sheet-table info${f.strong ? ' strong' : ''}"><thead>${f.title ? `<tr><th colspan="${(f.head || f.body[0]).length}">${esc(f.title)}</th></tr>` : ''}${f.head ? `<tr>${f.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr>` : ''}</thead>
+  <tbody>${f.body.map(r => `<tr>${r.map(v => `<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+
+// Printed text from the paper, line by line; a line can be { b: 'bold part', t: 'rest' }.
+const noteHtml = f => `<div class="note">${f.lines.map(l => `<div>${typeof l === 'string' ? esc(l) : `<b>${esc(l.b)}</b> ${esc(l.t || '')}`}</div>`).join('')}</div>`;
+
 function fieldHtml(f, sec) {
+  if (f.type === 'note') return noteHtml(f);
+  if (f.type === 'info') return infoHtml(f, sec);
   if (f.type === 'table') return tableHtml(f, sec);
   if (f.type === 'matrix') return matrixHtml(f, sec);
   return `<label class="field"><span>${esc(f.label)}${f.required ? ' *' : ''}</span>${input(f, f.id)}${hint(f)}</label>`;
 }
 
-// Two-tap delete instead of a confirm() pop-up (some browsers block pop-ups, so the ✕ seemed dead):
-// the first tap turns ✕ into a red "Delete?", the second tap does it; it resets after 5 seconds.
+// Two-tap delete instead of a confirm() pop-up (some browsers block pop-ups, so the button seemed dead):
+// the first tap turns Delete into a red "Delete?", the second tap does it; it resets after 5 seconds.
 function armed(btn) {
   if (btn.classList.contains('armed')) return true;
   btn.classList.add('armed');
   btn.textContent = 'Delete?';
-  setTimeout(() => { btn.classList.remove('armed'); btn.textContent = '✕'; }, 5000);
+  setTimeout(() => { btn.classList.remove('armed'); btn.textContent = 'Delete'; }, 5000);
   return false;
 }
 
@@ -458,8 +554,8 @@ function showCellPhoto(cell, file) {
   if (img.src) URL.revokeObjectURL(img.src);
   img.hidden = clear.hidden = !file;
   if (file) img.src = URL.createObjectURL(file); else img.removeAttribute('src');
-  // with a photo in, the button shrinks to just 📷 (tap to retake) so the thumbnail and ✕ fit
-  cell.querySelector('.photo-btn span').textContent = file ? '' : 'Take';
+  // with a photo in, the button reads Retake next to the thumbnail
+  cell.querySelector('.photo-btn span').textContent = file ? 'Retake' : 'Take photo';
   cell.querySelector('.photo-btn').title = file ? 'Retake photo' : 'Take photo';
 }
 app.addEventListener('change', e => {
@@ -501,15 +597,20 @@ async function renderSheet(url, backHref, backLabel) {
   const s = await api(url);
   app.innerHTML = `
     <a class="crumb" href="${backHref}">← ${esc(backLabel)}</a>
-    <div class="bar"><h1>${esc(s.name)}</h1><span class="sub">${esc(s.code)} · ${esc(s.frequency || '')}</span></div>
-    ${s.description ? `<div class="sub" style="margin:-10px 0 12px">${esc(s.description)}</div>` : ''}
+    <div class="sheethead">
+      <h1>${esc(s.name)}</h1>
+      <div class="meta"><span class="logcode">${esc(s.code)}</span>${esc(s.frequency || '')}</div>
+      ${s.description ? `<p class="desc">${esc(s.description)}</p>` : ''}
+    </div>
+    ${s.placeholder ? `<div class="empty" style="text-align:left">This log isn't built yet. Send the paper or Excel version of ${esc(s.code)} and it will be added here.</div>` : ''}
     <form class="sheet" onsubmit="return false">${s.sections.map(sec => `
       <section>
-        <h2>${esc(sec.title)}</h2>
+        ${sec.title ? `<h2>${esc(sec.title)}</h2>` : ''}
         ${sectionBody(sec)}
       </section>`).join('')}
       ${photoSection()}
       <div class="bar"><span class="sub">Preview: entries aren't saved yet.</span><button class="primary" disabled>Save</button></div>
+      ${s.footer ? `<footer class="docfoot">${s.footer.map(l => `<div>${esc(l)}</div>`).join('')}</footer>` : ''}
     </form>`;
   wireSheet(s);
   wirePhotos(app.querySelector('form.sheet'));
@@ -524,8 +625,8 @@ function photoSection() {
     <div class="hint">Take a photo of the filled-in paper log as a backup. You can add more than one.</div>
     <div class="photo-grid" data-photos></div>
     <div class="addrows">
-      <label class="addrow photo-btn">📷 Take photo<input type="file" accept="image/*" capture="environment" hidden></label>
-      <label class="addrow photo-btn">🖼 Choose photo<input type="file" accept="image/*" multiple hidden></label>
+      <label class="addrow photo-btn">Take photo<input type="file" accept="image/*" capture="environment" hidden></label>
+      <label class="addrow photo-btn">Choose photo<input type="file" accept="image/*" multiple hidden></label>
     </div>
   </section>`;
 }
@@ -538,7 +639,7 @@ function wirePhotos(form) {
     grid.innerHTML = form.photos.map((p, i) => `
       <figure class="photo"><img src="${URL.createObjectURL(p.file)}" alt="Photo ${i + 1} of the paper log">
         <figcaption>${esc(p.time)}</figcaption>
-        <button type="button" class="delrow" data-delphoto="${i}" title="Remove this photo" aria-label="Remove photo ${i + 1}">✕</button></figure>`).join('');
+        <button type="button" class="delrow" data-delphoto="${i}" title="Remove this photo">Remove</button></figure>`).join('');
   };
   // only the paper-log buttons here; photo boxes inside rows are handled by showCellPhoto
   form.querySelectorAll('.photos-section .photo-btn input').forEach(inp => inp.onchange = () => {
@@ -556,8 +657,13 @@ function wirePhotos(form) {
 }
 
 // Simple fields sit side by side in a grid; tables and grids take the full width.
+// sec.side: wide items sit side by side (paper: instructions to the left of the reference table)
 function sectionBody(sec) {
-  const wide = f => f.type === 'table' || f.type === 'matrix' || f.type === 'textarea';
+  if (sec.side) {  // left: notes and boxes stacked; right: reference tables
+    const right = f => f.type === 'info' || f.type === 'table';
+    return `<div class="side"><div class="sidecol">${sec.fields.filter(f => !right(f)).map(f => fieldHtml(f, sec)).join('')}</div><div class="wide">${sec.fields.filter(right).map(f => fieldHtml(f, sec)).join('')}</div></div>`;
+  }
+  const wide = f => f.type === 'table' || f.type === 'matrix' || f.type === 'textarea' || f.type === 'info' || f.type === 'note';
   let html = '', run = [];
   const flush = () => { if (run.length) html += `<div class="fields">${run.map(f => fieldHtml(f, sec)).join('')}</div>`; run = []; };
   for (const f of sec.fields) wide(f) ? (flush(), html += `<div class="wide">${fieldHtml(f, sec)}</div>`) : run.push(f);

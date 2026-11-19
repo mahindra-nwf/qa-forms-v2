@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iPad Preview</title>
+<style>
+  /* Development helper: shows the app at the size Safari uses on the plant's iPad 9th gen (MK2K3LL/A).
+     Screen 1080 × 810 in landscape / 810 × 1080 in portrait; Safari's address and tab bars take
+     about 74 px at the top, so the page itself gets the rest. Open http://localhost:8081/ipad */
+  :root { --bg: #2b3036; --bar: #1f2328; --ink: #e8ecef; --muted: #9aa5ae; --accent: #4fb3cf; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; min-height: 100vh; }
+  .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 16px; background: var(--bar); position: sticky; top: 0; z-index: 1; }
+  .bar strong { margin-right: 8px; }
+  .bar span { color: var(--muted); }
+  button, label { font: inherit; color: var(--ink); background: #353b42; border: 1px solid #4a525b; border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+  button.on { background: var(--accent); border-color: var(--accent); color: #0d1b20; font-weight: 600; }
+  label { display: inline-flex; gap: 6px; align-items: center; }
+  .stage { display: flex; justify-content: center; padding: 16px; overflow: hidden; }
+  .frame { flex: none; }  /* takes the shrunk size of the iPad so it stays centred */
+  .device { background: #111; border-radius: 28px; padding: 22px; box-shadow: 0 10px 40px rgba(0,0,0,.45); transform-origin: top left; width: max-content; }
+  .safari { background: #f2f2f7; color: #6b7280; font-size: 12px; height: 74px; border-radius: 6px 6px 0 0; display: grid; place-items: center; }
+  iframe { display: block; border: 0; background: #fff; }
+</style>
+</head>
+<body>
+<div class="bar" id="bar">
+  <strong>iPad 9th gen</strong>
+  <button data-o="landscape" class="on">Landscape 1080 × 810</button>
+  <button data-o="portrait">Portrait 810 × 1080</button>
+  <label><input type="checkbox" id="fit" checked> Fit to window</label>
+  <label><input type="checkbox" id="chrome" checked> Show Safari bar</label>
+  <button id="reload">Reload</button>
+  <span id="info"></span>
+</div>
+<div class="stage"><div class="frame" id="frame"><div class="device" id="device"><div class="safari" id="safari">Safari address and tab bar</div><iframe id="app" src="/" title="QA app at iPad size"></iframe></div></div></div>
+<script>
+  const SIZES = { landscape: [1080, 810], portrait: [810, 1080] }, SAFARI = 74;
+  let orient = 'landscape';
+  try { orient = localStorage.getItem('ipadOrient') || orient; } catch {}
+  const $ = id => document.getElementById(id);
+  function layout() {
+    const [w, h] = SIZES[orient], bar = $('chrome').checked ? SAFARI : 0;
+    $('safari').style.display = bar ? '' : 'none';
+    $('safari').style.width = w + 'px';
+    Object.assign($('app').style, { width: w + 'px', height: (h - bar) + 'px' });
+    const dev = $('device'), full = { w: w + 44, h: h + 44 };
+    const scale = $('fit').checked ? Math.min(1, (innerWidth - 32) / full.w, (innerHeight - $('bar').offsetHeight - 32) / full.h) : 1;
+    dev.style.transform = `scale(${scale})`;
+    Object.assign($('frame').style, { width: full.w * scale + 'px', height: full.h * scale + 'px' });
+    $('info').textContent = `page area ${w} × ${h - bar}` + (scale < 1 ? ` · shown at ${Math.round(scale * 100)}%` : '');
+    document.querySelectorAll('[data-o]').forEach(b => b.classList.toggle('on', b.dataset.o === orient));
+  }
+  document.querySelectorAll('[data-o]').forEach(b => b.onclick = () => {
+    orient = b.dataset.o;
+    try { localStorage.setItem('ipadOrient', orient); } catch {}
+    layout();
+  });
+  $('fit').onchange = $('chrome').onchange = layout;
+  $('reload').onclick = () => $('app').contentWindow.location.reload();
+  addEventListener('resize', layout);
+  layout();
+</script>
+</body>
+</html>
