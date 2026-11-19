@@ -54,6 +54,7 @@
   .sheet-table th, .sheet-table td { border-bottom: 1px solid var(--line); padding: 5px 6px; text-align: left; }
   .sheet-table thead th { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
   .sheet-table tbody th { font-weight: 600; white-space: nowrap; width: 1%; padding-right: 14px; }
+  .sheet-table tbody th.wrap { white-space: normal; width: auto; }
   /* long descriptions under a row name wrap instead of pushing the table wider than the iPad */
   .sheet-table tr.grouphead th { text-align: center; color: var(--ink); border-bottom: 2px solid var(--line); }
   .sheet-table tr.grouphead th:not(:empty) { background: var(--accent-soft); border-left: 2px solid var(--card); }
@@ -157,6 +158,7 @@
   .sheet-table td.num { color: var(--muted); width: 1%; }
   .addrow { margin-top: 8px; color: var(--accent); }
   .matrix tbody th { white-space: normal; width: auto; font-weight: 400; min-width: 320px; }
+  @media (max-width: 900px) { .matrix tbody th { min-width: 260px; } } /* portrait iPad: SSOP 056-A fits without sideways scrolling */
   .matrix td { text-align: center; width: 120px; }
   .matrix .reading { margin-top: 6px; max-width: 200px; }
   .tick { width: 56px; height: 40px; font-size: 20px; font-weight: 700; color: var(--accent); padding: 0; }
@@ -476,7 +478,8 @@ function tableRow(f, i, head) {
   // a plain string row has no .sub/.values of its own (careful: strings inherit a built-in .sub())
   const obj = head && typeof head === 'object' ? head : {};
   const label = obj.label ?? head, vals = obj.values || {};
-  const th = `<th>${esc(label)}${obj.sub ? `<div class="sub" style="font-weight:400">${esc(obj.sub)}</div>` : ''}</th>`;
+  // a long checklist line (e.g. SSOP 056-B) wraps instead of pushing the table off the screen
+  const th = `<th${String(label).length > 50 ? ' class="wrap"' : ''}>${esc(label)}${obj.sub ? `<div class="sub" style="font-weight:400">${esc(obj.sub)}</div>` : ''}</th>`;
   return `<tr>${head !== undefined ? th : `<td class="num">${rowNum(i)}</td>`}${f.columns.map(c =>
     `<td>${input(c, `${f.id}.${i}.${c.id}`, vals[c.id])}</td>`).join('')}${head !== undefined ? '' : `<td class="del">${delBtn}</td>`}</tr>`;
 }
