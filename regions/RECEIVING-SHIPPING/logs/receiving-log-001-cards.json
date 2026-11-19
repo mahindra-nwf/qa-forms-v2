@@ -37,22 +37,26 @@
             {
               "id": "po",
               "label": "PO# or BOL#",
-              "type": "text"
+              "type": "text",
+              "span": 2
             },
             {
               "id": "lot",
               "label": "Lot code",
-              "type": "text"
+              "type": "text",
+              "span": 2
             },
             {
               "id": "exp",
               "label": "Exp. date",
-              "type": "text"
+              "type": "text",
+              "span": 2
             },
             {
               "id": "amount",
               "label": "Amount",
-              "type": "number"
+              "type": "number",
+              "span": 2
             },
             {
               "id": "unit",
@@ -64,25 +68,29 @@
                 "lb",
                 "bag",
                 "pallet"
-              ]
+              ],
+              "span": 2
             },
             {
               "id": "truckTemp",
-              "label": "Truck",
+              "label": "Truck temp",
               "type": "number",
-              "unit": "°F"
+              "unit": "°F",
+              "span": 2
             },
             {
               "id": "productTemp",
-              "label": "Product",
+              "label": "Product temp",
               "type": "number",
-              "unit": "°F"
+              "unit": "°F",
+              "span": 2
             },
             {
               "id": "spec",
               "label": "Product spec",
               "type": "checkbox",
-              "checkLabel": "Meets"
+              "checkLabel": "Meets",
+              "span": 2
             },
             {
               "id": "accepted",
@@ -91,7 +99,8 @@
               "options": [
                 "Accepted",
                 "Rejected"
-              ]
+              ],
+              "span": 2
             },
             {
               "id": "storage",
@@ -101,29 +110,78 @@
                 "Dry",
                 "Cooler",
                 "Frozen"
-              ]
+              ],
+              "span": 2
             },
             {
               "id": "seal",
               "label": "FTL seal #(s)",
-              "type": "text"
+              "type": "text",
+              "span": 2
             },
             {
               "id": "ltl",
               "label": "LTL secured",
               "type": "checkbox",
-              "checkLabel": "Yes"
+              "checkLabel": "Yes",
+              "span": 2
             },
             {
               "id": "init",
               "label": "Init",
-              "type": "text"
+              "type": "text",
+              "span": 1
             },
             {
               "id": "documents",
               "label": "Document photos (BOL, invoice…)",
-              "type": "photos",
-              "span": 10
+              "type": "photos"
+            }
+          ],
+          "rowTypes": [
+            {
+              "id": "item",
+              "label": "Add item",
+              "tag": "Item",
+              "layout": [
+                {
+                  "title": "Delivery",
+                  "columns": [
+                    "date",
+                    "vendor",
+                    "item",
+                    "po",
+                    "lot",
+                    "exp"
+                  ]
+                },
+                {
+                  "title": "Quantity & temperatures",
+                  "columns": [
+                    "amount",
+                    "unit",
+                    "truckTemp",
+                    "productTemp",
+                    "spec"
+                  ]
+                },
+                {
+                  "title": "Decision",
+                  "columns": [
+                    "accepted",
+                    "storage",
+                    "seal",
+                    "ltl",
+                    "init"
+                  ]
+                },
+                {
+                  "title": "Documents",
+                  "columns": [
+                    "documents"
+                  ]
+                }
+              ]
             }
           ]
         }

@@ -493,7 +493,8 @@ function cardRow(f, i, typeId) {
   const t = rowType(f, typeId);
   // a plain div for the documents box, so tapping a thumbnail doesn't trigger the label's camera input
   const field = (c, short) => { const tag = c.type === 'photos' ? 'div' : 'label';
-    return `<${tag} class="field" style="grid-column: span ${slotsOf(c)}"><span>${esc(short && c.short || c.label)}</span>${input(c, `${f.id}.${i}.${c.id}`)}</${tag}>`; };
+    // a documents box always takes a whole line (a fixed span wider than a portrait line would squeeze everything else)
+    return `<${tag} class="field" style="grid-column: ${c.type === 'photos' ? '1 / -1' : 'span ' + slotsOf(c)}"><span>${esc(short && c.short || c.label)}</span>${input(c, `${f.id}.${i}.${c.id}`)}</${tag}>`; };
   // One grid line; a line in a grouped layout gets one column per slot so it always fills a single line.
   const grid = (cols, opts = {}) => {
     const slots = cols.reduce((n, c) => n + slotsOf(c), 0);
