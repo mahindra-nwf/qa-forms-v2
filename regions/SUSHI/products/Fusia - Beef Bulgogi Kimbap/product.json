@@ -1,0 +1,75 @@
+{
+  "order": 14,
+  "name": "Fusia - Beef Bulgogi Kimbap",
+  "brand": "Fusia (Aldi EV)",
+  "item": "751928",
+  "customer": "Fusia (Aldi EV)",
+  "variety": "Kimbap - Beef Bulgogi",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Calrose Rice"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Beef"
+      },
+      {
+        "material": "Carrot"
+      },
+      {
+        "material": "Spinach"
+      },
+      {
+        "material": "Takawan"
+      },
+      {
+        "material": "Onion"
+      },
+      {
+        "material": "Sesame Oil"
+      },
+      {
+        "material": "Miso"
+      },
+      {
+        "material": "Sugar"
+      },
+      {
+        "material": "Coating",
+        "spec": "White Sesame"
+      },
+      {
+        "material": "Nori"
+      },
+      {
+        "material": "Mirin"
+      },
+      {
+        "material": "Takumi"
+      },
+      {
+        "material": "Red Miso"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "Burrito tray"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  },
+  "rollType": "Aldi EV Kimbap"
+}

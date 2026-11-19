@@ -1,0 +1,80 @@
+{
+  "order": 2,
+  "name": "Moji - Spicy Crab",
+  "brand": "Moji",
+  "item": "35824",
+  "customer": "Moji",
+  "variety": "Moji - Spicy Crab",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Sweet"
+      },
+      {
+        "material": "Broken Rice"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "M9"
+      },
+      {
+        "material": "Surimi"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Carrot"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Sriracha Sauce"
+      },
+      {
+        "material": "Starch"
+      },
+      {
+        "material": "Coating",
+        "spec": "Black Sesame"
+      },
+      {
+        "material": "Nori"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "8 pc Moji"
+      },
+      {
+        "material": "Film/Lid",
+        "spec": "Lid"
+      },
+      {
+        "material": "Soy Sauce Pack"
+      },
+      {
+        "material": "Wasabi Pack"
+      },
+      {
+        "material": "Ginger Pack"
+      },
+      {
+        "material": "Cartons/Labels",
+        "spec": "Label"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  },
+  "rollType": "Moji"
+}

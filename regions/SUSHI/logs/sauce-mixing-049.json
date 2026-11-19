@@ -1,0 +1,208 @@
+{
+  "name": "Sauce Mixing",
+  "code": "Log 049",
+  "group": "Mixing Log",
+  "scope": "line",
+  "frequency": "Each batch",
+  "sections": [
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "instructions",
+          "type": "note",
+          "lines": [
+            {
+              "b": "Instructions:",
+              "t": ""
+            },
+            "1. Record which product is being made.",
+            "2. Using a sanitized Thermapen, measure and record the temperature of the mixture after it has been mixed.",
+            "3. Record the time that the mixing has completed.",
+            "4. Record the time that the batch is moved into production for use.",
+            "5. Record the temperature of the batch when it is moved into production for use.",
+            "6. The time between every third batch feeding should be shorter than 4 hours.",
+            {
+              "b": "Note:",
+              "t": "All seafood mix temperatures must be stored in cooler and the internal temperature must remain ≤ 50°F. If temperature is between 50-70°F, it must be used within 5 hours."
+            },
+            "Sanitize the Thermapen before each use.",
+            "Record when last batch of the day enters Production."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Day",
+      "fields": [
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "scaleSerial",
+          "label": "Scale verification: serial #",
+          "type": "text"
+        },
+        {
+          "id": "scaleWeight",
+          "label": "Scale verification: weight",
+          "type": "number",
+          "unit": "lbs"
+        }
+      ]
+    },
+    {
+      "title": "Batches",
+      "fields": [
+        {
+          "id": "batches",
+          "label": "",
+          "type": "table",
+          "rows": 1,
+          "columns": [
+            {
+              "id": "product",
+              "label": "Product",
+              "type": "text",
+              "span": 3
+            },
+            {
+              "id": "ingr1Lot",
+              "label": "Ingredient 1 lot #",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "ingr1Received",
+              "label": "Ingredient 1 received",
+              "type": "date",
+              "span": 2
+            },
+            {
+              "id": "ingr2Lot",
+              "label": "Ingredient 2 lot #",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "ingr2Received",
+              "label": "Ingredient 2 received",
+              "type": "date",
+              "span": 2
+            },
+            {
+              "id": "tempAfterMixing",
+              "label": "Temp after mixing (°F)",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "mixingEnd",
+              "label": "Mixing end time",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "mixerInitial",
+              "label": "Initial of mixer",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "timeIntoProduction",
+              "label": "Time into production",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "tempIntoProduction",
+              "label": "Temp into production (°F)",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "fillerInitial",
+              "label": "Initial of sauce machine filler",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "batchNo",
+              "label": "Batch #",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "correctiveActions",
+              "label": "Corrective actions",
+              "type": "text",
+              "span": 4
+            }
+          ],
+          "rowTypes": [
+            {
+              "id": "batch",
+              "label": "Add batch",
+              "tag": "Batch",
+              "layout": [
+                {
+                  "title": "Mixing",
+                  "columns": [
+                    "product",
+                    "ingr1Lot",
+                    "ingr1Received",
+                    "ingr2Lot",
+                    "ingr2Received"
+                  ]
+                },
+                {
+                  "title": "",
+                  "columns": [
+                    "tempAfterMixing",
+                    "mixingEnd",
+                    "mixerInitial"
+                  ]
+                },
+                {
+                  "title": "Into production",
+                  "columns": [
+                    "timeIntoProduction",
+                    "tempIntoProduction",
+                    "fillerInitial",
+                    "batchNo"
+                  ]
+                },
+                {
+                  "title": "",
+                  "columns": [
+                    "correctiveActions"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "qaVerification",
+          "label": "QA verification",
+          "type": "text"
+        },
+        {
+          "id": "qaDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ],
+  "groupOrder": 2
+}

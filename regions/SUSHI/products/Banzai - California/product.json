@@ -1,0 +1,77 @@
+{
+  "order": 8,
+  "name": "Banzai - California",
+  "brand": "Banzai",
+  "item": "88802",
+  "customer": "Banzai",
+  "variety": "Banzai - California",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Milky Queen"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "M9"
+      },
+      {
+        "material": "Surimi"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Avocado"
+      },
+      {
+        "material": "Peas"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Starch"
+      },
+      {
+        "material": "Coating",
+        "spec": "White Sesame"
+      },
+      {
+        "material": "Nori"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "15 pc Retail"
+      },
+      {
+        "material": "Film/Lid",
+        "spec": "Film"
+      },
+      {
+        "material": "Soy Sauce Pack"
+      },
+      {
+        "material": "Wasabi Pack"
+      },
+      {
+        "material": "Cartons/Labels",
+        "spec": "Cartons"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  },
+  "rollType": "Retail (11.5 oz)"
+}

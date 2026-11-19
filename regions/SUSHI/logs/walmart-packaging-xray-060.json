@@ -1,0 +1,482 @@
+{
+  "name": "Packaging, Temperature, and X-Ray",
+  "nameIf": {
+    "field": "customer",
+    "value": "Walmart",
+    "name": "Walmart Packaging, Temperature, and X-Ray"
+  },
+  "code": "Log 060",
+  "scope": "product",
+  "category": "Packaging",
+  "frequency": "Each production run · checks every 30 min",
+  "description": "X-Ray check must be completed at the start of production, every hour (±15 minutes) of production, and at the end of production. If any monitoring fails, packaging must stop and all product from last passing inspection must be checked. Rejected packages will be rerun 3 times through the X-Ray. If all 3 reruns pass, product is released. If any of the 3 reruns are rejected again, number of packages are to be indicated in the comment and packages are to be given to QA for analysis.",
+  "sections": [
+    {
+      "title": "Production",
+      "fields": [
+        {
+          "id": "qaAuditor",
+          "label": "QA auditor",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "location",
+          "label": "Location",
+          "type": "text",
+          "prefill": "region"
+        },
+        {
+          "id": "itemNumber",
+          "label": "Item number",
+          "type": "text",
+          "prefill": "item"
+        },
+        {
+          "id": "customer",
+          "label": "Customer",
+          "type": "text",
+          "required": true,
+          "prefill": "customer"
+        },
+        {
+          "id": "datePacked",
+          "label": "Date packed",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "variety",
+          "label": "Variety",
+          "type": "text",
+          "required": true,
+          "prefill": "variety"
+        },
+        {
+          "id": "masterCaseLot",
+          "label": "Master case lot #",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "dateProduced",
+          "label": "Date produced",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "fullCases",
+          "label": "# Full cases",
+          "type": "number"
+        },
+        {
+          "id": "masterCaseExpiry",
+          "label": "Master case expiration date",
+          "type": "date"
+        },
+        {
+          "id": "productionType",
+          "label": "Select one",
+          "type": "passfail",
+          "options": [
+            "Regular production",
+            "Rework"
+          ],
+          "required": true
+        },
+        {
+          "id": "reworkReason",
+          "label": "Rework reason",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "title": "First article inspection",
+      "fields": [
+        {
+          "id": "inspectionApproval",
+          "label": "Inspection approval (initials)",
+          "type": "text",
+          "required": true,
+          "hint": "The first article MUST be inspected for adherence to product specifications. First article inspections and approval MUST occur at the start of each new product."
+        },
+        {
+          "id": "inspectionTime",
+          "label": "Time",
+          "type": "time",
+          "required": true
+        },
+        {
+          "id": "labelReview",
+          "label": "Label review",
+          "type": "checkbox",
+          "checkLabel": "I verify the label used is correct in accordance with the Allergen Control Program (SOP 032)"
+        },
+        {
+          "id": "trayTare",
+          "label": "Tray tare weight (average of 5 trays, lids, and labels)",
+          "type": "number",
+          "unit": "oz"
+        },
+        {
+          "id": "scaleWeight",
+          "label": "Scale verification: calibrated weight",
+          "type": "number",
+          "unit": "g"
+        },
+        {
+          "id": "scaleSerial",
+          "label": "Scale serial #",
+          "type": "text"
+        },
+        {
+          "id": "pressurePopSeal",
+          "label": "Pressure to pop seal",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "title": "Checks",
+      "fields": [
+        {
+          "id": "checks",
+          "label": "Checks",
+          "type": "table",
+          "rows": 1,
+          "hint": "Tap + Full check every hour (all boxes: X-ray, label, 3 weights, seal, 3 × O2 and 3 × CO2, pallet temp, 2 label photos) and + Label check at the 30-minute marks in between (label inspection only; take 2 photos of the label with Take photo). Use Delete to remove a row added by mistake. Seal check: 3 consecutive trays for single meals, 2 for family meals. Obs. = Monthly direct observation; Pre-ship = Pre-shipment check (verify production documents have been reviewed, guarantees food safety, and release product).",
+          "columns": [
+            {
+              "id": "time",
+              "label": "1. Time",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "xray",
+              "label": "2. X-Ray monitoring",
+              "type": "passfail",
+              "options": [
+                "Pass",
+                "Fail"
+              ]
+            },
+            {
+              "id": "recipe",
+              "label": "3. X-Ray recipe",
+              "type": "passfail",
+              "options": [
+                "Pass",
+                "Fail"
+              ]
+            },
+            {
+              "id": "labelInspection",
+              "label": "Label inspection",
+              "type": "passfail",
+              "options": [
+                "Pass",
+                "Fail"
+              ]
+            },
+            {
+              "id": "initial",
+              "label": "Initial",
+              "type": "text"
+            },
+            {
+              "id": "weight1",
+              "label": "4. Weight 1",
+              "type": "number",
+              "unit": "oz",
+              "short": "4. Weight"
+            },
+            {
+              "id": "weight2",
+              "label": "4. Weight 2",
+              "type": "number",
+              "unit": "oz",
+              "short": "4. Weight"
+            },
+            {
+              "id": "weight3",
+              "label": "4. Weight 3",
+              "type": "number",
+              "unit": "oz",
+              "short": "4. Weight"
+            },
+            {
+              "id": "unitsPerCase",
+              "label": "5. Units per case",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "noSealBubble",
+              "label": "6. No seal bubble",
+              "type": "checkbox",
+              "checkLabel": "Yes",
+              "span": 2
+            },
+            {
+              "id": "sealResult",
+              "label": "7. Seal check result",
+              "type": "passfail",
+              "options": [
+                "Pass",
+                "Fail"
+              ]
+            },
+            {
+              "id": "o2",
+              "label": "8. % O2 1",
+              "type": "number",
+              "short": "8. % O2"
+            },
+            {
+              "id": "o2b",
+              "label": "8. % O2 2",
+              "type": "number",
+              "short": "8. % O2"
+            },
+            {
+              "id": "o2c",
+              "label": "8. % O2 3",
+              "type": "number",
+              "short": "8. % O2"
+            },
+            {
+              "id": "co2",
+              "label": "9. % CO2 1",
+              "type": "number",
+              "short": "9. % CO2"
+            },
+            {
+              "id": "co2b",
+              "label": "9. % CO2 2",
+              "type": "number",
+              "short": "9. % CO2"
+            },
+            {
+              "id": "co2c",
+              "label": "9. % CO2 3",
+              "type": "number",
+              "short": "9. % CO2"
+            },
+            {
+              "id": "unitLabelItem",
+              "label": "10. Verify unit label item #",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "productTemp",
+              "label": "11. Pallet temp (<40°F)",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "rejectContainer",
+              "label": "Check reject container",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comments",
+              "label": "Comments / CA",
+              "type": "text",
+              "span": 3
+            },
+            {
+              "id": "obsInitials",
+              "label": "Obs. initials",
+              "type": "text"
+            },
+            {
+              "id": "obsTime",
+              "label": "Obs. time",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "preShipInitials",
+              "label": "Pre-ship initials",
+              "type": "text"
+            },
+            {
+              "id": "preShipDateTime",
+              "label": "Pre-ship date/time",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "labelPhoto",
+              "label": "Label photo 1",
+              "type": "photo",
+              "span": 3
+            },
+            {
+              "id": "labelPhoto2",
+              "label": "Label photo 2",
+              "type": "photo",
+              "span": 3
+            }
+          ],
+          "rowTypes": [
+            {
+              "id": "full",
+              "label": "Full check",
+              "tag": "Full",
+              "columns": [
+                "time",
+                "xray",
+                "recipe",
+                "labelInspection",
+                "initial",
+                "weight1",
+                "weight2",
+                "weight3",
+                "unitsPerCase",
+                "noSealBubble",
+                "sealResult",
+                "o2",
+                "o2b",
+                "o2c",
+                "co2",
+                "co2b",
+                "co2c",
+                "unitLabelItem",
+                "productTemp",
+                "rejectContainer",
+                "comments",
+                "obsInitials",
+                "obsTime",
+                "preShipInitials",
+                "preShipDateTime",
+                "labelPhoto",
+                "labelPhoto2"
+              ],
+              "layout": [
+                {
+                  "title": "X-ray",
+                  "columns": [
+                    "time",
+                    "xray",
+                    "recipe",
+                    "initial"
+                  ]
+                },
+                {
+                  "title": "Label check",
+                  "columns": [
+                    "labelInspection",
+                    "labelPhoto",
+                    "labelPhoto2"
+                  ]
+                },
+                {
+                  "title": "Product samples (3 products)",
+                  "clusters": [
+                    {
+                      "title": "Product 1",
+                      "columns": [
+                        "weight1",
+                        "o2",
+                        "co2"
+                      ]
+                    },
+                    {
+                      "title": "Product 2",
+                      "columns": [
+                        "weight2",
+                        "o2b",
+                        "co2b"
+                      ]
+                    },
+                    {
+                      "title": "Product 3",
+                      "columns": [
+                        "weight3",
+                        "o2c",
+                        "co2c"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "Pack & seal",
+                  "columns": [
+                    "unitsPerCase",
+                    "noSealBubble",
+                    "sealResult",
+                    "unitLabelItem",
+                    "productTemp",
+                    "rejectContainer"
+                  ]
+                },
+                {
+                  "title": "Notes & sign-off",
+                  "columns": [
+                    "comments",
+                    "obsInitials",
+                    "obsTime",
+                    "preShipInitials",
+                    "preShipDateTime"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "label",
+              "label": "Label check",
+              "tag": "Label",
+              "columns": [
+                "time",
+                "labelInspection",
+                "initial",
+                "comments",
+                "labelPhoto",
+                "labelPhoto2"
+              ],
+              "oneLine": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "End of production",
+      "fields": [
+        {
+          "id": "labelReturnedInitial",
+          "label": "Label removed from the line and returned to the cabinet (initial)",
+          "type": "text"
+        },
+        {
+          "id": "labelReturnedDate",
+          "label": "Date",
+          "type": "date"
+        },
+        {
+          "id": "labelReturnedTime",
+          "label": "Time",
+          "type": "time"
+        },
+        {
+          "id": "review",
+          "label": "Document is completed?",
+          "type": "passfail",
+          "options": [
+            "Accept",
+            "Reject"
+          ]
+        }
+      ]
+    }
+  ]
+}

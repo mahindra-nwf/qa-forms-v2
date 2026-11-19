@@ -1,0 +1,77 @@
+{
+  "order": 11,
+  "name": "Fusia - California",
+  "brand": "Fusia (Aldi EV)",
+  "item": "86776",
+  "customer": "Fusia (Aldi EV)",
+  "variety": "EV - California",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Milky Queen"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "M9"
+      },
+      {
+        "material": "Surimi"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Avocado"
+      },
+      {
+        "material": "Peas"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Starch"
+      },
+      {
+        "material": "Coating",
+        "spec": "White Sesame"
+      },
+      {
+        "material": "Nori"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "15 pc Retail"
+      },
+      {
+        "material": "Film/Lid",
+        "spec": "Film"
+      },
+      {
+        "material": "Soy Sauce Pack"
+      },
+      {
+        "material": "Wasabi Pack"
+      },
+      {
+        "material": "Cartons/Labels",
+        "spec": "Cartons"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  },
+  "rollType": "Retail (11.5 oz Aldi SB)"
+}

@@ -1,0 +1,73 @@
+{
+  "name": "Sushi",
+  "title": "Sushi line",
+  "order": 3,
+  "areaPlan": [
+    {
+      "name": "Prep Room",
+      "logs": [
+        "production-lot-number-045.json",
+        "seafood-mixing-049.json",
+        "sauce-mixing-049.json",
+        "marinated-meat-049.json",
+        "marinated-beef-049.json",
+        "cooking-beef-049.json",
+        "enviroguard-mp2-strength-067.json"
+      ]
+    },
+    {
+      "name": "Hi Roll",
+      "logs": [
+        "production-lot-number-045.json"
+      ]
+    },
+    {
+      "name": "Harvesting",
+      "logs": [
+        "product-weights-041.json",
+        "production-lot-number-045.json"
+      ]
+    },
+    {
+      "name": "High Risk Packaging",
+      "logs": [
+        "walmart-packaging-xray-060.json",
+        "metal-xray-reject-095.json"
+      ]
+    },
+    {
+      "name": "Low Risk Packaging",
+      "logs": [
+        "pallet-count-074.json"
+      ]
+    },
+    {
+      "name": "Raw Area",
+      "later": true,
+      "logs": []
+    },
+    {
+      "name": "Cook Area",
+      "later": true,
+      "logs": [
+        "cooking-cooling-meat-084.json",
+        "cooking-cooling-chicken-084.json",
+        "cooking-cooling-beef-084.json",
+        "cooking-cooling-pork-084.json",
+        "cooking-cooling-spicy-pork-084.json",
+        "cooking-cooling-braised-beef-084.json",
+        "heat-treatment-pork-084.json",
+        "cooking-cooling-vegetable-084.json",
+        "cooking-cooling-mila-rice-084.json"
+      ]
+    },
+    {
+      "name": "QA Floater",
+      "later": true,
+      "logs": [
+        "glass-brittle-055.json",
+        "chemical-strength-051.json"
+      ]
+    }
+  ]
+}

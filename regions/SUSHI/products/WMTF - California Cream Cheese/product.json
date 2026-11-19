@@ -1,0 +1,50 @@
+{
+  "order": 21,
+  "name": "WMTF - California Cream Cheese",
+  "brand": "Walmart",
+  "item": "19904",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - California CC w/ sweet soy glaze",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Milky Queen"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Avocado"
+      },
+      {
+        "material": "Cream Cheese"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Nori"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "fiber board tray"
+      },
+      {
+        "material": "sweet soy glaze"
+      }
+    ]
+  },
+  "rollType": "WMT Fresh Sushi"
+}

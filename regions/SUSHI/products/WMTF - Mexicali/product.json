@@ -1,0 +1,47 @@
+{
+  "order": 20,
+  "name": "WMTF - Mexicali",
+  "brand": "Walmart",
+  "item": "70566",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - Mexicali Roll w/Wasabi aiol",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Milky Queen"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Cream Cheese"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Nori"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "fiber board tray"
+      },
+      {
+        "material": "wasabi aioli"
+      }
+    ]
+  },
+  "rollType": "WMT Fresh Sushi"
+}

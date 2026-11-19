@@ -1,0 +1,193 @@
+{
+  "name": "Chemical Strength Check",
+  "code": "Log 051",
+  "scope": "line",
+  "frequency": "",
+  "sections": [
+    {
+      "title": "",
+      "side": true,
+      "fields": [
+        {
+          "id": "instructions",
+          "type": "note",
+          "lines": [
+            {
+              "b": "Frequency:",
+              "t": "Daily"
+            },
+            "F-204 & F-364: Titration kit (chlorinated alkalinity drop count test kit)",
+            "F-29 (sink and hose): Titration kit (QUAT test kit)",
+            "F-29 (foot foamer and non-food hose/Lafferty dispenser): test strips",
+            "Sterilex (portable chemical pump): test strips",
+            "Titration kit instructions: Included in the titration kit"
+          ]
+        },
+        {
+          "id": "reference",
+          "label": "",
+          "type": "info",
+          "head": [
+            "Chemical",
+            "Sample size (mL)",
+            "Units",
+            "Acceptable",
+            "Multiplier",
+            "Drops"
+          ],
+          "body": [
+            [
+              "Meritech Boot Cleaner XP",
+              "NA (strip)",
+              "ppm",
+              "800–1000",
+              "NA",
+              "NA (strip)"
+            ],
+            [
+              "F-364",
+              "10",
+              "oz / gal",
+              "2–12",
+              "0.16",
+              "13–75"
+            ],
+            [
+              "F-204",
+              "30",
+              "oz / gal",
+              "2–12",
+              "0.2680",
+              "8–44"
+            ],
+            [
+              "F-29 (Non-FCS)",
+              "NA (strip)",
+              "ppm",
+              "800–1000",
+              "10",
+              "NA (strip)"
+            ],
+            [
+              "F-29 (FCS)",
+              "5",
+              "ppm",
+              "150–400",
+              "10",
+              "15–40"
+            ],
+            [
+              "Sterilex",
+              "0.5",
+              "% PerQuat",
+              "9.6–11.2 %",
+              "NA",
+              "12–14"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "checks",
+          "label": "",
+          "type": "table",
+          "display": "table",
+          "rows": 3,
+          "columns": [
+            {
+              "id": "date",
+              "label": "Date",
+              "type": "date"
+            },
+            {
+              "id": "pumpSterilex",
+              "label": "Sterilex",
+              "type": "number",
+              "group": "Portable Chemical Pump"
+            },
+            {
+              "id": "nonfoodF364",
+              "label": "F-364",
+              "type": "number",
+              "group": "1. Non-Food (Lafferty dispenser)"
+            },
+            {
+              "id": "nonfoodF29",
+              "label": "F-29",
+              "type": "number",
+              "group": "1. Non-Food (Lafferty dispenser)"
+            },
+            {
+              "id": "hoseF364",
+              "label": "F-364",
+              "type": "number",
+              "group": "2. Washroom Hose"
+            },
+            {
+              "id": "hoseF29",
+              "label": "F-29",
+              "type": "number",
+              "group": "2. Washroom Hose"
+            },
+            {
+              "id": "sinkF29",
+              "label": "F-29",
+              "type": "number",
+              "group": "3. Washroom Sink"
+            },
+            {
+              "id": "sinkF204",
+              "label": "F-204",
+              "type": "number",
+              "group": "3. Washroom Sink"
+            },
+            {
+              "id": "foamerWashroom",
+              "label": "F29 Foot Foamer",
+              "type": "number",
+              "group": "4. Washroom",
+              "mergeLabel": true
+            },
+            {
+              "id": "foamerRice",
+              "label": "F29 Foot Foamer",
+              "type": "number",
+              "group": "5. Rice",
+              "mergeLabel": true
+            },
+            {
+              "id": "bootWasher",
+              "label": "Cleaner XP",
+              "type": "number",
+              "group": "6. Boot"
+            },
+            {
+              "id": "initial",
+              "label": "Initial",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Verification",
+      "fields": [
+        {
+          "id": "verification",
+          "label": "Verification",
+          "type": "text"
+        },
+        {
+          "id": "verificationDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}

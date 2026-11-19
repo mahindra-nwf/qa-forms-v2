@@ -1,0 +1,68 @@
+{
+  "order": 16,
+  "name": "WMTF - California",
+  "brand": "Walmart",
+  "item": "19884",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - California Roll w/Sweet Chili Aioli",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Milky Queen"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Avocado"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Nori"
+      },
+      {
+        "material": "Rice"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "fiber board tray"
+      },
+      {
+        "material": "Film/Lid"
+      },
+      {
+        "material": "sweet chili"
+      },
+      {
+        "material": "Soy Sauce Pack"
+      },
+      {
+        "material": "Wasabi Pack"
+      },
+      {
+        "material": "Ginger Pack"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  },
+  "rollType": "WMT Fresh Sushi"
+}

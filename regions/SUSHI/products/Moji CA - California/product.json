@@ -1,0 +1,83 @@
+{
+  "order": 4,
+  "name": "Moji CA - California",
+  "brand": "Moji CA",
+  "item": "35901",
+  "customer": "Moji CA",
+  "variety": "Moji - California (Canada)",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Sweet"
+      },
+      {
+        "material": "Broken Rice"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "M9"
+      },
+      {
+        "material": "Surimi"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Avocado"
+      },
+      {
+        "material": "Peas"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Starch"
+      },
+      {
+        "material": "Coating",
+        "spec": "White Sesame"
+      },
+      {
+        "material": "Nori"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "8 pc Moji"
+      },
+      {
+        "material": "Film/Lid",
+        "spec": "Lid"
+      },
+      {
+        "material": "Soy Sauce Pack"
+      },
+      {
+        "material": "Wasabi Pack"
+      },
+      {
+        "material": "Ginger Pack"
+      },
+      {
+        "material": "Cartons/Labels",
+        "spec": "Label"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  },
+  "rollType": "Moji"
+}

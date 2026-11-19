@@ -1,0 +1,183 @@
+{
+  "name": "Marinated Meat",
+  "code": "Log 049",
+  "group": "Mixing Log",
+  "scope": "line",
+  "frequency": "Each batch",
+  "sections": [
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "instructions",
+          "type": "note",
+          "lines": [
+            {
+              "b": "Instructions:",
+              "t": ""
+            },
+            "1. Record which product is being made.",
+            "2. Using a sanitized Thermapen, measure and record the temperature after it has been mixed.",
+            {
+              "b": "Note:",
+              "t": "Record meat temperature before prep and after. If temperature is between 50°F - 80°F, product must be used within a period of 8 hours."
+            },
+            "Sanitize Thermapen after each use."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Day",
+      "fields": [
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "scaleSerial",
+          "label": "Scale verification: serial #",
+          "type": "text"
+        },
+        {
+          "id": "scaleWeight",
+          "label": "Scale verification: weight",
+          "type": "number",
+          "unit": "lbs"
+        }
+      ]
+    },
+    {
+      "title": "Batches",
+      "fields": [
+        {
+          "id": "batches",
+          "label": "",
+          "type": "table",
+          "rows": 1,
+          "columns": [
+            {
+              "id": "lot",
+              "label": "Lot #",
+              "type": "text",
+              "span": 2
+            },
+            {
+              "id": "received",
+              "label": "Rec'd date",
+              "type": "date",
+              "span": 2
+            },
+            {
+              "id": "timeBefore",
+              "label": "Time before marination",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "tempBefore",
+              "label": "Temp before marination (°F)",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "timeAfter",
+              "label": "Time after marination",
+              "type": "time",
+              "span": 2
+            },
+            {
+              "id": "tempAfter",
+              "label": "Temp after marination (°F)",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "lbsWithMarination",
+              "label": "LBS with marination",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "lbsAfterDrain",
+              "label": "LBS after drain",
+              "type": "number",
+              "span": 2
+            },
+            {
+              "id": "correctiveActions",
+              "label": "Corrective actions",
+              "type": "text",
+              "span": 4
+            },
+            {
+              "id": "initial",
+              "label": "Initial",
+              "type": "text",
+              "span": 2
+            }
+          ],
+          "rowTypes": [
+            {
+              "id": "batch",
+              "label": "Add batch",
+              "tag": "Batch",
+              "layout": [
+                {
+                  "title": "Meat",
+                  "columns": [
+                    "lot",
+                    "received"
+                  ]
+                },
+                {
+                  "title": "Marination",
+                  "columns": [
+                    "timeBefore",
+                    "tempBefore",
+                    "timeAfter",
+                    "tempAfter"
+                  ]
+                },
+                {
+                  "title": "Weights",
+                  "columns": [
+                    "lbsWithMarination",
+                    "lbsAfterDrain",
+                    "correctiveActions",
+                    "initial"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "qaVerification",
+          "label": "QA verification",
+          "type": "text"
+        },
+        {
+          "id": "qaDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ],
+  "groupOrder": 3
+}

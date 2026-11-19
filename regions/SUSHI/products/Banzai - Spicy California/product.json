@@ -1,0 +1,78 @@
+{
+  "order": 9,
+  "name": "Banzai - Spicy California",
+  "brand": "Banzai",
+  "item": "88812",
+  "customer": "Banzai",
+  "variety": "Banzai - Spicy Crab",
+  "note": "Recipe sheet lists this item as \"Banzai - Spicy Crab\"",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Milky Queen"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "M9"
+      },
+      {
+        "material": "Surimi"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Carrot"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Sriracha Sauce"
+      },
+      {
+        "material": "Starch"
+      },
+      {
+        "material": "Coating",
+        "spec": "Black Sesame"
+      },
+      {
+        "material": "Nori"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "15 pc Retail"
+      },
+      {
+        "material": "Film/Lid",
+        "spec": "Film"
+      },
+      {
+        "material": "Soy Sauce Pack"
+      },
+      {
+        "material": "Wasabi Pack"
+      },
+      {
+        "material": "Cartons/Labels",
+        "spec": "Cartons"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  },
+  "rollType": "Retail (11.5 oz)"
+}

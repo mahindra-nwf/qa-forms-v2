@@ -1,0 +1,47 @@
+{
+  "order": 19,
+  "name": "WMTF - Tempura",
+  "brand": "Walmart",
+  "item": "19888",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - Tempura Shrimp Roll w/ spicy aioli",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Milky Queen"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Avocado"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Nori"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "fiber board tray"
+      },
+      {
+        "material": "spicy aioli"
+      }
+    ]
+  },
+  "rollType": "Tempura"
+}

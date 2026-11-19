@@ -1,0 +1,266 @@
+{
+  "name": "Product Weights",
+  "code": "Log 041",
+  "scope": "product",
+  "frequency": "",
+  "sections": [
+    {
+      "title": "",
+      "side": true,
+      "fields": [
+        {
+          "id": "scaleNote",
+          "type": "note",
+          "lines": [
+            {
+              "b": "Scale verification:",
+              "t": ""
+            },
+            "Using the 500 gram calibrated weight, check the scale before use."
+          ]
+        },
+        {
+          "id": "scaleSerial",
+          "label": "Scale serial #",
+          "type": "text"
+        },
+        {
+          "id": "scaleGrams",
+          "label": "Weight on scale",
+          "type": "number",
+          "unit": "g"
+        },
+        {
+          "id": "targets",
+          "type": "info",
+          "label": "Target range",
+          "head": [
+            "Roll type",
+            "Pieces",
+            "Weight min (oz)",
+            "Weight max (oz)",
+            "Thickness max (mm)",
+            "Diameter (mm)",
+            "Rice (oz)",
+            "Ingredients (oz)"
+          ],
+          "body": [
+            [
+              "Retail (11.5 oz)",
+              "15",
+              "10.7",
+              "11",
+              "18",
+              "36–43",
+              "—",
+              "—"
+            ],
+            [
+              "Retail (11.5 oz Aldi SB)",
+              "15",
+              "10.7",
+              "11",
+              "18",
+              "36–43",
+              "—",
+              "—"
+            ],
+            [
+              "Moji",
+              "8",
+              "5.4",
+              "5.65",
+              "18",
+              "35–39.5",
+              "—",
+              "—"
+            ],
+            [
+              "Tempura",
+              "8",
+              "4.6",
+              "5",
+              "15",
+              "34–43",
+              "—",
+              "—"
+            ],
+            [
+              "Flat Hot Maki Sushi Cali/Shrimp Avo",
+              "8",
+              "8",
+              "8.5",
+              "18–20",
+              "44–46",
+              "—",
+              "—"
+            ],
+            [
+              "WMT Fresh Sushi",
+              "8",
+              "7.1",
+              "7.5",
+              "20",
+              "40–43",
+              "4.26–4.50",
+              "2.84–3.00"
+            ],
+            [
+              "Kimbap (burrito)",
+              "8",
+              "8",
+              "8.5",
+              "16–18",
+              "46–48",
+              "4.80–5.10",
+              "3.20–3.40"
+            ],
+            [
+              "Spicy Salmon Kimbap (flat)",
+              "8",
+              "8",
+              "8.5",
+              "16–18",
+              "46–49",
+              "4.80–5.10",
+              "3.20–3.40"
+            ],
+            [
+              "Aldi EV Kimbap",
+              "8",
+              "8",
+              "8.5",
+              "16–18",
+              "46–48",
+              "4.80–5.10",
+              "3.20–3.40"
+            ]
+          ],
+          "rowsFor": "rollType"
+        }
+      ]
+    },
+    {
+      "title": "Product",
+      "fields": [
+        {
+          "id": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "product",
+          "label": "Product",
+          "type": "text",
+          "required": true,
+          "prefill": "name"
+        },
+        {
+          "id": "variety",
+          "label": "Variety",
+          "type": "text",
+          "prefill": "variety"
+        },
+        {
+          "id": "rollType",
+          "label": "Roll type",
+          "type": "select",
+          "options": [
+            "Retail (11.5 oz)",
+            "Retail (11.5 oz Aldi SB)",
+            "Moji",
+            "Tempura",
+            "Flat Hot Maki Sushi Cali/Shrimp Avo",
+            "WMT Fresh Sushi",
+            "Kimbap (burrito)",
+            "Spicy Salmon Kimbap (flat)",
+            "Aldi EV Kimbap"
+          ],
+          "span": 2,
+          "prefill": "rollType",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "checks",
+          "label": "",
+          "type": "table",
+          "rows": 3,
+          "columns": [
+            {
+              "id": "side",
+              "label": "Side (W/E)",
+              "type": "passfail",
+              "options": [
+                "W",
+                "E"
+              ]
+            },
+            {
+              "id": "time",
+              "label": "Time",
+              "type": "time"
+            },
+            {
+              "id": "thickness",
+              "label": "Thickness (mm)",
+              "type": "number"
+            },
+            {
+              "id": "diameter",
+              "label": "Diameter (mm)",
+              "type": "number"
+            },
+            {
+              "id": "ingredWt",
+              "label": "Ingred. wt (oz)",
+              "type": "number"
+            },
+            {
+              "id": "totalWt",
+              "label": "Total wt (oz)",
+              "type": "number"
+            },
+            {
+              "id": "ingredPct",
+              "label": "Ingred. %",
+              "type": "number"
+            },
+            {
+              "id": "riceTemp",
+              "label": "Rice temp (°F)",
+              "type": "number"
+            },
+            {
+              "id": "initial",
+              "label": "Initial",
+              "type": "text"
+            }
+          ],
+          "display": "table"
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "qaVerification",
+          "label": "QA verification",
+          "type": "text"
+        },
+        {
+          "id": "qaDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}

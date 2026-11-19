@@ -1,0 +1,87 @@
+{
+  "order": 12,
+  "name": "Fusia - Shrimp Avocado",
+  "brand": "Fusia (Aldi EV)",
+  "item": "86752",
+  "customer": "Fusia (Aldi EV)",
+  "variety": "EV - Shrimp and Avocado",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Milky Queen"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "M9"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Shrimp"
+      },
+      {
+        "material": "Avocado"
+      },
+      {
+        "material": "Peas"
+      },
+      {
+        "material": "Dill"
+      },
+      {
+        "material": "Horseradish"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Starch"
+      },
+      {
+        "material": "Sugar",
+        "spec": "White"
+      },
+      {
+        "material": "Coating",
+        "spec": "White Sesame"
+      },
+      {
+        "material": "Nori"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "15 pc Retail"
+      },
+      {
+        "material": "Film/Lid",
+        "spec": "Film"
+      },
+      {
+        "material": "Soy Sauce Pack"
+      },
+      {
+        "material": "Wasabi Pack"
+      },
+      {
+        "material": "Cartons/Labels",
+        "spec": "Cartons"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  },
+  "rollType": "Retail (11.5 oz Aldi SB)"
+}

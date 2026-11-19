@@ -1,0 +1,93 @@
+{
+  "name": "Enviroguard MP2 Strength",
+  "code": "Log 067",
+  "scope": "line",
+  "frequency": "",
+  "sections": [
+    {
+      "title": "",
+      "side": true,
+      "fields": [
+        {
+          "id": "frequency",
+          "type": "note",
+          "lines": [
+            {
+              "b": "Frequency:",
+              "t": "On each day of production, the first buggy filled needs to be tested."
+            }
+          ]
+        },
+        {
+          "id": "limits",
+          "type": "info",
+          "strong": true,
+          "title": "Enviroguard MP2 Concentration",
+          "body": [
+            [
+              "90",
+              "PPM Low"
+            ],
+            [
+              "190",
+              "PPM High"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "",
+      "fields": [
+        {
+          "id": "tests",
+          "label": "",
+          "type": "table",
+          "rows": 3,
+          "columns": [
+            {
+              "id": "date",
+              "label": "Date",
+              "type": "date"
+            },
+            {
+              "id": "time",
+              "label": "Time",
+              "type": "time"
+            },
+            {
+              "id": "productType",
+              "label": "Product type",
+              "type": "text"
+            },
+            {
+              "id": "ppm",
+              "label": "PPM",
+              "type": "number"
+            },
+            {
+              "id": "initial",
+              "label": "Initial",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "QA verification",
+      "fields": [
+        {
+          "id": "qaVerification",
+          "label": "QA verification",
+          "type": "text"
+        },
+        {
+          "id": "qaDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}

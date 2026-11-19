@@ -1,0 +1,113 @@
+{
+  "name": "Metal/X-ray Detector Reject",
+  "code": "Log 095",
+  "scope": "product",
+  "category": "Packaging",
+  "frequency": "When product is rejected",
+  "description": "1. Remove the rejected product from the reject freezer and inspect for physical damage. If damaged, dispose of it according to company procedures. 2. Pass each tray of rejected product through the metal detector or X-ray machine 3 times. a. Passed: if it passes all 3 inspections it may continue through the remaining production process. b. Failed: remove it from the process, thaw and dissect it to find the source of contamination. c. If contamination is found, record the findings in the Foreign Material Log 070.",
+  "sections": [
+    {
+      "title": "Production",
+      "fields": [
+        {
+          "id": "productionDate",
+          "label": "Production date",
+          "type": "date",
+          "required": true,
+          "default": "today"
+        },
+        {
+          "id": "itemNumber",
+          "label": "Item number",
+          "type": "text",
+          "required": true,
+          "prefill": "item"
+        },
+        {
+          "id": "variety",
+          "label": "Variety description",
+          "type": "text",
+          "required": true,
+          "prefill": "variety"
+        }
+      ]
+    },
+    {
+      "title": "Ingredients",
+      "fields": [
+        {
+          "id": "ingredients",
+          "label": "Ingredients",
+          "type": "table",
+          "rowHeader": "Ingredient",
+          "fixedRows": [
+            "Base (noodle/rice/dumpling)",
+            "Protein",
+            "Vegetables",
+            "Sauce"
+          ],
+          "columns": [
+            {
+              "id": "lot1",
+              "label": "Lot number",
+              "type": "text"
+            },
+            {
+              "id": "received",
+              "label": "Received date",
+              "type": "date"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Rejects",
+      "fields": [
+        {
+          "id": "rejects",
+          "label": "Rejects",
+          "type": "table",
+          "rows": 2,
+          "columns": [
+            {
+              "id": "time",
+              "label": "Time",
+              "type": "time"
+            },
+            {
+              "id": "notes",
+              "label": "Notes / corrective actions",
+              "type": "text"
+            },
+            {
+              "id": "qty",
+              "label": "Qty rejected",
+              "type": "number"
+            },
+            {
+              "id": "initial",
+              "label": "Initial",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "QA verification",
+      "fields": [
+        {
+          "id": "qaVerification",
+          "label": "QA verification",
+          "type": "text"
+        },
+        {
+          "id": "qaDate",
+          "label": "Date",
+          "type": "date"
+        }
+      ]
+    }
+  ]
+}

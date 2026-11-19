@@ -1,0 +1,2002 @@
+{
+  "name": "Glass & Brittle Plastic Register",
+  "code": "Log 055",
+  "scope": "line",
+  "frequency": "Monthly",
+  "description": "Count each item and check its condition. If a condition is not acceptable, notify management and complete Corrective and Preventative Action Report Log 033.",
+  "sections": [
+    {
+      "title": "Audit",
+      "fields": [
+        {
+          "id": "auditor",
+          "label": "Auditor",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "monthYear",
+          "label": "Month / year",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "Entrance",
+      "fields": [
+        {
+          "id": "loc0",
+          "label": "Entrance",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 4"
+            },
+            {
+              "label": "Biometric Scanner",
+              "sub": "Monitor Display · expected 2"
+            },
+            {
+              "label": "Eye Wash Station",
+              "sub": "Eye Wash · expected 2"
+            },
+            {
+              "label": "Boot washer",
+              "sub": "Chemical container, Indicator light, Emergency button, Power knob, Black sensors · expected 1, 1, 1, 1, 4"
+            },
+            {
+              "label": "Plastic Cover",
+              "sub": "Hair Net, RM Hair Net, Face Mask, Beard Net, Boot Cover, Ear Plugs, Lead Hair Net · expected 1, 1, 1, 1, 1, 1, 1"
+            },
+            {
+              "label": "Soap & Paper Towel Dispenser",
+              "sub": "expected 2, 3"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Insect Lights",
+              "sub": "expected 1"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Waste Bay",
+      "fields": [
+        {
+          "id": "loc1",
+          "label": "Waste Bay",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Insect Lights",
+              "sub": "expected 1"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Receiving Bay",
+      "fields": [
+        {
+          "id": "loc2",
+          "label": "Receiving Bay",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Insect Lights",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 2"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Laundry Room",
+      "fields": [
+        {
+          "id": "loc3",
+          "label": "Laundry Room",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 4"
+            },
+            {
+              "label": "Scales",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Chemical Containers",
+              "sub": "Boot Washer Chemical, etc. · expected Variable"
+            },
+            {
+              "label": "Volumetric Containers",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Water Filter Pump",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Hand Held Blender",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Preservative",
+              "sub": "Niprosin, Polylysine · expected Variable"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Prep Cooler",
+      "fields": [
+        {
+          "id": "loc4",
+          "label": "Prep Cooler",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Mixer (AMFEC)",
+              "sub": "Control panel display, Buttons, Knobs, Power switch, ER Stop, Unload · expected 1, 2, 6 1, 1, 2"
+            },
+            {
+              "label": "Trash Bins",
+              "sub": "White Bin, Grey Bin · expected Variable"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 3"
+            },
+            {
+              "label": "Plug Covers",
+              "sub": "expected 4"
+            },
+            {
+              "label": "PAA Dosatron",
+              "sub": "Dosatron Pump · expected 1"
+            },
+            {
+              "label": "Plastic Cover",
+              "sub": "Mask, Sleeve, Apron, etc. · expected 6"
+            },
+            {
+              "label": "Eye Wash Station",
+              "sub": "Eye Wash · expected 2"
+            },
+            {
+              "label": "Cooling Unit",
+              "sub": "White PVC Pipe · expected 2"
+            },
+            {
+              "label": "Ingredient Containers",
+              "sub": "Containers, Pales · expected Variable"
+            },
+            {
+              "label": "Wash Hose",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Exit Lights",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Ingredient Containers",
+              "sub": "Barrels, Lids, Tubs · expected Variable"
+            },
+            {
+              "label": "Intemp Data Logger",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Thermapens",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Avocado Cutter",
+              "sub": "Light cover, buttons, emergency knob, power knob · expected 1, 3, 1, 1"
+            },
+            {
+              "label": "Scale",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Chemical Containers",
+              "sub": "Pail, Sprayer, Pump · expected Variable"
+            },
+            {
+              "label": "Shrimp Cutter",
+              "sub": "Buttons, Emergency Button · expected 3, 1"
+            },
+            {
+              "label": "Risco Mixer (BONN 200 RS 450)",
+              "sub": "Blue bushing, blue rollers, blue sensors, red sensors, blue blockers(top), blue blocker(bottom), blue guides, monitor, monitor cover, buttons, ER button, power knob · expected 1, 2, 1, 1, 2, 1, 2, 1, 1, 3, 1, 1"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 1"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Storage Cooler",
+      "fields": [
+        {
+          "id": "loc5",
+          "label": "Storage Cooler",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Strip Curtains",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Intemp Data Logger",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Ingredient Containers",
+              "sub": "Barrels, lids, tubs · expected Variable"
+            },
+            {
+              "label": "Buggies",
+              "sub": "Buggies, Buggy Lids · expected Variable"
+            },
+            {
+              "label": "Plastic Totes",
+              "sub": "Green Tote, Blue Tote · expected Variable"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Freezer",
+      "fields": [
+        {
+          "id": "loc6",
+          "label": "Freezer",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Intemp Data Logger",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Exit Lights",
+              "sub": "Warehouse side, Packaging side · expected 1,1"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 6"
+            },
+            {
+              "label": "Plastic Totes",
+              "sub": "Green Tote, Blue Tote · expected Variable"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Shipping/Receiving Cooler",
+      "fields": [
+        {
+          "id": "loc7",
+          "label": "Shipping/Receiving Cooler",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Rolled Up Door Control Panels(2)",
+              "sub": "Rolled Up Door Control Panels · expected 2"
+            },
+            {
+              "label": "Rolled Up Door Sensors(2)",
+              "sub": "Rolled Up Door Sensors · expected 8"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 6"
+            },
+            {
+              "label": "Buggies",
+              "sub": "Buggies, Buggy Lids · expected Variable"
+            },
+            {
+              "label": "Blue Barrels",
+              "sub": "Blue Barrels, Barrel Lids · expected Variable"
+            },
+            {
+              "label": "Intemp Data Logger",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Fire Light",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Fisheye Mirror",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Plastic Totes",
+              "sub": "Green Tote, Blue Tote · expected Variable"
+            },
+            {
+              "label": "Plastic Pallet",
+              "sub": "expected Variable"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "RM Prod/Pack (I)",
+      "fields": [
+        {
+          "id": "loc8",
+          "label": "RM Prod/Pack (I)",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 20"
+            },
+            {
+              "label": "Plug Covers",
+              "sub": "expected 13"
+            },
+            {
+              "label": "Clocks",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Trash Bins",
+              "sub": "White Bin, Grey Bin · expected Variable"
+            },
+            {
+              "label": "FlexPak (Leak Detector)",
+              "sub": "Pressure Tank, Top Seal, Pressure Gauge · expected 1, 1, 1"
+            },
+            {
+              "label": "Conveyor Belts",
+              "sub": "Freezer · expected 1, 2"
+            },
+            {
+              "label": "ULMA conveyor",
+              "sub": "Belt, ER stop, Buttons, Sensors · expected 1, 1, 2, 2"
+            },
+            {
+              "label": "ULMA (FM-300)",
+              "sub": "Plastic Cover, Control Panel Monitor, Buttons, ER stop, red sensor · expected 1, 1, 8, 1, 3"
+            },
+            {
+              "label": "ULMA Heat Tunnel",
+              "sub": "ER stop, Power Light, Buttons, Switch, Temp Display, Speed Knob · expected 1, 1, 2, 2, 2, 1"
+            },
+            {
+              "label": "Xray Indicator Light",
+              "sub": "White, Red, Orange, Green · expected 1, 1, 1, 1"
+            },
+            {
+              "label": "Xray",
+              "sub": "Xray On Lights, Xray Monitor, ER Stop buttons, Power Switch · expected 4, 1, 3, 1"
+            },
+            {
+              "label": "Metal Detector",
+              "sub": "Display Monitor, Start, Stop, Knobs, ER Stop, Power Switch, Black Sensor · expected 1, 1, 1, 1, 1, 1, 2"
+            },
+            {
+              "label": "Label Machine (trays)",
+              "sub": "Panel Display, Reset Button, Start/Stop Button, ER stop, Control Panel Monitor, Printer Control Panel, Plastic Cover · expected 3, 1, 1, 1, 1, 1, 1"
+            },
+            {
+              "label": "Label Machine (bowls)",
+              "sub": "Black Sensor, Blue Sensor, Control Panel, ER stop, Power Switch · expected 1, 1, 1, 1, 1"
+            },
+            {
+              "label": "Multivac",
+              "sub": "Control Panel Monitor, Start Button, Stop Button, ER stop · expected 1, 1, 1, 1"
+            },
+            {
+              "label": "Thermapens",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Scale",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Chemical Containers",
+              "sub": "Pail, Sprayer, Pump · expected 1,1,1"
+            },
+            {
+              "label": "Volumetric Containers",
+              "sub": "Preservatives · expected Variable"
+            },
+            {
+              "label": "Scales",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "TV",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Markem Printer (2)",
+              "sub": "Control Monitor, Start, Stop, Black Sensor, Ink Storage · expected 1, 1, 1, 1, 1"
+            },
+            {
+              "label": "Markem Conveyor",
+              "sub": "Power Light, Knob, Switch · expected 1, 1, 3"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Sauce Room",
+      "fields": [
+        {
+          "id": "loc9",
+          "label": "Sauce Room",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Scales",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 11"
+            },
+            {
+              "label": "Trash Bins",
+              "sub": "White Bin, Grey Bin · expected Variable"
+            },
+            {
+              "label": "Sauce Machine (3)",
+              "sub": "Plastic Cover, Control Panel Monitor, Thermostat, Button, Switch, ER Stop · expected 4, 1, 2, 1, 1, 1"
+            },
+            {
+              "label": "Sauce Machine Pump (3)",
+              "sub": "Power Switch, Control Panel · expected 1, 1"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Chemical Containers",
+              "sub": "Pail, Sprayer · expected Variable"
+            },
+            {
+              "label": "Volumetric Containers",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Oxygen Alarm",
+              "sub": "Control panel, indicator light · expected 1, 2"
+            },
+            {
+              "label": "Buggies",
+              "sub": "Buggies, Buggy Lids · expected Variable"
+            },
+            {
+              "label": "Vernier Caliper",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Thermapens",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Soap & Paper Towel Dispenser",
+              "sub": "expected 1,1"
+            },
+            {
+              "label": "Clock",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Exit Lights",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Soap & Paper Towel Dispenser",
+              "sub": "expected 1,1"
+            },
+            {
+              "label": "Plug Covers",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 1"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "IQ1",
+      "fields": [
+        {
+          "id": "loc10",
+          "label": "IQ1",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Buttons & Knobs",
+              "sub": "Start Button, Stop Button, Control Power Reset, Alarm Horn, Run Clean Mode · expected 1, 1, 1, 1, 1"
+            },
+            {
+              "label": "Indicator Light",
+              "sub": "Red, orange, green · expected 1, 2, 1"
+            },
+            {
+              "label": "Under Temp. Setting",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Control Panel",
+              "sub": "Control Panel, Control panel Cover · expected 1, 1"
+            },
+            {
+              "label": "Red Sensor",
+              "sub": "expected 16"
+            },
+            {
+              "label": "First Aid Sign",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Emergency Stop Button",
+              "sub": "expected 7"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Immersion Freezer",
+      "fields": [
+        {
+          "id": "loc11",
+          "label": "Immersion Freezer",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Indicator Light",
+              "sub": "Orange Light · expected 1"
+            },
+            {
+              "label": "Control Panel",
+              "sub": "Control Panel, Control panel Cover · expected 1, 1"
+            },
+            {
+              "label": "Buttons & Knobs",
+              "sub": "Alarm Horn Silence, Control Power Reset, Run Clean Mode · expected 1, 1, 1"
+            },
+            {
+              "label": "ER Stop",
+              "sub": "expected 5"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Rice",
+      "fields": [
+        {
+          "id": "loc12",
+          "label": "Rice",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "pH Meter",
+              "sub": "Monitor, probe, standard solution tubes, electrolite cup · expected 1, 1, 2, 1"
+            },
+            {
+              "label": "Blue Barrels",
+              "sub": "Blue Barrels, Barrel Lids · expected Variable"
+            },
+            {
+              "label": "White Rice Tubs",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Trash Bins",
+              "sub": "White Bin, Grey Bin · expected Variable"
+            },
+            {
+              "label": "Rice Washer",
+              "sub": "Buttons & Knobs · expected 6"
+            },
+            {
+              "label": "Plug Covers",
+              "sub": "expected 9"
+            },
+            {
+              "label": "Chemical Containers",
+              "sub": "Pail, Sprayer, Pump · expected Variable"
+            },
+            {
+              "label": "Clocks",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Fire Light",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 8"
+            },
+            {
+              "label": "Scales",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Exit Lights",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Carts",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Carbon Monoxide Alarm",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Heat Tank Monitor",
+              "sub": "expected 3"
+            },
+            {
+              "label": "Rice Mixer (2)",
+              "sub": "On/Off Button, Knob, Power Light, Buttons · expected 2, 2, 2, 4"
+            },
+            {
+              "label": "Robot Coupe",
+              "sub": "Cover, Screen Display, Buttons · expected 1, 1, 6"
+            },
+            {
+              "label": "Kettle Water Pipe",
+              "sub": "Pressure Gauge · expected 1"
+            },
+            {
+              "label": "Eye Wash Station",
+              "sub": "Eye Wash · expected 2"
+            },
+            {
+              "label": "Rice Oven Control Panel",
+              "sub": "Monitor Display, Knobs, Start, Stop, Burner Switch, ER Stop, Power Switch, Light Covers · expected 3, 3, 3, 3, 5, 1, 1, 3"
+            },
+            {
+              "label": "Volumetric Containers",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Soap & Paper Towel Dispenser",
+              "sub": "expected 1, 1"
+            },
+            {
+              "label": "Kettle",
+              "sub": "Pressure gauge, Timer · expected 1, 1"
+            },
+            {
+              "label": "Weight Scale",
+              "sub": "Weight Monitor · expected 1"
+            },
+            {
+              "label": "Rice Scoop",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 4"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Raw Area",
+      "fields": [
+        {
+          "id": "loc13",
+          "label": "Raw Area",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Barrels",
+              "sub": "Barrel, Barrel Lids · expected Variable"
+            },
+            {
+              "label": "Scales",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Eye Wash Station",
+              "sub": "Eye Wash · expected 2"
+            },
+            {
+              "label": "Plastic Cover",
+              "sub": "Plastic Covers · expected 3"
+            },
+            {
+              "label": "Wash Hose",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Volumetric Containers",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Vacuum Tumbler Control Panel",
+              "sub": "Buttons, Knobs, Time Display, Gauge, ER Stop, Power Switch · expected 4, 4, 1, 3, 1, 1"
+            },
+            {
+              "label": "Red Tubs",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Clock",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Trash Bins",
+              "sub": "expected Variable"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cooking Area",
+      "fields": [
+        {
+          "id": "loc14",
+          "label": "Cooking Area",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Combi Oven (6)",
+              "sub": "Glass Door, Built-in Hose, Display Monitor, Knob, Handle · expected 1, 1, 1, 1"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Red Tubs",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Clock",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Wash Hose",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Scales",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Eye Wash Station",
+              "sub": "Eye Wash · expected 2"
+            },
+            {
+              "label": "Barrels",
+              "sub": "Barrels, Barrel Lids · expected Variable"
+            },
+            {
+              "label": "Blast Chiller Control Panel",
+              "sub": "Start, Knob, Air Temp Display · expected 1, 1, 1"
+            },
+            {
+              "label": "Light Remote",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Trash Bins",
+              "sub": "expected Variable"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Hi-Roll Entrance",
+      "fields": [
+        {
+          "id": "loc15",
+          "label": "Hi-Roll Entrance",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Oxygen Alarm",
+              "sub": "Control panel, indicator light · expected 1, 2"
+            },
+            {
+              "label": "Soap & Paper Towel Dispenser",
+              "sub": "expected 1, 1"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "IQ2",
+      "fields": [
+        {
+          "id": "loc16",
+          "label": "IQ2",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Indicator Lights",
+              "sub": "Red, orange, green · expected 1, 2, 1"
+            },
+            {
+              "label": "Emergency Stop Button",
+              "sub": "expected 4"
+            },
+            {
+              "label": "Emergency Stop Button (Control Panel)",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Control Panel",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Under Temp. Setting",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Control Panel Reset",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Control Panel Cover",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Red Sensor",
+              "sub": "expected 6"
+            },
+            {
+              "label": "Start Button",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Stop Button",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Knob",
+              "sub": "Run Mode Clean · expected 1"
+            },
+            {
+              "label": "Buttons & Knobs",
+              "sub": "Alarm Horn Silence · expected 1"
+            },
+            {
+              "label": "Power On/Off switch",
+              "sub": "Power Switch · expected 1"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Hi-Roll",
+      "fields": [
+        {
+          "id": "loc17",
+          "label": "Hi-Roll",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Door Window",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Risco (4)",
+              "sub": "Panel display, plastic cover, power switch, plastic arm · expected 4, 4, 4, 4"
+            },
+            {
+              "label": "Vemag (6)",
+              "sub": "Control panel, Pressure gauge, Sight glass with pingpong balls, Knob, Buttons · expected 6, 6, 6, 6, 12"
+            },
+            {
+              "label": "Sesame Hopper (2)",
+              "sub": "Power switch, Knob · expected 2, 2"
+            },
+            {
+              "label": "South Sushi Roller (2: east and west)",
+              "sub": "Digital pot display, light cover, speed control knob, knobs, start/stop button, rice sensor light · expected 10, 14, 12, 13, 4, 4"
+            },
+            {
+              "label": "Rice Lift",
+              "sub": "Button, Side Knob · expected 1, 1"
+            },
+            {
+              "label": "North Sushi Roller Control Panel (2: east and west)",
+              "sub": "Setting Display, Light Cover, Stop Button, Start Button, Knobs, ER stop, Power Switch · expected 6, 2, 4, 4, 16, 2, 1"
+            },
+            {
+              "label": "Fisheye Mirror",
+              "sub": "By rice lift · expected 1"
+            },
+            {
+              "label": "Plug Covers",
+              "sub": "expected 9"
+            },
+            {
+              "label": "Sauce Hoppers",
+              "sub": "Control Panel · expected 2"
+            },
+            {
+              "label": "Eye Wash Station",
+              "sub": "Eye Wash · expected 2"
+            },
+            {
+              "label": "Plastic Cover",
+              "sub": "Hair Net, Sleeve, Apron · expected 1, 1, 1"
+            },
+            {
+              "label": "Calculator",
+              "sub": "expected 1"
+            },
+            {
+              "label": "TV",
+              "sub": "expected 1"
+            },
+            {
+              "label": "White Rice Tubs",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Chemical Containers",
+              "sub": "Pail, Sprayer, Pump · expected Variable"
+            },
+            {
+              "label": "Utensils",
+              "sub": "Rice scoop, Knife, etc. · expected Variable"
+            },
+            {
+              "label": "Clock",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 6"
+            },
+            {
+              "label": "Trash Bins",
+              "sub": "White Bin, Grey Bin · expected Variable"
+            },
+            {
+              "label": "Exit Lights",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Oxygen Alarm",
+              "sub": "Control panel, indicator light · expected 1, 2"
+            },
+            {
+              "label": "Carts",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 1"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Harvest",
+      "fields": [
+        {
+          "id": "loc18",
+          "label": "Harvest",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Thermapens",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Sushi Cutter (2)",
+              "sub": "Digital pot display, control panel display, power light, emergency stop button, On/Off buttons · expected 2, 2, 2, 2, 6"
+            },
+            {
+              "label": "Conveyor Belts",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Power Control Panel",
+              "sub": "Start, Stop, Plug · expected 2, 2, 2"
+            },
+            {
+              "label": "Calculator",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Plug Covers",
+              "sub": "expected 13"
+            },
+            {
+              "label": "Wash Hose",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Oxygen Meter",
+              "sub": "Air Check O2 Sensor · expected 1"
+            },
+            {
+              "label": "IQ Spirral Sensor",
+              "sub": "Black Sensor, Red Sensor · expected 1, 2"
+            },
+            {
+              "label": "Scale",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Vernier Caliper",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Chemical Containers",
+              "sub": "Pail, Sprayer, Pump · expected Variable"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 11"
+            },
+            {
+              "label": "Clock",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Safety Glasses Bin",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Trash Bins",
+              "sub": "White Bin, Grey Bin · expected Variable"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 2"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Spiral",
+      "fields": [
+        {
+          "id": "loc19",
+          "label": "Spiral",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "White Infeed Belt",
+              "sub": "Harvest Room · expected 1"
+            },
+            {
+              "label": "Spiral Control Panel (West Coast)",
+              "sub": "Light cover, emergency stop button, control panel display, control panel cover · expected 4, 1, 1, 1"
+            },
+            {
+              "label": "Spiral Control Panel",
+              "sub": "Display panel, display cover, light covers, ER Stop button, Power switch · expected 1, 1, 2, 1, 1"
+            },
+            {
+              "label": "Spiral ER Stop",
+              "sub": "Emergency Stop Buttons with Green Lights · expected 4"
+            },
+            {
+              "label": "Defibrillator",
+              "sub": "Cover panel, power button, shock button, AED screen · expected 1, 1, 1, 1"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "High-Risk Pack",
+      "fields": [
+        {
+          "id": "loc20",
+          "label": "High-Risk Pack",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Xray Indicator Light",
+              "sub": "Alarm, X-Ray on, Power on · expected 1, 1, 1"
+            },
+            {
+              "label": "Xray",
+              "sub": "ER stop, Power Switch, Control Panel Monitor · expected 3, 1, 1"
+            },
+            {
+              "label": "ULMA conveyor",
+              "sub": "Belt, ER stop, Buttons, Sensors, Refracting Panels · expected 1, 1, 2, 6, 6"
+            },
+            {
+              "label": "ULMA (FM 500)",
+              "sub": "Control Panel Monitor, Buttons, ER stop, Plastic Cover · expected 1, 8, 1, 3"
+            },
+            {
+              "label": "ULMA Heat Tunnel",
+              "sub": "ER stop, Power Light, Buttons, Switch, Temp Display, Speed Knob · expected 1, 1, 2, 2, 2, 1"
+            },
+            {
+              "label": "Plug Covers",
+              "sub": "expected 16"
+            },
+            {
+              "label": "Metal Detector",
+              "sub": "Control Panel Display, Buttons, Knob, Power Switch · expected 1, 3, 1, 1"
+            },
+            {
+              "label": "Conveyor Belts",
+              "sub": "expected 3"
+            },
+            {
+              "label": "Plastic Totes",
+              "sub": "Green Totes, Blue Totes · expected Variable"
+            },
+            {
+              "label": "Plastic Curtain Strips",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Chemical Containers",
+              "sub": "Pail, Sprayer, Pump · expected Variable"
+            },
+            {
+              "label": "Ingredient Containers",
+              "sub": "Barrels, Lids, Tubs · expected Variable"
+            },
+            {
+              "label": "Buggies",
+              "sub": "Buggies, Buggy Lids · expected Variable"
+            },
+            {
+              "label": "Clock",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 13"
+            },
+            {
+              "label": "Flow Wrap (2)",
+              "sub": "Control Panel, Light Cover, Knobs, Buttons, Sealing Display, Plastic Cover, Power Switch, ER stop · expected 1, 2, 3, 3, 2, 2, 1, 1"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Trash Bins",
+              "sub": "White Bin, Grey Bin · expected Variable"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Low-Risk Pack",
+      "fields": [
+        {
+          "id": "loc21",
+          "label": "Low-Risk Pack",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Thermapens",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Insect Lights",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Clock",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Conveyor Belts",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Trash Bins",
+              "sub": "White Bin, Grey Bin · expected Variable"
+            },
+            {
+              "label": "Markem Printer (2)",
+              "sub": "Control Monitor, Start, Stop, Black Sensor, Ink Storage · expected 1, 1, 1, 1, 1"
+            },
+            {
+              "label": "Markem Power Box",
+              "sub": "Start, Stop · expected 1, 1"
+            },
+            {
+              "label": "RoboPac",
+              "sub": "Control Monitor, Buttons, Key Switch, Power Knob, ER Stop, Side Button · expected 1, 3, 1 1, 1, 1"
+            },
+            {
+              "label": "ADCO Packaging",
+              "sub": "Power Switch, Panel Display, Control Panel, Start Button, Stop Button, Reset Button, ER stop, ER w/ green lights, Plastic Cover, Pressure Gauge, Light Cover · expected 2, 12, 1, 2, 2, 2, 2, 2, 6, 1, 4"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "RM Prod/Pack (II)",
+      "fields": [
+        {
+          "id": "loc22",
+          "label": "RM Prod/Pack (II)",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "White Plastic Tub",
+              "sub": "expected Variable"
+            },
+            {
+              "label": "Conveyor Belt",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Servo Conveyor",
+              "sub": "ER stop, Stop Button, Reset Button, Start Button, Plastic Guide · expected 1, 1, 1, 1, 2"
+            },
+            {
+              "label": "Servo S-50",
+              "sub": "Plastic Cover, Control Monitor, Thermostat, Buttons, Switch, ER stop, Analog Knob, Meter Gauge, Back Glass Panel, Power Switch · expected 7, 1, 4, 3, 1, 1, 2, 1, 1, 1"
+            },
+            {
+              "label": "Adv Heat Tunnel",
+              "sub": "Plastic Cover, Thermostat, Buttons, Switch, Green light, ER stop, Knobs, Fan Screen, Belt Screen · expected 1, 1, 4, 1, 1, 2, 2, 1, 1"
+            },
+            {
+              "label": "Label Machine (bowls)",
+              "sub": "Black Sensor, Blue Sensor, Control Panel, ER stop, Power Switch · expected 1, 1, 1, 1, 1"
+            },
+            {
+              "label": "Buggies",
+              "sub": "Buggies, Buggy Lids · expected Variable"
+            },
+            {
+              "label": "Metal Detector",
+              "sub": "Orange Light, Control Panel, Control Panel Cover, Start, Stop, ER Stop, Power Switch · expected 1, 1, 1, 1, 1, 1, 1"
+            },
+            {
+              "label": "Metal Detector Reject Box",
+              "sub": "Plastic Cover, Black Sensor · expected 1, 2"
+            },
+            {
+              "label": "Label Printer (Bowls)",
+              "sub": "Ink Sprayer, Control Monitor · expected 1, 1"
+            },
+            {
+              "label": "Markem Printer (2)",
+              "sub": "Control Monitor, Start, Stop, Black Sensor, Ink Storage · expected 1, 1, 1, 1, 1"
+            },
+            {
+              "label": "Bug Light",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Plastic Container",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Clock",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 1"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Washroom",
+      "fields": [
+        {
+          "id": "loc23",
+          "label": "Washroom",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Door Window",
+              "sub": "expected 2"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Outside Washroom",
+      "fields": [
+        {
+          "id": "loc24",
+          "label": "Outside Washroom",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Safety Glasses Bin",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 1"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Maintenance Bay",
+      "fields": [
+        {
+          "id": "loc25",
+          "label": "Maintenance Bay",
+          "type": "table",
+          "rowHeader": "Item",
+          "fixedRows": [
+            {
+              "label": "Exit Lights",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Door Window",
+              "sub": "expected 2"
+            },
+            {
+              "label": "Fire Extinguisher",
+              "sub": "expected 1"
+            },
+            {
+              "label": "Lights & Covers",
+              "sub": "expected 2"
+            }
+          ],
+          "columns": [
+            {
+              "id": "tallied",
+              "label": "Tallied qty",
+              "type": "number"
+            },
+            {
+              "id": "ok",
+              "label": "Condition OK?",
+              "type": "passfail",
+              "options": [
+                "Y",
+                "N"
+              ]
+            },
+            {
+              "id": "comment",
+              "label": "Comment",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

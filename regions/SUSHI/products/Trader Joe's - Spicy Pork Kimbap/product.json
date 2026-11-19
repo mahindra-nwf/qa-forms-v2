@@ -1,0 +1,78 @@
+{
+  "order": 15,
+  "name": "Trader Joe's - Spicy Pork Kimbap",
+  "brand": "Trader Joe's",
+  "item": "853606",
+  "customer": "Trader Joe's",
+  "variety": "Kimbap - Spicy Pork (California)",
+  "note": "Two Spicy Pork Kimbap items exist (853606 \"California\" and 821124); confirm which one",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Calrose Rice"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Pork"
+      },
+      {
+        "material": "Carrot"
+      },
+      {
+        "material": "Spinach"
+      },
+      {
+        "material": "Takawan"
+      },
+      {
+        "material": "Sesame Oil"
+      },
+      {
+        "material": "Miso"
+      },
+      {
+        "material": "Sugar"
+      },
+      {
+        "material": "Nori"
+      },
+      {
+        "material": "Gochujang - level 1"
+      },
+      {
+        "material": "Gochujang - level 4"
+      },
+      {
+        "material": "Soy Sauce"
+      },
+      {
+        "material": "Salted Sake"
+      },
+      {
+        "material": "Sugar"
+      },
+      {
+        "material": "Allulose"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "Burrito tray"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  },
+  "rollType": "Kimbap (burrito)"
+}

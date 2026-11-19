@@ -1,0 +1,50 @@
+{
+  "order": 17,
+  "name": "WMTF - Spicy California",
+  "brand": "Walmart",
+  "item": "19885",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - Spicy California Roll w/Wasabi Aioli",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Milky Queen"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Avocado"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Sriracha Sauce"
+      },
+      {
+        "material": "Nori"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "fiber board tray"
+      },
+      {
+        "material": "wasabi aioli"
+      }
+    ]
+  },
+  "rollType": "WMT Fresh Sushi"
+}

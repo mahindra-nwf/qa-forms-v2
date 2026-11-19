@@ -1,0 +1,72 @@
+{
+  "order": 13,
+  "name": "Fusia - Spicy Salmon Kimbap",
+  "brand": "Fusia (Aldi EV)",
+  "item": "751935",
+  "customer": "Fusia (Aldi EV)",
+  "variety": "Kimbap - Spicy Salmon",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Calrose Rice"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "Salmon"
+      },
+      {
+        "material": "Red Bell Pepper"
+      },
+      {
+        "material": "Takawan"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Sriracha Sauce"
+      },
+      {
+        "material": "Sugar"
+      },
+      {
+        "material": "Coating",
+        "spec": "White Sesame"
+      },
+      {
+        "material": "Nori"
+      },
+      {
+        "material": "Mirin"
+      },
+      {
+        "material": "Takumi"
+      },
+      {
+        "material": "Red Miso"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "Burrito tray"
+      },
+      {
+        "material": "Cartons/Labels"
+      },
+      {
+        "material": "Master Case"
+      }
+    ]
+  },
+  "rollType": "Spicy Salmon Kimbap (flat)"
+}

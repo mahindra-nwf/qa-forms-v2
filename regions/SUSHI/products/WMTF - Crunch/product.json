@@ -1,0 +1,47 @@
+{
+  "order": 18,
+  "name": "WMTF - Crunch",
+  "brand": "Walmart",
+  "item": "19886",
+  "customer": "Walmart",
+  "variety": "WMT Fresh MKS - Crunch Roll w/ Wasabi Aioli",
+  "materials": {
+    "ingredients": [
+      {
+        "material": "Rice",
+        "spec": "Milky Queen"
+      },
+      {
+        "material": "Vinegar"
+      },
+      {
+        "material": "Salt"
+      },
+      {
+        "material": "Soybean Oil"
+      },
+      {
+        "material": "Redi Chunk"
+      },
+      {
+        "material": "Avocado"
+      },
+      {
+        "material": "Mayonnaise"
+      },
+      {
+        "material": "Nori"
+      }
+    ],
+    "packaging": [
+      {
+        "material": "Trays",
+        "spec": "fiber board tray"
+      },
+      {
+        "material": "wasabi aioli"
+      }
+    ]
+  },
+  "rollType": "WMT Fresh Sushi"
+}
