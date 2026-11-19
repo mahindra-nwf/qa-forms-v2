@@ -450,8 +450,8 @@ function input(f, name, preset) {
     `<label><input type="radio" ${n} value="${esc(o)}"${o === value ? ' checked' : ''}><span>${esc(o)}</span></label>`).join('')}</span>`;
   if (f.type === 'textarea') return `<textarea ${n} rows="2">${esc(value || '')}</textarea>`;
   if (f.type === 'checkbox') return `<label class="check"><input type="checkbox" ${n}>${esc(f.checkLabel || '')}</label>`;
-  // Several document photos for one row (BOL, invoice…); each photo gets a type. Files live on the element (el.docs).
-  if (f.type === 'photos') return `<div class="docs" data-docs data-name="${esc(name)}" data-types="${esc((f.docTypes || ['BOL', 'Invoice', 'Packing slip', 'COA', 'Other']).join('|'))}">
+  // Several document photos for one row (BOL, invoice…); each photo gets a type (big upload boxes: images only, no type). Files live on the element (el.docs).
+  if (f.type === 'photos') return `<div class="docs" data-docs data-name="${esc(name)}" data-types="${f.big ? '' : esc((f.docTypes || ['BOL', 'Invoice', 'Packing slip', 'COA', 'Other']).join('|'))}">
     <div class="doc-list"></div>
     ${f.big ? `<div class="doc-add big"><label class="photo-btn">Upload from device<input type="file" accept="image/*" multiple hidden data-docadd></label>
     <label class="photo-btn">Open camera<input type="file" accept="image/*" capture="environment" hidden data-docadd></label></div></div>` : `<div class="doc-add"><label class="photo-btn">Take photo<input type="file" accept="image/*" capture="environment" hidden data-docadd></label>
@@ -621,7 +621,7 @@ function drawDocs(box) {
   box.querySelectorAll('.doc-list img').forEach(img => URL.revokeObjectURL(img.src));
   box.querySelector('.doc-list').innerHTML = box.docs.map((d, i) => `
     <div class="doc"><img src="${URL.createObjectURL(d.file)}" alt="Document photo ${i + 1}">
-      <select data-doctype="${i}" aria-label="Document type">${types.map(t => `<option${t === d.type ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select>
+      ${types[0] ? `<select data-doctype="${i}" aria-label="Document type">${types.map(t => `<option${t === d.type ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select>` : ''}
       <button type="button" class="delrow" data-docremove="${i}">Remove</button></div>`).join('');
 }
 app.addEventListener('change', e => {
